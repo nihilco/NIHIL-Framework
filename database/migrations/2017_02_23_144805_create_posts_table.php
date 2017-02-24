@@ -17,7 +17,12 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('title');
+            $table->text('description');
             $table->text('content');
+            $table->integer('votes_up')->default(0);
+            $table->integer('votes_down')->default(0);
+            $table->integer('total_comments')->default(0);
+            $table->timestamp('published_at');
             $table->timestamps();
         });
     }
