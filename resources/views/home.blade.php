@@ -1,17 +1,21 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    You are logged in!
-                </div>
+      <!-- Main section-->
+      <section>
+         <!-- Page content-->
+         <div class="content-wrapper">
+            <div class="content-heading">
+               Dashboard
+               <small>some small phrase</small>
             </div>
-        </div>
-    </div>
-</div>
+            <div class="row">
+               <div class="col-xs-12 text-center">
+                  <h2 class="text-thin">Single view content</h2>
+                  <p>This project is an application skeleton. You can use it to quickly bootstrap your jQuery webapp projects and dev environment for these projects.
+                     <br>The seed app doesn\'t do much and has most of the feature removed so you can add theme as per your needs just following the demo app examples.</p>
+               </div>
+            </div>
+         </div>
+      </section>
 @endsection

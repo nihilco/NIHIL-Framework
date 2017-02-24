@@ -1,26 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ config('app.local') }}">
 
 <head>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
    <meta name="description" content="Bootstrap Admin App + jQuery">
    <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin">
+   <!-- CSRF Token -->
+   <meta name="csrf-token" content="{{ csrf_token() }}">
    <title>{{ config('app.name', 'NIHIL Framework') }}</title>
    <!-- =============== VENDOR STYLES ===============-->
    <!-- FONT AWESOME-->
-   <script src="https://use.fontawesome.com/7fb8662a54.js"></script>
+   <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
    <!-- SIMPLE LINE ICONS-->
-   <link rel="stylesheet" href="../vendor/simple-line-icons/css/simple-line-icons.css">
+   <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
    <!-- ANIMATE.CSS-->
-   <link rel="stylesheet" href="../vendor/animate.css/animate.min.css">
+   <link rel="stylesheet" href="vendor/animate.css/animate.min.css">
    <!-- WHIRL (spinners)-->
-   <link rel="stylesheet" href="../vendor/whirl/dist/whirl.css">
+   <link rel="stylesheet" href="vendor/whirl/dist/whirl.css">
    <!-- =============== PAGE VENDOR STYLES ===============-->
    <!-- =============== BOOTSTRAP STYLES ===============-->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+   <link rel="stylesheet" href="css/bootstrap.css" id="bscss">
    <!-- =============== APP STYLES ===============-->
-   <link rel="stylesheet" href="css/app.css" id="maincss">
+   <link rel="stylesheet" href="css/angel.css" id="maincss">
+   <!-- Scripts -->
+   <script>
+       window.Laravel = {!! json_encode([
+           'csrfToken' => csrf_token(),
+       ]) !!};
+   </script>
 </head>
 
 <body>
@@ -31,12 +39,12 @@
          <nav role="navigation" class="navbar topnavbar">
             <!-- START navbar header-->
             <div class="navbar-header">
-               <a href="#/" class="navbar-brand">
+               <a href="{{ url('/') }}" class="navbar-brand">
                   <div class="brand-logo">
-                     <img src="img/logo.png" alt="App Logo" class="img-responsive">
+                    {{ config('app.name', 'NIHIL Framework') }}
                   </div>
                   <div class="brand-logo-collapsed">
-                     <img src="img/logo-single.png" alt="App Logo" class="img-responsive">
+                     NF
                   </div>
                </a>
             </div>
@@ -65,6 +73,14 @@
                         <em class="icon-magnifier"></em>
                      </a>
                   </li>
+                  @if (Auth::guest())
+                  <li>
+                     <a href="{{ route('register') }}">Signup</a>
+                  </li>
+                  <li>
+                     <a href="{{ route('login') }}">Login</a>
+                  </li>
+                  @else
                   <!-- START Offsidebar button-->
                   <li>
                      <a href="#" data-toggle-state="offsidebar-open" data-no-persist="true">
@@ -72,6 +88,7 @@
                      </a>
                   </li>
                   <!-- END Offsidebar menu-->
+                  @endif
                </ul>
                <!-- END Right Navbar-->
             </div>
@@ -125,6 +142,7 @@
          </div>
          <!-- END Sidebar (left)-->
       </aside>
+      @if (!Auth::guest())
       <!-- offsidebar-->
       <aside class="offsidebar hide">
          <!-- START Off Sidebar (right)-->
@@ -147,6 +165,17 @@
                <div class="tab-content">
                   <div id="app-settings" role="tabpanel" class="tab-pane fade in active">
                      <h3 class="text-center text-thin">Tab 1</h3>
+                     <ul class="nav">
+                         <li>
+                             <div class="p-lg text-center">
+                                 <!-- Optional link to list more users-->
+                                 <a href="{{ route('logout') }}" title="Logout" class="btn btn-block btn-default" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+                                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                             </div>
+                         </li>
+                     </ul>
                   </div>
                   <div id="app-chat" role="tabpanel" class="tab-pane fade">
                      <h3 class="text-center text-thin">Tab 2</h3>
@@ -156,36 +185,10 @@
          </nav>
          <!-- END Off Sidebar (right)-->
       </aside>
-      <!-- Main section-->
-      <section>
-         <!-- Page content-->
-         <div class="content-wrapper">
-            <div class="content-heading">
-               <!-- START Language list-->
-               <div class="pull-right">
-                  <div class="btn-group">
-                     <button type="button" data-toggle="dropdown" class="btn btn-default">English</button>
-                     <ul role="menu" class="dropdown-menu dropdown-menu-right animated fadeInUpShort">
-                        <li><a href="#" data-set-lang="en">English</a>
-                        </li>
-                        <li><a href="#" data-set-lang="es">Spanish</a>
-                        </li>
-                     </ul>
-                  </div>
-               </div>
-               <!-- END Language list    -->
-               Single View
-               <small data-localize="dashboard.WELCOME"></small>
-            </div>
-            <div class="row">
-               <div class="col-xs-12 text-center">
-                  <h2 class="text-thin">Single view content</h2>
-                  <p>This project is an application skeleton. You can use it to quickly bootstrap your jQuery webapp projects and dev environment for these projects.
-                     <br>The seed app doesn't do much and has most of the feature removed so you can add theme as per your needs just following the demo app examples.</p>
-               </div>
-            </div>
-         </div>
-      </section>
+      @endif
+
+      @yield('content')
+
       <!-- Page footer-->
       <footer>
          <span>Copyright &copy; 2009-<?= date('Y'); ?> The NIHIL Corporation.  All rights reserved.</span>
@@ -193,16 +196,22 @@
    </div>
    <!-- =============== VENDOR SCRIPTS ===============-->
    <!-- MODERNIZR-->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+   <script src="vendor/modernizr/modernizr.custom.js"></script>
    <!-- JQUERY-->
-   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-   <!-- TETHER -->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+   <script src="vendor/jquery/dist/jquery.js"></script>
    <!-- BOOTSTRAP-->
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+   <script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
+   <!-- STORAGE API-->
+   <script src="vendor/jQuery-Storage-API/jquery.storageapi.js"></script>
+   <!-- JQUERY EASING-->
+   <script src="vendor/jquery.easing/js/jquery.easing.js"></script>
+   <!-- ANIMO-->
+   <script src="vendor/animo.js/animo.js"></script>
+   <!-- LOCALIZE-->
+   <script src="vendor/jquery-localize-i18n/dist/jquery.localize.js"></script>
    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
    <!-- =============== APP SCRIPTS ===============-->
-   <script src="js/app.js"></script>
+   <script src="js/angel.js"></script>
 </body>
 
 </html>
