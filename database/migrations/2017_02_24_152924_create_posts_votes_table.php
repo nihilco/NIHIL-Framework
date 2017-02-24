@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostsTable extends Migration
+class CreatePostsVotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('posts_votes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('title');
-            $table->text('description');
-            $table->text('content');
-            $table->integer('votes_up')->default(0);
-            $table->integer('votes_down')->default(0);
-            $table->integer('total_comments')->default(0);
-            $table->timestamp('published_at');
+            $table->integer('post_id');
+            $table->string('ip_address', 45);
+            $table->text('user_agent');
+            $table->decimal('value');
             $table->timestamps();
         });
     }
@@ -34,6 +31,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('posts_votes');
     }
 }
