@@ -11,13 +11,13 @@
   <title>{{ config('app.name', 'NIHIL Framework') }}</title>
   <!-- =============== VENDOR STYLES ===============-->
   <!-- FONT AWESOME-->
-  <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/vendor/fontawesome/css/font-awesome.min.css">
   <!-- SIMPLE LINE ICONS-->
-  <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="/vendor/simple-line-icons/css/simple-line-icons.css">
   <!-- =============== BOOTSTRAP STYLES ===============-->
-  <link rel="stylesheet" href="css/bootstrap.css" id="bscss">
+  <link rel="stylesheet" href="/css/bootstrap.css" id="bscss">
   <!-- =============== APP STYLES ===============-->
-  <link rel="stylesheet" href="css/angel.css" id="maincss">
+  <link rel="stylesheet" href="/css/angel.css" id="maincss">
   <!-- Scripts -->
   <script>
       window.Laravel = {!! json_encode([
@@ -48,17 +48,17 @@
    </div>
   <!-- =============== VENDOR SCRIPTS ===============-->
   <!-- MODERNIZR-->
-  <script src="vendor/modernizr/modernizr.custom.js"></script>
+  <script src="/vendor/modernizr/modernizr.custom.js"></script>
   <!-- JQUERY-->
-  <script src="vendor/jquery/dist/jquery.js"></script>
+  <script src="/vendor/jquery/dist/jquery.js"></script>
   <!-- BOOTSTRAP-->
-  <script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="/vendor/bootstrap/dist/js/bootstrap.js"></script>
   <!-- STORAGE API-->
-  <script src="vendor/jQuery-Storage-API/jquery.storageapi.js"></script>
+  <script src="/vendor/jQuery-Storage-API/jquery.storageapi.js"></script>
   <!-- PARSLEY-->
-  <script src="vendor/parsleyjs/dist/parsley.min.js"></script>
+  <script src="/vendor/parsleyjs/dist/parsley.min.js"></script>
   <!-- =============== APP SCRIPTS ===============-->
-  <script src="js/angel.js"></script>
+  <script src="/js/angel.js"></script>
 </body>
 
 </html>

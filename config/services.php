@@ -31,8 +31,10 @@ return [
 
     'stripe' => [
         'model' => App\User::class,
-        'key' => env('STRIPE_KEY'),
-        'secret' => env('STRIPE_SECRET'),
+        'mode' => env('STRIPE_MODE'),
+        'accountId' => env('STRIPE_ACCOUNT_ID'),
+        'publishableKey' => env('STRIPE_PUBLISHABLE_KEY'),
+        'secretKey' => env('STRIPE_SECRET_KEY')
     ],
 
 ];
