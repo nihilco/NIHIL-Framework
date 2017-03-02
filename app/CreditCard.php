@@ -11,5 +11,11 @@ class CreditCard extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['user_id', 'card_id', 'brand', 'last_4', 'fingerprint', 'default', 'added_at'];
+
+    //
+    public function user()
+    {
+        return $this->hasOne(CreditCard::class);
+    }
 }

@@ -14,6 +14,7 @@ return [
     */
 
     'paths' => [
+        realpath(base_path('resources/themes/' . NF_THEME . '/views')),
         realpath(base_path('resources/views')),
     ],
 

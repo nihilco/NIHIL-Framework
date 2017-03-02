@@ -23,6 +23,21 @@
    <link rel="stylesheet" href="/css/bootstrap.css" id="bscss">
    <!-- =============== APP STYLES ===============-->
    <link rel="stylesheet" href="/css/angel.css" id="maincss">
+   <!-- Piwik -->
+   <script type="text/javascript">
+     var _paq = _paq || [];
+     /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+     _paq.push(['trackPageView']);
+     _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="//pluto.nihil.co/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '2']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+   </script>
+   <!-- End Piwik Code -->
    <!-- Scripts -->
    <script>
        window.Laravel = {!! json_encode([
@@ -107,6 +122,7 @@
    <!-- =============== VENDOR SCRIPTS ===============-->
    <!-- STRIPE -->
    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+   <script type="text/javascript" src="https://js.stripe.com/v3/"></script>                                    
    <!-- MODERNIZR-->
    <script src="/vendor/modernizr/modernizr.custom.js"></script>
    <!-- JQUERY-->
@@ -124,6 +140,7 @@
    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
    <!-- =============== APP SCRIPTS ===============-->
    <script src="/js/angel.js"></script>
+   <script src="/js/nf2.js"></script>                                    
 </body>
 
 </html>

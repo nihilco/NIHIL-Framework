@@ -62,6 +62,8 @@ Route::get('/payments/create', 'PaymentsController@create');
 Route::post('/payments', 'PaymentsController@store');
 Route::get('/payments/{payment}', 'PaymentsController@show');
 Route::delete('/payments/{payment}', 'PaymentsController@destroy');
+Route::get('/payments/make', 'PaymentsController@make');
+Route::get('/donate', 'PaymentsController@donate');
 
 // USERS
 Route::get('/users/create', 'UsersController@create');

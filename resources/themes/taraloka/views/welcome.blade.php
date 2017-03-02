@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ config('app.name', 'NIHIL Framework') }}</title>
+        <title>Taraloka</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -63,7 +63,6 @@
                 margin-bottom: 30px;
             }
         </style>
-
 <!-- Piwik -->
     <script type="text/javascript">
       var _paq = _paq || [];
@@ -73,7 +72,7 @@ _paq.push(['enableLinkTracking']);
 (function() {
     var u="//pluto.nihil.co/";
     _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', '2']);
+    _paq.push(['setSiteId', '6']);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
 })();
@@ -95,7 +94,7 @@ _paq.push(['enableLinkTracking']);
 
             <div class="content">
                 <div class="title m-b-md">
-                    {{ config('app.name', 'NIHIL Framework') }}
+                    Taraloka
                 </div>
                 <!--
                 <div class="links">

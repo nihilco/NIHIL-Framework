@@ -42,6 +42,16 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function cards()
+    {
+        return $this->hasMany(CreditCard::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
     public function createStripeCustomerId()
     {
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
