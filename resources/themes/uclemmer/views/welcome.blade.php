@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Taraloka</title>
+        <title>uclemmer</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -72,7 +72,7 @@ _paq.push(['enableLinkTracking']);
 (function() {
     var u="//pluto.nihil.co/";
     _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', '6']);
+    _paq.push(['setSiteId', '5']);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
 })();
@@ -96,7 +96,7 @@ _paq.push(['enableLinkTracking']);
 
             <div class="content">
                 <div class="title m-b-md">
-                    <img src="/img/taraloka-logo.png" alt="Taraloka Foundation" />
+                    uclemmer
                 </div>
                 <!--
                 <div class="links">
