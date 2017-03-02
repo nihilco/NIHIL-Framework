@@ -23,6 +23,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/astral-shoe-fundraiser', 'HomeController@astral');
 
 // WEBHOOKS
 Route::post('/stripe/webhooks', 'WebhooksController@handle');

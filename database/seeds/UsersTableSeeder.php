@@ -33,5 +33,12 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::byEmail(env('DB_SEED_USER_EMAIL'))->createStripeCustomerId();
+
+        DB::table('users')->insert([
+            'name' => 'Taraloka Test',
+            'email' => 'test@taraloka.org',
+            'password' => bcrypt('taraloka'),
+        ]);
+
     }
 }
