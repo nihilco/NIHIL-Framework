@@ -120,8 +120,8 @@
                <h1><img src="/img/partners/astral.png" /><br />Shoe Fundraiser</h1>
            </div>
 
-       <p>This year as <strong>The Taraloka Foundation</strong> returns to India this March, we will be packing a brand new pair of shoes for each girl.  We are working with our new partners over at <a href="www.astraldesigns.com" target="balnk">Astral</a> to make this happen, but we need your help too.  Our goal for this fundraiser is to raise $25/girl, for a total of $700 to cover the cost of new shoes.</p>
-
+       <p>Thanks to a new partnership with our friends at <a href="www.astraldesigns.com" target="_blank">Astral</a>, our girls will be walking to school in style.  When we return to Sikkim in March, we will be packing a new pair of shoes for each girl.  Between donated and discounted shoes, our cost will only be $25 per pair.  Please help us raise the funds to complete this project!</p>
+       
        <p>To the right (or below, depending on your device) you will find an image of each girl. If selectable, you can use the following form to give her a pair of shoes.  As donations are matched with each girl, her picture will become unselectable.</p>
 
        </div>
