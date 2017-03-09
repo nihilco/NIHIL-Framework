@@ -29,12 +29,12 @@ class User extends Authenticatable
 
     public static function byEmail($email)
     {
-        return static::where('email', $email)->firstOrFail();
+        return static::where('email', $email)->first();
     }
 
     public static function byStripeId($sid)
     {
-        return static::where('stripe_id', $sid)->firstOrFail();
+        return static::where('stripe_id', $sid)->first();
     }
 
     public function posts()
@@ -42,38 +42,9 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    public function cards()
+    public function customers()
     {
-        return $this->hasMany(CreditCard::class);
+        return $this->hasMany(Customer::class);
     }
 
-    public function payments()
-    {
-        return $this->hasMany(Payment::class);
-    }
-
-    public function createStripeCustomerId()
-    {
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-
-        $customers = \Stripe\Customer::all();
-        $customer = null;
-        
-        foreach($customers['data'] as $c) {
-            if($c->email == $this->email) {
-                $customer = $c;
-                break;
-            }
-        }
-        
-        if(!$customer) {
-            $customer = \Stripe\Customer::create(array(
-                "description" => "Customer for " . $this->email . ".",
-                "email" => $this->email,
-            ));
-        }
-
-        $this->stripe_id = $customer->id;
-        return $this->save();
-    }
 }

@@ -16,8 +16,8 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('title');
-            $table->string('slug')->unique();
+            $table->string('title', 100);
+            $table->string('slug', 100)->unique();
             $table->text('description')->nullable();
             $table->text('content');
             $table->integer('votes_up')->default(0);

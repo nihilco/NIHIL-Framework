@@ -4,9 +4,13 @@
 
 <!-- Main section-->
           <section>
-         <!-- Page content-->
-                      <div class="content-wrapper">
-                <div class="row">
+              <!-- Page content-->
+              <div class="content-wrapper">
+               <div class="content-heading">
+               Posts
+               <small>some small phrase</small>
+            </div>
+    <div class="row">
                    <!-- Blog Content-->
                    <div class="col-lg-9">
 

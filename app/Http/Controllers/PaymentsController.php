@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Payment;
 use App\User;
 use App\CreditCard;
+use App\Account;
+use App\Customer;
 
 class PaymentsController extends Controller
 {
@@ -32,8 +34,18 @@ class PaymentsController extends Controller
 
     //
     public function store()
-    {   
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+    {
+
+    }
+
+    //
+    public function process()
+    {
+        if($account = Account::find(constant('NF_ACCOUNT_ID'))) {
+            \Stripe\Stripe::setApiKey(\Crypt::decrypt($account->secret_key));
+        }else{
+            \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+        }
 
         if(!$user = User::byEmail(request('email'))) {
             $user = User::create([
@@ -41,25 +53,26 @@ class PaymentsController extends Controller
             ]);
         }
 
-        if(!$user->stripe_id){
-            $user->createStripeCustomerId();
+        if(!$customer = Customer::byAccountAndUserIds(constant('NF_ACCOUNT_ID'),$user->id)) {
+            $customer = Customer::createStripeCustomerId($user);
         }
-        $customer = \Stripe\Customer::retrieve($user->stripe_id);
+        
+        $stripeCustomer = \Stripe\Customer::retrieve($customer->stripe_id);
 
         $token = \Stripe\Token::retrieve(request('stripeToken'));
-
-        if(count($user->cards)) {
-            foreach($user->cards as $c) {
+        
+        if(count($customer->cards)) {
+            foreach($customer->cards as $c) {
                 if($c->fingerprint = $token->card->fingerprint) {
                     $card = $c;
                 }
             }
         }else{
-            $newCard = $customer->sources->create(array("source" => request('stripeToken')));
+            $newCard = $stripeCustomer->sources->create(array("source" => request('stripeToken')));
 
             $card = CreditCard::create([
-                'user_id' => $user->id,
-                'card_id' => $token->card->id,
+                'customer_id' => $customer->id,
+                'stripe_id' => $token->card->id,
                 'brand' => $token->card->brand,
                 'last_4' => $token->card->last4,
                 'fingerprint' => $token->card->fingerprint,
@@ -69,24 +82,32 @@ class PaymentsController extends Controller
         }
 
         $charge = \Stripe\Charge::create([
-            'customer' => $user->stripe_id,
+            'customer' => $customer->stripe_id,
             'currency' => 'usd',
-            'source' => $card->card_id,
+            'source' => $card->stripe_id,
             'amount' => $this->convertToCents(request('amount')),
             'metadata' => [
+                'type' => 'donation',
                 'comments' => request('comments'),
             ],
         ]);
         
-        Payment::create([
+        $payment = Payment::create([
             'invoice_id' => 1,
-            'user_id' => $user->id,
-            'charge_id' => $charge->id,
+            'customer_id' => $customer->id,
+            'stripe_id' => $charge->id,
             'amount' => $charge->amount,
             'comments' => request('comments')
         ]);
 
-        return redirect()->route('home');
+        session()->flash('confirm', [
+            'title' => 'Thank You!',
+            'message' => 'Thank you for your donation.',
+            'payment' => $payment
+        ]);
+        
+        //return redirect()->route('home');
+        return redirect()->route('confirm');
     }
 
     //

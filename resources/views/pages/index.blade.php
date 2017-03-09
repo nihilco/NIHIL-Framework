@@ -1,5 +1,23 @@
-@extends('layouts.master')
+@extends('layouts.admin')
 
 @section('content')
-<h1>Post Index</h1>
+
+          <!-- Main section-->
+          <section>
+               <!-- Page content-->
+                   <div class="content-wrapper">
+               <div class="content-heading">
+               Pages
+               <small>some small phrase</small>
+            </div>
+                <div class="row">
+                   <!-- Blog Content-->
+                   <div class="col-lg-9">
+
+
+                   </div>
+                </div>
+             </div>
+          </section>
+    
 @endsection

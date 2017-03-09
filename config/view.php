@@ -1,5 +1,9 @@
 <?php
 
+if(!defined('NF_THEME')) {
+    define('NF_THEME', 'default');
+}
+
 return [
 
     /*

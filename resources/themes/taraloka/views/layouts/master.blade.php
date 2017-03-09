@@ -1,29 +1,26 @@
-
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="{{ config('app.local') }}">
       <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
-          <link rel="icon" type="image/png" href="/themes/taraloka/img/favicon/favicon_32x32.png">
+          <link rel="icon" type="image/png" href="/img/favicon/favicon_32x32.png">
           <meta description="The Taraloka Foundation is a registered 501(c)3 organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
           <meta keywords="taraloka, sikkim, india, foundation, nihil">
           <meta author="Uriah M. Clemmer IV">
 
           <meta property="fb:app_id" content="187097078310518">
 
-          <meta name="csrf-param" content="_csrf">
-          <meta name="csrf-token" content="YUdpYVNwRmFTBAEZZwZzFQ0yDgc6CHUyJClYESYCcj43Ch1SGQEQAg==">
           <title>Taraloka Foundation</title>
           <meta name="og:url" content="https://taraloka.org">
       <meta name="og:type" content="article">
       <meta name="og:title" content="Taraloka Foundation">
       <meta name="og:description" content="The Taraloka Foundation is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
       <meta name="og:image" content="https://taraloka.org/themes/taraloka/img/taraloka-logo.png">
-      <link href="/assets/2948f47/css/bootstrap.css?v=1435580974" rel="stylesheet">
-      <link href="/assets/d0ebc86d/css/font-awesome.min.css?v=1451417028" rel="stylesheet">
-      <link href="/themes/taraloka/css/taraloka.css?v=1452026298" rel="stylesheet">
+      <link href="/css/bootstrap.css" rel="stylesheet">
+      <link href="/css/font-awesome.min.css" rel="stylesheet">
+      <link href="/css/taraloka.css" rel="stylesheet">
           <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!-- WARNING: Respond.js doesnt work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -46,6 +43,20 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
+   <!-- Piwik -->
+   <script type="text/javascript">
+     var _paq = _paq || [];
+     /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+     _paq.push(['trackPageView']);
+     _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="//pluto.nihil.co/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '6']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+   </script>
 
 </head>
 <body>
@@ -62,7 +73,7 @@
 
         <!-- START: HEADER LOGO -->
         <div class="col-sm-3 col-md-2">
-          <a href="/"><img class="img-responsive" src="/themes/taraloka/img/taraloka-logo.png" alt="The Taraloka Foundation" /></a>
+          <a href="/"><img class="img-responsive" src="/img/taraloka-logo.png" alt="The Taraloka Foundation" /></a>
         </div>
         <!-- END: HEADER LOGO -->
 
@@ -119,47 +130,8 @@
   </section>
   <!-- END: SITE HEADER -->
 
-  
-<!-- START: SITE BANNER -->
-<section id="site-banner">
+       @yield('content')  
 
-  <div class="row">
-
-    <!-- START: CTA SLIDER -->
-    <div class="col-sm-12">
-
-      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-        <div class="item active">
-          <img src="/themes/taraloka/img/girls-waterfall-cropped.png" alt="Slide 1" />
-          <div class="carousel-caption">
-                <!--<h2><a href="/donate">Make your end of the year donation today.</a></h2>-->
-            </div>
-        </div>
-        </div>
-
-        <!-- Controls -->
-        <!--<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>-->
-      </div>
-    </div>
-    <!-- END: CTA SLIDER -->
-
-  </div>
-
-</section>
-<!-- END: SITE BANNER -->
 </div>
 <!-- END: SITE WRAPPER -->
 
@@ -179,7 +151,7 @@
             <div class="col-sm-12">
 
               <ul class="list-inline">
-                <li><a href="/"><img src="/themes/taraloka/img/taraloka-wordmark.png" alt="Taraloka Foundation" style="width:150px;" /></a></li>
+                <li><a href="/"><img src="/img/taraloka-wordmark.png" alt="Taraloka Foundation" style="width:150px;" /></a></li>
               </ul>
 
             </div>
@@ -222,26 +194,26 @@
 
           <div class="row">
             <div class="col-xs-6">
-              <a href="#" data-toggle="modal" data-target="#footerPic1"><img src="/themes/taraloka/img/girl-1.png" class="img-responsive" alt="Girl 1" /></a>
+              <a href="#" data-toggle="modal" data-target="#footerPic1"><img src="/img/girl-1.png" class="img-responsive" alt="Girl 1" /></a>
               <!-- Modal -->
               <div class="modal fade" id="footerPic1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-body">
-                  <img src="/themes/taraloka/img/girl-1.png" class="img-responsive" alt="Girl 1" />
+                  <img src="/img/girl-1.png" class="img-responsive" alt="Girl 1" />
                   </div>
                 </div>
                 </div>
               </div>
             </div>
             <div class="col-xs-6">
-              <a href="#" data-toggle="modal" data-target="#footerPic2"><img src="/themes/taraloka/img/girl-2.png" class="img-responsive" alt="Girl 2" /></a>
+              <a href="#" data-toggle="modal" data-target="#footerPic2"><img src="/img/girl-2.png" class="img-responsive" alt="Girl 2" /></a>
               <!-- Modal -->
               <div class="modal fade" id="footerPic2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-body">
-                  <img src="/themes/taraloka/img/girl-2.png" class="img-responsive" alt="Girl 1" />
+                  <img src="/img/girl-2.png" class="img-responsive" alt="Girl 1" />
                   </div>
                 </div>
                 </div>
@@ -250,26 +222,26 @@
           </div>
           <div class="row" style="margin-top:20px;">
             <div class="col-xs-6">
-              <a href="#" data-toggle="modal" data-target="#footerPic3"><img src="/themes/taraloka/img/girl-3.png" class="img-responsive" alt="Girl 3" /></a>
+              <a href="#" data-toggle="modal" data-target="#footerPic3"><img src="/img/girl-3.png" class="img-responsive" alt="Girl 3" /></a>
               <!-- Modal -->
               <div class="modal fade" id="footerPic3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-body">
-                  <img src="/themes/taraloka/img/girl-3.png" class="img-responsive" alt="Girl 1" />
+                  <img src="/img/girl-3.png" class="img-responsive" alt="Girl 1" />
                   </div>
                 </div>
                 </div>
               </div>
             </div>
             <div class="col-xs-6">
-              <a href="#" data-toggle="modal" data-target="#footerPic4"><img src="/themes/taraloka/img/girl-4.png" class="img-responsive" alt="Girl 4" /></a>
+              <a href="#" data-toggle="modal" data-target="#footerPic4"><img src="/img/girl-4.png" class="img-responsive" alt="Girl 4" /></a>
               <!-- Modal -->
               <div class="modal fade" id="footerPic4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-body">
-                  <img src="/themes/taraloka/img/girl-4.png" class="img-responsive" alt="Girl 1" />
+                  <img src="/img/girl-4.png" class="img-responsive" alt="Girl 1" />
                   </div>
                 </div>
                 </div>
@@ -314,7 +286,7 @@
 
         <!-- START: FOOTER COPYRIGHT -->
         <div class="col-sm-8">
-          <p>Copyright 2014 &copy; <strong class="font-green">The Taraloka Foundation</strong>.  All rights reserved.  <a href="/privacy" style="margin:0 10px">Privacy</a>  <a href="/terms" style="margin:0 5px">Terms</a></p>
+          <p>Copyright 2014 &copy; <strong class="font-green">The Taraloka Foundation</strong>.  All rights reserved.  <!--<a href="/privacy" style="margin:0 10px">Privacy</a>  <a href="/terms" style="margin:0 5px">Terms</a>--></p>
         </div>
         <!-- END: FOOTER COPYRIGHT -->
 
@@ -332,18 +304,78 @@
 </div>
 <!-- END: SITE FOOTER -->
 
-<script src="/assets/c1a7e316/jquery.js?v=1435580966"></script>
-<script src="/assets/908b7c08/yii.js?v=1441890008"></script>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+   <!-- STRIPE -->
+   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+   <script type="text/javascript" src="https://js.stripe.com/v3/"></script>                                    
+     
+<script src="/js/jquery.js"></script>
 
-               ga('create', 'UA-2228318-23', 'auto');
-ga('send', 'pageview');
+   <script type="text/javascript">
+     var stripe = Stripe('<?php if($account = \App\Account::find(constant('NF_ACCOUNT_ID'))){echo $account->publishable_key; }else{ echo env('STRIPE_PUBLISHABLE_KEY'); } ?>');
+     var elements = stripe.elements();
 
-  </script>
+// Custom styling can be passed to options when creating an Element.
+var style = {
+    base: {
+	// Add your base input styles here. For example:
+	fontSsize: '14px',
+	lineHeight: '1.52857143',
+	color: '#3a3f51'
+    }
+};
 
+// Create an instance of the card Element
+var card = elements.create('card', {hidePostalCode: false, style: style});
+
+// Add an instance of the card Element into the `card-element` <div>
+card.mount('#card-element');
+
+card.addEventListener('change', function(event) {
+    var displayError = document.getElementById('card-errors');
+    if (event.error) {
+	displayError.textContent = event.error.message;
+    } else {
+	displayError.textContent = '';
+    }
+});
+
+// Create a token or display an error the form is submitted.
+var form = document.getElementById('payment-form');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    stripe.createToken(card).then(function(result) {
+	if (result.error) {
+	    // Inform the user if there was an error
+	    var errorElement = document.getElementById('card-errors');
+	    errorElement.textContent = result.error.message;
+	} else {
+	    // Send the token to your server
+	    stripeTokenHandler(result.token);
+	}
+    });
+});
+
+function stripeTokenHandler(token) {
+    // Insert the token ID into the form so it gets submitted to the server
+    var form = document.getElementById('payment-form');
+    var hiddenInput = document.createElement('input');
+    hiddenInput.setAttribute('type', 'hidden');
+    hiddenInput.setAttribute('name', 'stripeToken');
+    hiddenInput.setAttribute('value', token.id);
+    form.appendChild(hiddenInput);
+
+    // Submit the form
+    form.submit();
+}
+
+$(document).ready(function(e){
+    $(".nf-img-check").click(function(){
+        $(this).toggleClass("nf-check");
+    });
+});
+
+   </script>
+     
 </body>
 </html>

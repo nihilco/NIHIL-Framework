@@ -129,27 +129,157 @@
                <ul class="nav">
                   <!-- Iterates over all sidebar items-->
                   <li class="nav-heading ">
-                     <span data-localize="sidebar.heading.HEADER">Menu Navigation</span>
+                     <span>Main Navigation</span>
                   </li>
                   <li class=" active">
-                     <a href="singleview.html" title="Single View">
-                        <em class="fa fa-file-o"></em>
-                        <span data-localize="sidebar.nav.SINGLEVIEW">Single View</span>
+                     <a href="/dashboard" title="Single View">
+                        <em class="fa fa-home"></em>
+                        <span>Dashboard</span>
                      </a>
                   </li>
-                  <li class=" ">
-                     <a href="#menuid" title="Menu" data-toggle="collapse">
-                        <em class="icon-folder"></em>
-                        <span data-localize="sidebar.nav.menu.MENU">Menu</span>
+                  <li class="nav-heading ">
+                     <span>Content Management</span>
+                  </li>
+                  <li class="">
+                     <a href="/pages" title="Single View">
+                        <em class="fa fa-file-text-o"></em>
+                        <span>Pages</span>
                      </a>
-                     <ul id="menuid" class="nav sidebar-subnav collapse">
-                        <li class="sidebar-subnav-header">Menu</li>
-                        <li class=" ">
-                           <a href="submenu.html" title="Sub Menu">
-                              <span data-localize="sidebar.nav.menu.SUBMENU">Sub Menu</span>
-                           </a>
-                        </li>
-                     </ul>
+                  </li>
+                  <li class="">
+                     <a href="/posts" title="Single View">
+                        <em class="fa fa-thumb-tack"></em>
+                        <span>Posts</span>
+                     </a>
+                  </li>
+                  <li class="">
+                     <a href="/comments" title="Single View">
+                        <em class="fa fa-comments"></em>
+                        <span>Comments</span>
+                     </a>
+                  </li>
+                  <li class="">
+                     <a href="/categories" title="Single View">
+                        <em class="fa fa-folder"></em>
+                        <span>Categories</span>
+                     </a>
+                  </li>
+                  <li class="">
+                     <a href="/tags" title="Single View">
+                        <em class="fa fa-hashtag"></em>
+                        <span>Tags</span>
+                     </a>
+                  </li>
+                  <li class="nav-heading ">
+                     <span>eCommerce</span>
+                  </li>
+                  <li class="">
+                     <a href="/products" title="Single View">
+                        <em class="fa fa-barcode"></em>
+                        <span>Products</span>
+                     </a>
+                  </li>
+                  <li class="">
+                     <a href="/invoices" title="Single View">
+                        <em class="fa fa-briefcase"></em>
+                        <span>Invoices</span>
+                     </a>
+                  </li>
+                  <li class="">
+                     <a href="/orders" title="Single View">
+                        <em class="fa fa-shopping-cart"></em>
+                        <span>Orders</span>
+                     </a>
+                  </li>
+                  <li class="">
+                     <a href="/payments" title="Single View">
+                        <em class="fa fa-usd"></em>
+                        <span>Payments</span>
+                     </a>
+                  </li>
+                  <li class="">
+                     <a href="/subscriptions" title="Single View">
+                        <em class="fa fa-calendar"></em>
+                        <span>Subscriptions</span>
+                     </a>
+                  </li>
+                  <li class="">
+                     <a href="/plans" title="Single View">
+                        <em class="fa fa-cubes"></em>
+                        <span>Plans</span>
+                     </a>
+                  </li>
+                  <li class="">
+                     <a href="/accounts" title="Single View">
+                        <em class="fa fa-lock"></em>
+                        <span>Accounts</span>
+                     </a>
+                  </li>
+                  <li class="">
+                     <a href="/addresses" title="Single View">
+                        <em class="fa fa-truck"></em>
+                        <span>Addresses</span>
+                     </a>
+                  </li>
+                  <li class="nav-heading ">
+                     <span>Support</span>
+                  </li>
+                  <li class="">
+                     <a href="/tickets" title="Single View">
+                        <em class="fa fa-support"></em>
+                        <span>Tickets</span>
+                     </a>
+                  </li>
+                  <li class="">
+                     <a href="/types" title="Single View">
+                        <em class="fa fa-filter"></em>
+                        <span>Types</span>
+                     </a>
+                  </li>
+                  <li class="">
+                     <a href="/replies" title="Single View">
+                        <em class="fa fa-thumbs-up"></em>
+                        <span>Replies</span>
+                     </a>
+                  </li>
+                  <li class="">
+                     <a href="/resolutions" title="Single View">
+                        <em class="fa fa-check-circle"></em>
+                        <span>Resolutions</span>
+                     </a>
+                  </li>
+                  <li class="">
+                     <a href="/priorities" title="Single View">
+                        <em class="fa fa-exclamation-circle"></em>
+                        <span>Priorities</span>
+                     </a>
+                  </li>
+                  <li class="">
+                     <a href="/statuses" title="Single View">
+                        <em class="fa fa-compass"></em>
+                        <span>Statuses</span>
+                     </a>
+                  </li>
+                  <li class="nav-heading ">
+                     <span>Access Control</span>
+                  </li>
+                  <li class="">
+                     <a href="/users" title="Single View">
+                        <em class="fa fa-user"></em>
+                        <span>Users</span>
+                     </a>
+                  </li>
+                  <li class="">
+                     <a href="/groups" title="Single View">
+                        <em class="fa fa-users"></em>
+                        <span>groups</span>
+                     </a>
+                  </li>
+                          <li class="">
+                     <a href="/resources" title="Single View">
+                        <em class="fa fa-database"></em>
+                        <span>Resources</span>
+                     </a>
                   </li>
                </ul>
                <!-- END sidebar nav-->
@@ -230,7 +360,72 @@
    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
    <!-- =============== APP SCRIPTS ===============-->
    <script src="/js/angel.js"></script>
-   <script src="/js/nf2.js"></script>                                    
+   <script type="text/javascript">
+     var stripe = Stripe('<?php if($account = \App\Account::find(constant('NF_ACCOUNT_ID'))){echo $account->publishable_key; }else{ echo env('STRIPE_PUBLISHABLE_KEY'); } ?>');
+     var elements = stripe.elements();
+
+// Custom styling can be passed to options when creating an Element.
+var style = {
+    base: {
+	// Add your base input styles here. For example:
+	fontSsize: '14px',
+	lineHeight: '1.52857143',
+	color: '#3a3f51'
+    }
+};
+
+// Create an instance of the card Element
+var card = elements.create('card', {hidePostalCode: false, style: style});
+
+// Add an instance of the card Element into the `card-element` <div>
+card.mount('#card-element');
+
+card.addEventListener('change', function(event) {
+    var displayError = document.getElementById('card-errors');
+    if (event.error) {
+	displayError.textContent = event.error.message;
+    } else {
+	displayError.textContent = '';
+    }
+});
+
+// Create a token or display an error the form is submitted.
+var form = document.getElementById('payment-form');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    stripe.createToken(card).then(function(result) {
+	if (result.error) {
+	    // Inform the user if there was an error
+	    var errorElement = document.getElementById('card-errors');
+	    errorElement.textContent = result.error.message;
+	} else {
+	    // Send the token to your server
+	    stripeTokenHandler(result.token);
+	}
+    });
+});
+
+function stripeTokenHandler(token) {
+    // Insert the token ID into the form so it gets submitted to the server
+    var form = document.getElementById('payment-form');
+    var hiddenInput = document.createElement('input');
+    hiddenInput.setAttribute('type', 'hidden');
+    hiddenInput.setAttribute('name', 'stripeToken');
+    hiddenInput.setAttribute('value', token.id);
+    form.appendChild(hiddenInput);
+
+    // Submit the form
+    form.submit();
+}
+
+$(document).ready(function(e){
+    $(".nf-img-check").click(function(){
+        $(this).toggleClass("nf-check");
+    });
+});
+
+   </script>                                    
 </body>
 
 </html>

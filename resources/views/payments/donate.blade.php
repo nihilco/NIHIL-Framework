@@ -15,7 +15,7 @@
                       <!-- START panel-->
                       <div class="panel panel-default">
                          <div class="panel-body">
-                            <form role="form" method="POST" action="/payments" id="payment-form">
+                            <form role="form" method="POST" action="/donate" id="payment-form">
                                {{ csrf_field() }}
                                <div class="row">
                                  <div class="col-sm-12">
@@ -72,7 +72,7 @@
 </div>
 <div class="row">
     <div class="col-sm-6">
-                               <div class="form-group">
+      <div class="form-group">
         <label for="card-element">
           Credit Card
         </label>
@@ -82,9 +82,9 @@
 
         <!-- Used to display Element errors -->
         <div id="card-errors"></div>
+      </div>
     </div>
-    </div>
-    </div>
+</div>
 
                                <div class="form-group{{ $errors->has('comments') ? ' has-error' : '' }}">
                                    <label>Comments</label>

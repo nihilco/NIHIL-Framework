@@ -15,6 +15,15 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id');
+            $table->string('mode', 16);
+            $table->string('status', 16)->nullable();
+            $table->string('account_id');
+            $table->string('publishable_key')->nullable();
+            $table->string('secret_key', 255)->nullable();
+            $table->text('description')->nullable();
+            $table->integer('country_id')->default(1);
+            $table->boolean('managed')->default(true);
             $table->timestamps();
         });
     }

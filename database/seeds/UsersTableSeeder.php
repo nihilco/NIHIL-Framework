@@ -22,7 +22,8 @@ class UsersTableSeeder extends Seeder
             'name' => 'Testing Tester',
             'email' => 'testing@testing.test',
             'password' => bcrypt('secret'),
-            'stripe_id' => 'cus_00000000000000',
+            'created_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
         //
@@ -30,15 +31,17 @@ class UsersTableSeeder extends Seeder
             'name' => env('DB_SEED_USER_NAME'),
             'email' => env('DB_SEED_USER_EMAIL'),
             'password' => bcrypt(env('DB_SEED_USER_PASSWORD')),
+            'created_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
-        User::byEmail(env('DB_SEED_USER_EMAIL'))->createStripeCustomerId();
-
+        //
         DB::table('users')->insert([
             'name' => 'Taraloka Test',
             'email' => 'test@taraloka.org',
             'password' => bcrypt('taraloka'),
+            'created_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
         ]);
-
     }
 }

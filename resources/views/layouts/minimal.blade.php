@@ -47,7 +47,7 @@
                <!-- START panel-->
                <div class="panel panel-dark panel-flat">
                   <div class="panel-heading text-center">
-                     <a href="{{ url('/') }}">
+                     <a href="{{ url('/') }}" class="minimal-header">
                        {{ config('app.name', 'NIHIL Framework') }}
                      </a>
                   </div>

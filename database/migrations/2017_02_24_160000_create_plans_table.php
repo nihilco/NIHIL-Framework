@@ -15,6 +15,11 @@ class CreatePlansTable extends Migration
     {
         Schema::create('plans', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name', 100);
+            $table->integer('amount');
+            $table->integer('currency_id')->default(1);
+            $table->string('interval', 32);
+            $table->integer('interval_count');
             $table->timestamps();
         });
     }
