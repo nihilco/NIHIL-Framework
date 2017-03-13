@@ -18,13 +18,13 @@ class UsersTableSeeder extends Seeder
         //});
 
         //
-        DB::table('users')->insert([
-            'name' => 'Testing Tester',
-            'email' => 'testing@testing.test',
-            'password' => bcrypt('secret'),
-            'created_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
+        //DB::table('users')->insert([
+        //    'name' => 'Testing Tester',
+        //    'email' => 'testing@testing.test',
+        //    'password' => bcrypt('secret'),
+        //    'created_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        //    'updated_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        //]);
 
         //
         DB::table('users')->insert([
@@ -36,12 +36,12 @@ class UsersTableSeeder extends Seeder
         ]);
 
         //
-        DB::table('users')->insert([
-            'name' => 'Taraloka Test',
-            'email' => 'test@taraloka.org',
-            'password' => bcrypt('taraloka'),
-            'created_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
+        //DB::table('users')->insert([
+        //    'name' => 'Taraloka Test',
+        //    'email' => 'test@taraloka.org',
+        //    'password' => bcrypt('taraloka'),
+        //    'created_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        //    'updated_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        //]);
     }
 }

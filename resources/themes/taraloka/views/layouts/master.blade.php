@@ -11,11 +11,9 @@
           <meta property="fb:app_id" content="187097078310518">
 
           <title>Taraloka Foundation</title>
-          <meta name="og:url" content="https://taraloka.org">
-      <meta name="og:type" content="article">
-      <meta name="og:title" content="Taraloka Foundation">
-      <meta name="og:description" content="The Taraloka Foundation is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
-      <meta name="og:image" content="https://taraloka.org/themes/taraloka/img/taraloka-logo.png">
+
+      @yield('og')
+      
       <link href="/css/bootstrap.css" rel="stylesheet">
       <link href="/css/font-awesome.min.css" rel="stylesheet">
       <link href="/css/taraloka.css" rel="stylesheet">

@@ -1,5 +1,13 @@
 @extends('layouts.master')
 
+@section('og')
+      <meta name="og:url" property="og:url" content="https://taraloka.org">
+      <meta name="og:type" property="og:type" content="article">
+      <meta name="og:title" property="og:title" content="Taraloka Foundation">
+      <meta name="og:description" property="og:description" content="The Taraloka Foundation is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
+      <meta name="og:image" property="og:image" content="https://taraloka.org/img/taraloka-logo-og-dark.png">
+@endsection
+    
 @section('content')
 
 <section id="site-content">

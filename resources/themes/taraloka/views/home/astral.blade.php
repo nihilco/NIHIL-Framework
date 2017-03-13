@@ -1,5 +1,13 @@
 @extends('layouts.master')
 
+@section('og')
+      <meta name="og:url" property="og:url" content="https://taraloka.org/astral-shoe-fundraiser">
+      <meta name="og:type" property="og:type" content="article">
+      <meta name="og:title" property="og:title" content="Astral Shoe Fundraiser - Taraloka Foundation">
+      <meta name="og:description" property="og:description" content="Thanks to a new partnership with our friends at Astral, our girls will be walking to school in style.  When we return to Sikkim in March, we will be packing a new pair of shoes for each girl.  Between donated and discounted shoes, our cost will only be $25 per pair.  Please help us raise the funds to complete this project!">
+      <meta name="og:image" property="og:image" content="https://taraloka.org/img/taraloka-logo-og-dark.png">
+@endsection
+    
 @section('content')
 
 <section id="site-content">
