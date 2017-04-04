@@ -88,7 +88,7 @@ _paq.push(['enableLinkTracking']);
                         <a href="{{ url('/dashboard') }}">Home</a>
                     @else
                         <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
+                        <a href="{{ url('/signup') }}">Signup</a>
                     @endif
                 </div>
             @endif
