@@ -26,7 +26,8 @@
        </div>
        <div class="col-sm-4">
 
-
+<form role="form" method="POST" action="/astral-shoe-fundraiser" id="payment-form">
+       {{ csrf_field() }}
     
        <div class="row" style="margin-top:21px;">
        <div class="col-sm-12">
@@ -351,9 +352,40 @@
        </div>
        <div class="col-sm-4" style="margin-top:21px;">
 
-<h3>Thank You!</h3>
+         <div class="form-group">
+           <label for="email">Email</label>
+           <input type="email" class="form-control" name="email" placeholder="jsmith@exapmle.com">
+         </div>
+    <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label for="card-element">
+          Credit Card
+        </label>
+        <div id="card-element" class="form-control">
+          <!-- a Stripe Element will be inserted here. -->
+        </div>
 
-    <p>We successfully raised $700.  This fundraiser is now closed, but you can <a href="/donate">donate</a> anytime.</p>
+        <!-- Used to display Element errors -->
+        <div id="card-errors"></div>
+      </div>
+    </div>
+</div>
+                               <div class="form-group{{ $errors->has('comments') ? ' has-error' : '' }}">
+                                   <label>Comments</label>
+                                   <textarea name="comments" class="form-control" rows="5" placeholder="Enter comments..."></textarea>
+                                   @if ($errors->has('comments'))
+                                   <span class="help-block">
+                                       <strong>{{ $errors->first('comments') }}</strong>
+                                   </span>
+                                   @endif
+                               </div>
+<div class="form-group">
+    <label>For each girl you select in blue, you will be charged $25.</label>
+</div>
+    
+<button type="submit" class="btn btn-lg btn-success">Donate</button>
+       </form>
        
        </div>
        </div>
