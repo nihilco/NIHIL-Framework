@@ -46,7 +46,7 @@
                                </div>
 <div class="row">
     <div class="col-sm-3">    
-                               <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+                               <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
                                   <label>Amount</label>
                                   <input type="text" name="amount" placeholder="Enter amount" class="form-control" id="amount">
                                   @if ($errors->has('amount'))
@@ -55,6 +55,29 @@
                                   </span>
                                   @endif
                                </div>
+    </div>
+    <div class="col-sm-4">
+
+                                   <div class="form-group {{ $errors->has('recurrence') ? ' has-error' : '' }}">
+                                     <label class="control-label" for="recurrence_buttons">Recurrence</label><br />
+                                     <div class="btn-group" id="recurrence_buttons" data-toggle="buttons">
+                                       <label class="btn btn-default active">
+                                         <input type="radio" tabindex="5" name="recurrence" value="single" checked>Single
+                                       </label>
+                                       <label class="btn btn-default">
+                                         <input type="radio" tabindex="5" name="recurrence" value="month">Monthly
+                                       </label>
+                                       <label class="btn btn-default">
+                                         <input type="radio" tabindex="5" name="recurrence" value="year">Yearly
+                                       </label>
+                                     </div>
+                                     @if ($errors->has('recurrence'))
+                                     <span class="help-block">
+                                       <strong>{{ $errors->first('recurrence') }}</strong>
+                                     </span>
+                                     @endif
+                                   </div>
+    
     </div>
 </div>
 <div class="row">
@@ -95,7 +118,7 @@
                                    </span>
                                    @endif
                                </div>
-                               <button type="submit" class="btn btn-sm btn-primary pull-right">Make Donation</button>
+<button type="submit" class="btn btn-sm btn-primary pull-right" id="makePayment">Make Donation</button>
                             </form>
                          </div>
                       </div>

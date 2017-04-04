@@ -17,7 +17,8 @@
   <!-- =============== BOOTSTRAP STYLES ===============-->
   <link rel="stylesheet" href="/css/bootstrap.css" id="bscss">
   <!-- =============== APP STYLES ===============-->
-  <link rel="stylesheet" href="/css/angel.css" id="maincss">
+  <link rel="stylesheet" href="/css/angel.css" id="angelcss">
+  <link rel="stylesheet" href="/css/main.css" id="maincss">
    <!-- Piwik -->
    <script type="text/javascript">
      var _paq = _paq || [];
@@ -46,7 +47,7 @@
             <div class="block-center mt-xl wd-xl">
                <!-- START panel-->
                <div class="panel panel-dark panel-flat">
-                  <div class="panel-heading text-center">
+                  <div class="panel-heading nf-heading text-center">
                      <a href="{{ url('/') }}" class="minimal-header">
                        {{ config('app.name', 'NIHIL Framework') }}
                      </a>

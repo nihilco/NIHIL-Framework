@@ -11,7 +11,7 @@ class CreditCard extends Model
      *
      * @var array
      */
-    protected $fillable = ['customer_id', 'stripe_id', 'brand', 'last_4', 'fingerprint', 'default', 'added_at'];
+    protected $fillable = ['account_id', 'customer_id', 'stripe_id', 'brand', 'last_4', 'fingerprint', 'default', 'added_at'];
 
     //
     public function user()

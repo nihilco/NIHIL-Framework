@@ -7,15 +7,51 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     //
+    public static function byStripeId($sid)
+    {
+        return static::where('stripe_id', $sid)->first();
+    }
+
+    //
     public function cards()
     {
         return $this->hasMany(CreditCard::class);
     }
     
     //
+    public function bankAccounts()
+    {
+        return $this->hasMany(BankAccount::class);
+    }
+
+        //
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
+    //
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+    
+    //
     public function payments()
     {
         return $this->hasMany(Payment::class);
+    }
+
+    //
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    //
+    public function user()
+    {
+        return $this->hasOne(User::class);
     }
 
     //

@@ -11,11 +11,28 @@ class Payment extends Model
      *
      * @var array
      */
-    protected $fillable = ['invoice_id', 'customer_id', 'stripe_id', 'amount', 'comments'];
+    protected $fillable = ['account_id', 'customer_id', 'invoice_id', 'stripe_id', 'amount', 'comments'];
 
     public static function byStripeId($sid)
     {
         return static::where('charge_id', $sid)->first();
+    }
+
+    public static function totalOverPeriod($period = 'day')
+    {
+        if($period == 'day') {
+            $payments = static::where('created_at', '>=', \Carbon\Carbon::parse('today')->format('Y-m-d H:i:s'))->get();
+        }
+
+        $total = 0;
+        $count = 0;
+        
+        foreach($payments as $payment) {
+            $total += $payment->amount;
+            $count ++;
+        }
+
+        return ['total' => round($total/100), 'count' => $count];
     }
     
     public static function importStripePayments()

@@ -1,18 +1,20 @@
-@extends('layouts.master')
+@extends('layouts.admin')
 
 @section('content')
-
-<section id="site-content">
-       <div class="container">
-
-       <div class="row">
-       <div class="col-sm-8 col-sm-offset-2">
-           <div class="cms-projects-view">
-               <h1>Donate</h1>
-           </div>
-
+      <!-- Main section-->
+      <section>
+         <!-- Page content-->
+         <div class="content-wrapper">
+            <div class="content-heading">
+               Donate
+               <small>some small phrase</small>
+            </div>
+                <!-- START row-->
+                <div class="row">
+                   <div class="col-sm-9">
                       <!-- START panel-->
-                 
+                      <div class="panel panel-default">
+                         <div class="panel-body">
                             <form role="form" method="POST" action="/donate" id="payment-form">
                                {{ csrf_field() }}
                                <div class="row">
@@ -93,19 +95,12 @@
                                    </span>
                                    @endif
                                </div>
-                               <button type="submit" class="btn btn-sm btn-success btn-lg pull-right">Make Donation</button>
+                               <button type="submit" class="btn btn-sm btn-primary pull-right">Make Donation</button>
                             </form>
-
+                         </div>
+                      </div>
                       <!-- END panel-->
-    
-       
-       </div>
-       
-       </div>
-       </div>
-
-       </div>
-       </section>
-
-
+                   </div>
+         </div>
+      </section>
 @endsection

@@ -11,5 +11,5 @@ class Invoice extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['accounts_id'];
 }

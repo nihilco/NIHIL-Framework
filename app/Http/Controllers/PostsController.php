@@ -31,7 +31,7 @@ class PostsController extends Controller
     //
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::all()->sortByDesc('published_at');
         return view('posts.index', compact('posts'));
     }
 

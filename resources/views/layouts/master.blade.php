@@ -22,7 +22,8 @@
    <!-- =============== BOOTSTRAP STYLES ===============-->
    <link rel="stylesheet" href="/css/bootstrap.css" id="bscss">
    <!-- =============== APP STYLES ===============-->
-   <link rel="stylesheet" href="/css/angel.css" id="maincss">
+   <link rel="stylesheet" href="/css/angel.css" id="angelcss">
+   <link rel="stylesheet" href="/css/main.css" id="maincss">
    <!-- Piwik -->
    <script type="text/javascript">
      var _paq = _paq || [];
@@ -81,7 +82,7 @@
                   </li>
                   @if (Auth::guest())
                   <li>
-                     <a href="{{ route('register') }}">Signup</a>
+                     <a href="{{ route('signup') }}">Signup</a>
                   </li>
                   <li>
                      <a href="{{ route('login') }}">Login</a>
@@ -100,7 +101,7 @@
             </div>
             <!-- END Nav wrapper-->
             <!-- START Search form-->
-            <form role="search" action="search.html" class="navbar-form">
+            <form role="search" action="/search" class="navbar-form">
                <div class="form-group has-feedback">
                   <input type="text" placeholder="Type and hit enter ..." class="form-control">
                   <div data-search-dismiss="" class="fa fa-times form-control-feedback"></div>

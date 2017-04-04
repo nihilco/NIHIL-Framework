@@ -43,7 +43,7 @@
                                        <em class="fa fa-usd fa-5x"></em>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                       <div class="text-lg">0</div>
+    <div class="text-lg">${{ $paymentsTotal['total'] }} / {{ $paymentsTotal['count'] }}</div>
                                        <p class="m0">New Payments!</p>
                                     </div>
                                  </div>

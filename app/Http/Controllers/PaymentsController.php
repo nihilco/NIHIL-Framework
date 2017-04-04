@@ -8,6 +8,8 @@ use App\User;
 use App\CreditCard;
 use App\Account;
 use App\Customer;
+use App\Plan;
+use App\Subscription;
 
 class PaymentsController extends Controller
 {
@@ -15,14 +17,6 @@ class PaymentsController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['donate', 'process']]);
-    }
-
-    //
-    public function validator(array $data)
-    {
-        return Validator::make($data, [
-
-        ]);
     }
 
     //
@@ -41,6 +35,12 @@ class PaymentsController extends Controller
     //
     public function process()
     {
+        $this->validate(request(), [
+            'amount' => 'required|',
+            'email' => 'required|email',
+            'recurrence' => 'required|in:single,month,year'
+        ]);
+        
         if($account = Account::find(constant('NF_ACCOUNT_ID'))) {
             \Stripe\Stripe::setApiKey(\Crypt::decrypt($account->secret_key));
         }else{
@@ -71,6 +71,7 @@ class PaymentsController extends Controller
             $newCard = $stripeCustomer->sources->create(array("source" => request('stripeToken')));
 
             $card = CreditCard::create([
+                'account_id' => $customer->account_id, 
                 'customer_id' => $customer->id,
                 'stripe_id' => $token->card->id,
                 'brand' => $token->card->brand,
@@ -81,30 +82,83 @@ class PaymentsController extends Controller
             ]);
         }
 
-        $charge = \Stripe\Charge::create([
-            'customer' => $customer->stripe_id,
-            'currency' => 'usd',
-            'source' => $card->stripe_id,
-            'amount' => $this->convertToCents(request('amount')),
-            'metadata' => [
-                'type' => 'donation',
-                'comments' => request('comments'),
-            ],
-        ]);
+        $cents = $this->convertToCents(request('amount'));
         
-        $payment = Payment::create([
-            'invoice_id' => 1,
-            'customer_id' => $customer->id,
-            'stripe_id' => $charge->id,
-            'amount' => $charge->amount,
-            'comments' => request('comments')
-        ]);
+        if(request('recurrence') == 'month' || request('recurrence') == 'year') {
+            
+            if(!$plan = Plan::findUniquePlan($customer->account_id, $cents, 1, request('recurrence'), 1)) {
 
-        session()->flash('confirm', [
-            'title' => 'Thank You!',
-            'message' => 'Thank you for your donation.',
-            'payment' => $payment
-        ]);
+                $plan = Plan::create([
+                    'account_id' => $customer->account_id,
+                    'name' => 'Plan of ' . request('amount') . ' every 1 ' . request('recurrence') . '.',
+                    'amount' => $cents,
+                    'currency_id' => 1,
+                    'interval' => request('recurrence'),
+                    'interval_count' => 1,
+                ]);
+
+                $stripePlan = \Stripe\Plan::create([
+                    'amount' => $plan->amount,
+                    'interval' => $plan->interval,
+                    'interval_count' => $plan->interval_count,
+                    'name' => $plan->name,
+                    'currency' => 'usd',
+                    'id' => $plan->id
+                ]);
+            }
+
+            $stripeSubscription = \Stripe\Subscription::create(array(
+                'customer' => $customer->stripe_id,
+                'plan' => $plan->id,
+                'metadata' => [
+                    'type' => 'donation',
+                    'comments' => request('comments'),
+                ], 
+            ));
+
+            $subscription = Subscription::create([
+                'account_id' => $customer->account_id,
+                'customer_id' => $customer->id,
+                'plan_id' => $plan->id,
+                'stripe_id' => $stripeSubscription->id,
+                'number_of_terms' => 1,
+            ]);
+
+            session()->flash('confirm', [
+                'title' => 'Thank You!',
+                'message' => 'Thank you for your recurring donation.',
+                'subscription' => $subscription
+            ]);
+            
+        } else {
+            
+            $charge = \Stripe\Charge::create([
+                'customer' => $customer->stripe_id,
+                'currency' => 'usd',
+                'source' => $card->stripe_id,
+                'amount' => $cents,
+                'metadata' => [
+                    'type' => 'donation',
+                    'comments' => request('comments'),
+                ],
+            ]);
+            
+            $payment = Payment::create([
+                'account_id' => $customer->account_id,
+                'customer_id' => $customer->id,
+                'invoice_id' => 1,
+                'stripe_id' => $charge->id,
+                'amount' => $charge->amount,
+                'comments' => request('comments')
+            ]);
+
+            session()->flash('confirm', [
+                'title' => 'Thank You!',
+                'message' => 'Thank you for your donation.',
+                'payment' => $payment
+            ]);
+            
+        }
         
         //return redirect()->route('home');
         return redirect()->route('confirm');

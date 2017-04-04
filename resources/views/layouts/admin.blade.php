@@ -18,11 +18,14 @@
    <link rel="stylesheet" href="/vendor/animate.css/animate.min.css">
    <!-- WHIRL (spinners)-->
    <link rel="stylesheet" href="/vendor/whirl/dist/whirl.css">
+   <!-- SWEET ALERT-->
+   <link rel="stylesheet" href="/vendor/sweetalert/dist/sweetalert.css">      
    <!-- =============== PAGE VENDOR STYLES ===============-->
    <!-- =============== BOOTSTRAP STYLES ===============-->
    <link rel="stylesheet" href="/css/bootstrap.css" id="bscss">
    <!-- =============== APP STYLES ===============-->
-   <link rel="stylesheet" href="/css/angel.css" id="maincss">
+   <link rel="stylesheet" href="/css/angel.css" id="angelcss">
+   <link rel="stylesheet" href="/css/main.css" id="maincss">
    <!-- Piwik -->
    <script type="text/javascript">
      var _paq = _paq || [];
@@ -90,7 +93,7 @@
                   </li>
                   @if (Auth::guest())
                   <li>
-                     <a href="{{ route('register') }}">Signup</a>
+                     <a href="{{ route('signup') }}">Signup</a>
                   </li>
                   <li>
                      <a href="{{ route('login') }}">Login</a>
@@ -195,6 +198,12 @@
                      <a href="/payments" title="Single View">
                         <em class="fa fa-usd"></em>
                         <span>Payments</span>
+                     </a>
+                  </li>
+                  <li class="">
+                     <a href="/customers" title="Single View">
+                        <em class="fa fa-flag"></em>
+                        <span>Customers</span>
                      </a>
                   </li>
                   <li class="">
@@ -357,6 +366,7 @@
    <script src="/vendor/animo.js/animo.js"></script>
    <!-- LOCALIZE-->
    <script src="/vendor/jquery-localize-i18n/dist/jquery.localize.js"></script>
+   <script src="/vendor/sweetalert/dist/sweetalert.min.js"></script>
    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
    <!-- =============== APP SCRIPTS ===============-->
    <script src="/js/angel.js"></script>

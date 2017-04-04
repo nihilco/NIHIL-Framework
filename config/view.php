@@ -1,8 +1,12 @@
 <?php
 
-if(!defined('NF_THEME')) {
-    define('NF_THEME', 'default');
+$paths = array();
+
+if(defined('NF_THEME')) {
+    $paths[] = realpath(base_path('themes/' . NF_THEME . '/resources/views'));
 }
+
+$paths[] = realpath(base_path('resources/views'));
 
 return [
 
@@ -17,10 +21,7 @@ return [
     |
     */
 
-    'paths' => [
-        realpath(base_path('resources/themes/' . NF_THEME . '/views')),
-        realpath(base_path('resources/views')),
-    ],
+    'paths' => $paths,
 
     /*
     |--------------------------------------------------------------------------

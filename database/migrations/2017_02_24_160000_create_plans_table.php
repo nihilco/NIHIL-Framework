@@ -15,6 +15,7 @@ class CreatePlansTable extends Migration
     {
         Schema::create('plans', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('account_id');
             $table->string('name', 100);
             $table->integer('amount');
             $table->integer('currency_id')->default(1);

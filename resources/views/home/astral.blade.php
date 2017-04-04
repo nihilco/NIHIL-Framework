@@ -1,5 +1,13 @@
-@extends('layouts.admin')
+@extends('layouts.master')
 
+@section('og')
+      <meta name="og:url" property="og:url" content="https://taraloka.org/astral-shoe-fundraiser">
+      <meta name="og:type" property="og:type" content="article">
+      <meta name="og:title" property="og:title" content="Astral Shoe Fundraiser - Taraloka Foundation">
+      <meta name="og:description" property="og:description" content="Thanks to a new partnership with our friends at Astral, our girls will be walking to school in style.  When we return to Sikkim in March, we will be packing a new pair of shoes for each girl.  Between donated and discounted shoes, our cost will only be $25 per pair.  Please help us raise the funds to complete this project!">
+      <meta name="og:image" property="og:image" content="https://taraloka.org/img/taraloka-logo-og-dark.png">
+@endsection
+    
 @section('content')
 
 <section id="site-content">
@@ -20,14 +28,14 @@
 
 <form role="form" method="POST" action="/astral-shoe-fundraiser" id="payment-form">
        {{ csrf_field() }}
-       
+    
        <div class="row" style="margin-top:21px;">
        <div class="col-sm-12">
        
        <div class="form-group">
          <div class="col-xs-3">
     @if($girls->bimla)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/bimla.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -38,7 +46,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->binita)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/binita.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -49,7 +57,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->christina)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/christina.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -60,7 +68,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->dawa)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/dawa.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -71,7 +79,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->dechen)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/dechen.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -82,7 +90,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->dekhyong)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/dekhyong.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -93,7 +101,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->gayatri)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/gayatri.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -104,7 +112,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->gyalmit)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/gyalmit.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -115,7 +123,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->karma)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/karma.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -126,7 +134,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->maite)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/maite.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -137,7 +145,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->muskan)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/muskan.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -148,7 +156,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->ongmu)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/ongmu.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -159,7 +167,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->palmu)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/palmu.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -170,7 +178,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->pasang)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/pasang.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -181,7 +189,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->pasangkee)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/pasangkee.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -192,7 +200,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->pema)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/pema.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -203,7 +211,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->pemma)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/pema-2.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -214,7 +222,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->renu)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/renu.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -225,7 +233,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->rinsing)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/rinsing.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -236,7 +244,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->saraswati)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/saraswati.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -247,7 +255,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->sonam)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/sonam.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -258,7 +266,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->soyata)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/soyata.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -269,7 +277,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->sunita)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/sunita.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -280,7 +288,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->tashi)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/tashi.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -291,7 +299,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->tenzing)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/tenzing.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -302,7 +310,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->tenzing_paden)
-          <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+          <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/tenzing-paden.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -313,7 +321,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->tsering)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/tsering.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -324,7 +332,7 @@
          </div>
          <div class="col-xs-3">
     @if($girls->yangchen)
-           <label class="btn btn-success" style="padding:0; margin-bottom:10px;">
+           <label class="btn btn-success-inverse" style="padding:0; margin-bottom:10px;">
              <img src="/img/girls/yangchen.png" alt="..." class="img-thumbnail nf-img-check nf-checked" style="border:0;padding:0;">
     @else
            <label class="btn btn-primary" style="padding:0; margin-bottom:10px;">
@@ -372,7 +380,11 @@
                                    </span>
                                    @endif
                                </div>
-         <button type="submit" class="btn btn-lg btn-success">Donate</button>
+<div class="form-group">
+    <label>For each girl you select in blue, you will be charged $25.</label>
+</div>
+    
+<button type="submit" class="btn btn-lg btn-success">Donate</button>
        </form>
        
        </div>

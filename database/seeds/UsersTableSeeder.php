@@ -29,8 +29,10 @@ class UsersTableSeeder extends Seeder
         //
         DB::table('users')->insert([
             'name' => env('DB_SEED_USER_NAME'),
+            'username' => env('DB_SEED_USER_USERNAME'),
             'email' => env('DB_SEED_USER_EMAIL'),
             'password' => bcrypt(env('DB_SEED_USER_PASSWORD')),
+            'tos_acceptance_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
         ]);

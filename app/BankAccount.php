@@ -11,5 +11,5 @@ class BankAccount extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['account_id'];
 }

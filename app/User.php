@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'stripe_id'
+        'name', 'username', 'email', 'password', 'tos_acceptance_at'
     ];
 
     /**
@@ -27,14 +27,14 @@ class User extends Authenticatable
         'password', 'remember_token', 
     ];
 
+    public static function byUsername($username)
+    {
+        return static::where('username', $username)->first();
+    }
+
     public static function byEmail($email)
     {
         return static::where('email', $email)->first();
-    }
-
-    public static function byStripeId($sid)
-    {
-        return static::where('stripe_id', $sid)->first();
     }
 
     public function posts()

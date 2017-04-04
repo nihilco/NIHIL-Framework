@@ -2,23 +2,15 @@
 
 @section('content')
 
-<section id="site-content">
-       <div class="container">
-
-       <div class="row">
-       <div class="col-sm-4">
-           <div class="cms-projects-view">
-               <h1>Thank You!</h1>
-           </div>
-
-       <p>Thank you for your donation.</p>
-       
-       </div>
-       
-       </div>
-       </div>
-
-       </div>
-       </section>
-
-    @endsection
+      <!-- Main section-->
+      <section>
+         <!-- Page content-->
+         <div class="content-wrapper">
+            <div class="content-heading">
+               {{ session('confirm')['title'] }}
+               <small>{{ session('confirm')['message'] }}</small>
+            </div>
+         </div>
+      </section>
+    
+@endsection

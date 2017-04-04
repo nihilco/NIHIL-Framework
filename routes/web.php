@@ -19,11 +19,18 @@
 Route::get('/', function () {
     //return view('welcome');
     return view('home.index');
-});
+})->name('home');
 
-Auth::routes();
+//Auth::routes();
+Route::get('/signup', 'RegistrationController@create')->name('signup');
+Route::post('/signup', 'RegistrationController@store');
+Route::get('/login', 'SessionsController@create')->name('login');
+Route::post('/login', 'SessionsController@store');
+Route::post('/logout', 'SessionsController@destroy')->name('logout');
+Route::get('/password/request', 'PasswordsController@request')->name('password.request');
+Route::get('/password/reset', 'PasswordsController@reset')->name('password.reset');
 
-Route::get('/home', 'HomeController@home')->name('home');
+
 Route::get('/astral-shoe-fundraiser', 'HomeController@astral')->name('astral');
 Route::post('/astral-shoe-fundraiser', 'HomeController@process');
 Route::get('/confirm', 'HomeController@confirm')->name('confirm');
@@ -37,7 +44,8 @@ Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::post('/stripe/webhooks', 'WebhooksController@handle');
 
 // ADMIN
-Route::get('/dashboard', 'AdminController@index');
+Route::get('/dashboard', 'AdminController@index')->name('dashboard');
+//Route::get('/home', 'AuthController@home')->name('home');
 
 // INVOICES
 Route::get('/invoices/create', 'InvoicesController@create');
@@ -45,6 +53,13 @@ Route::post('/invoices', 'InvoicesController@store');
 Route::get('/invoices', 'InvoicesController@index');
 Route::get('/invoices/{invoice}', 'InvoicesController@show');
 Route::delete('/invoices/{invoice}', 'InvoicesController@destroy');
+
+// CUSTOMERS
+Route::get('/customers/create', 'CusotmersController@create');
+Route::post('/customers', 'CustomersController@store');
+Route::get('/customers', 'CustomersController@index');
+Route::get('/customers/{customer}', 'CustomersController@show');
+Route::delete('/customers/{customer}', 'CustomersController@destroy');
 
 // CATEGORIES
 Route::get('/categories/create', 'CategoriesController@create');
