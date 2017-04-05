@@ -51,7 +51,13 @@ class Customer extends Model
     //
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class, 'id');
+    }
+
+    //
+    public function account()
+    {
+        return $this->hasOne(Account::class, 'id');
     }
 
     //

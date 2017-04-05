@@ -18,6 +18,7 @@ class CreateAccountsTable extends Migration
             $table->integer('user_id');
             $table->string('mode', 16);
             $table->string('status', 16)->nullable();
+            $table->string('name');
             $table->string('account_id');
             $table->string('publishable_key')->nullable();
             $table->string('secret_key', 255)->nullable();

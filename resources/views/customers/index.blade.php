@@ -19,7 +19,7 @@
                         <!-- START table-responsive-->
                         <div class="table-responsive">
                             <table id="table-ext-1" class="table table-bordered table-hover">
-                                <thead>
+                                <thead class="panel-footer">
                                     <tr>
                                         <th data-check-all>
                                             <div data-toggle="tooltip" data-title="Check All" class="checkbox c-checkbox">
@@ -31,12 +31,13 @@
                                         </th>
                                         <th>#</th>
                                         <th>Stripe ID</th>
-                                        <th>Amount</th>
+                                        <th>Email</th>
                                         <th>Date Created</th>
                                         <th>&nbsp;</th>              
                                     </tr>
                                 </thead>
                                 <tbody>
+@if(count($customers) > 0)
                                     @php
                                         $c=0;
                                     @endphp
@@ -46,6 +47,9 @@
                                         @endphp
                                         @include('customers.table-row', compact($customer, $c))
                                     @endforeach
+                                            @else
+                                                <tr><td colspan="5">No customers found.</td></tr>
+                                                @endif
                                 </tbody>
                             </table>
                         </div>

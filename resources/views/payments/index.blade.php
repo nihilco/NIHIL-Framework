@@ -19,7 +19,7 @@
                         <!-- START table-responsive-->
                         <div class="table-responsive">
                             <table id="table-ext-1" class="table table-bordered table-hover">
-                                <thead>
+                                <thead class="panel-footer">
                                     <tr>
                                         <th data-check-all>
                                             <div data-toggle="tooltip" data-title="Check All" class="checkbox c-checkbox">
@@ -37,6 +37,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+@if(count($payments) > 0)
                                     @php
                                         $c=0;
                                     @endphp
@@ -46,6 +47,9 @@
                                         @endphp
                                         @include('payments.table-row', compact($payment, $c))
                                     @endforeach
+                                            @else
+<tr><td colspan="5">No payments found.</td></tr>
+                                                @endif
                                 </tbody>
                             </table>
                         </div>

@@ -8,14 +8,15 @@
                                   </div>
                                </td>
                                       <td>{{ $c }}</td>
-                               <td>{{ $payment->stripe_id }}</td>
-<td>{{ $payment->amount }}</td>
-<td>{{ $payment->created_at }}</td>
+                               <td>{{ $customer->account->name }}</td>
+                               <td>{{ $customer->stripe_id }}</td>
+<td>{{ $customer->user->email }}</td>
+<td>{{ $customer->created_at }}</td>
                                <td>
                                    <ul class="list-inline">
-                                      <li><a href="/payments/{{ $payment->id }}"><em class="fa fa-eye"></em></a></li>
-                                      <li><a href="/payments/{{ $payment->id }}/edit"><em class="fa fa-edit"></em></a></li>
-                                      <li><a href="/payments/{{ $payment->id }}/delete"><em class="fa fa-trash"></em></a></li>
+                                      <li><a href="/customers/{{ $customer->id }}"><em class="fa fa-eye"></em></a></li>
+                                      <li><a href="/customers/{{ $customer->id }}/edit"><em class="fa fa-edit"></em></a></li>
+                                      <li><a href="/customers/{{ $customer->id }}/delete"><em class="fa fa-trash"></em></a></li>
                                    </ul>
                                </td>
                             </tr>
