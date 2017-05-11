@@ -19,7 +19,7 @@ class CreateAccountsTable extends Migration
             $table->string('mode', 16);
             $table->string('status', 16)->nullable();
             $table->string('name');
-            $table->string('account_id');
+            $table->string('stripe_id');
             $table->string('publishable_key')->nullable();
             $table->string('secret_key', 255)->nullable();
             $table->text('description')->nullable();

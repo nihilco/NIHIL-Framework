@@ -7,7 +7,7 @@
         <!-- Page content-->
         <div class="content-wrapper">
             <div class="content-heading">
-                Payments
+                Customers
                 <small>some small phrase</small>
             </div>
             <div class="row">

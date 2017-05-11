@@ -74,8 +74,7 @@
                                             
                        </div>
                 </div>
-                <!-- END panel-->
-    
+                <!-- END panel-->    
 
                        </div>
                    </div>

@@ -174,7 +174,7 @@
     @else
 
     <tr>
-      <td colspan="7">No tickets found</td>
+      <td colspan="7">No tickets found.</td>
     </tr>
     
     @endif

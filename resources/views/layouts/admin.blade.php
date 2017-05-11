@@ -281,7 +281,7 @@
                   <li class="">
                      <a href="/groups" title="Single View">
                         <em class="fa fa-users"></em>
-                        <span>groups</span>
+                        <span>Groups</span>
                      </a>
                   </li>
                           <li class="">

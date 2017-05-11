@@ -16,7 +16,7 @@ class AccountsTableSeeder extends Seeder
             'user_id' => 1,
             'mode' => env('STRIPE_MODE'),
             'name' => env('STRIPE_ACCOUNT_NAME'),
-            'account_id' => env('STRIPE_ACCOUNT_ID'),
+            'stripe_id' => env('STRIPE_ACCOUNT_ID'),
             'publishable_key' => env('STRIPE_PUBLISHABLE_KEY'),
             'secret_key' => \Crypt::encrypt(env('STRIPE_SECRET_KEY')),
             'description' => 'Stand alone account for The NIHIL Corporation.',

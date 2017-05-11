@@ -30,7 +30,7 @@ class TypesController extends Controller
     public function index()
     {
         $types = Type::all();
-        return view('types.index', compact('type'));
+        return view('types.index', compact('types'));
     }
 
     //
