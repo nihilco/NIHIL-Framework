@@ -24,7 +24,7 @@ class AccountsController extends Controller
     //
     public function index()
     {
-        //Account::createStripeAccount();
+        //Account::editStripeAccount('acct_1AIGdvJ86jnKJ2ap');
         $accounts = Account::all();
         return view('accounts.index', compact('accounts'));
     }
