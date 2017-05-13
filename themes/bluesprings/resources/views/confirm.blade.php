@@ -6,7 +6,7 @@
        <div class="container">
 
        <div class="row">
-       <div class="col-sm-4">
+       <div class="col-sm-4 justify-content-center">
            <div class="cms-projects-view">
                <h1>Thank You!</h1>
            </div>

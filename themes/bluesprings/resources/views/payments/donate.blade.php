@@ -5,8 +5,8 @@
 <section id="site-content">
        <div class="container">
 
-       <div class="row">
-       <div class="col-sm-8 col-sm-offset-2">
+       <div class="row justify-content-center">
+       <div class="col-7">
            <div class="cms-projects-view">
                <h1>Donate</h1>
            </div>
@@ -42,7 +42,7 @@
                                    </div>
                                  </div>
                                </div>
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-sm-3">    
                                <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                   <label>Amount</label>
@@ -59,13 +59,13 @@
                                    <div class="form-group {{ $errors->has('recurrence') ? ' has-error' : '' }}">
                                      <label class="control-label" for="recurrence_buttons">Recurrence</label><br />
                                      <div class="btn-group" id="recurrence_buttons" data-toggle="buttons">
-                                       <label class="btn btn-default active">
+                                       <label class="btn btn-secondary active">
                                          <input type="radio" tabindex="5" name="recurrence" value="single" checked>Single
                                        </label>
-                                       <label class="btn btn-default">
+                                       <label class="btn btn-secondary">
                                          <input type="radio" tabindex="5" name="recurrence" value="month">Monthly
                                        </label>
-                                       <label class="btn btn-default">
+                                       <label class="btn btn-secondary">
                                          <input type="radio" tabindex="5" name="recurrence" value="year">Yearly
                                        </label>
                                      </div>
@@ -78,7 +78,7 @@
     
     </div>
 </div>
-<div class="row">
+<div class="row justify-content-center">
 <div class="col-sm-6">
                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                   <label>Email</label>
@@ -91,7 +91,7 @@
                                </div>
 </div>
 </div>
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-sm-6">
       <div class="form-group">
         <label for="card-element">
@@ -107,16 +107,8 @@
     </div>
 </div>
 
-                               <div class="form-group{{ $errors->has('comments') ? ' has-error' : '' }}">
-                                   <label>Comments</label>
-                                   <textarea name="comments" class="form-control" rows="5" placeholder="Enter comments..."></textarea>
-                                   @if ($errors->has('comments'))
-                                   <span class="help-block">
-                                       <strong>{{ $errors->first('comments') }}</strong>
-                                   </span>
-                                   @endif
-                               </div>
-                               <button type="submit" class="btn btn-sm btn-success btn-lg pull-right">Make Donation</button>
+                        
+                               <button type="submit" class="btn btn-success btn-lg pull-right">Make Donation</button>
                             </form>
 
                       <!-- END panel-->
