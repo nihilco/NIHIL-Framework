@@ -44,7 +44,7 @@ use App\Post;
         
     @else
 
-        <p>No posts.</p>
+        <p>No posts.  But this is real!</p>
         
     @endif
 
