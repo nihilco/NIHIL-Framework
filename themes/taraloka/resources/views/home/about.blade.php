@@ -1,39 +1,31 @@
 @extends('layouts.master')
 
-@section('og')
-      <meta name="og:url" property="og:url" content="https://taraloka.org">
+@section('meta')
+      <meta description="The Taraloka Foundation is a registered 501(c)3 organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
+      <meta keywords="taraloka, sikkim, india, foundation, nihil">
+      <meta author="Uriah M. Clemmer IV">
+
+      <meta property="fb:app_id" content="187097078310518">
+    
+      <meta name="og:url" property="og:url" content="https://taraloka.org/about">
       <meta name="og:type" property="og:type" content="article">
       <meta name="og:title" property="og:title" content="Taraloka Foundation">
       <meta name="og:description" property="og:description" content="The Taraloka Foundation is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
       <meta name="og:image" property="og:image" content="https://taraloka.org/img/taraloka-logo-og-dark.png">
+
+      <title>About - Taraloka</title>
 @endsection
     
 @section('content')
 
-<section id="site-content">
-    <div class="container">
-
+<section class="container site-content">
     <div class="row">
-    <div class="col-sm-9">
-
-    <div class="row">
-    <div class="col-md-12">
-
-    <div class="cms-projects-view">
+    <div class="col-sm-12">
     <h1>About</h1>
     </div>
-
     </div>
-    </div>
-
-    <div class="row">
-    <div class="col-md-12">
-
-    <div class="row">
-      <div class="col-sm-12">
-
-        <img src="/img/girl-6.png" alt="" class="pull-right content-image" />
-
+<div class="row">
+    <div class="col-sm-6">
     <p>After twelve years of guiding students in India, Tim Williams created <strong>The Taraloka Foundation</strong> in 2012 as a way to assist the noble work of fellow guides and Tibetan locals, Kelsang Phuntsok and Gelek Gyatso.  Through their dedication and hard work, the Sikkim Happiness Home has become a place of safety, comfort, education, and love for more than 25 girls.</p>
 
     <h3>Basic structure of Taraloka:</h3>
@@ -48,21 +40,12 @@
     <li>The girls attend an excellent private school in Gangtok, Sikkim India (Paljor Namgyl School)</li>
     <li>As soon as one girl leaves the SHH to live in a college dormitory, we find a sponsor and bring another young girl into the home.</li>
         </ul>
-      </div>
-    </div>
-    </div>
-    </div>
+</div>
+    <div class="col-sm-6">
+        <img src="/img/girl-6.png" alt="" class="img-fluid" />
+</div>
 
-    </div>
-    <div class="col-sm-3" style="padding-top:15px;padding-bottom:10px;">
-
-    <!--<div class="row"><div class="col-xs-12"><h3>Join Our Mailing List</h3>
-    <p>Keep up-to-date with events, news, and other important announcements.  We currently have over 2 subscribers and counting!</p><a href="/subscribe" class="btn btn-success btn-lg pull-right">Join Now</a></div></div>
-    </div>-->
-    </div>
-
-
-    </div>
-    </section>
+</div>
+</section>
     
-    @endsection
+@endsection

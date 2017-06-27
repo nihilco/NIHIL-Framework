@@ -18,21 +18,23 @@
   <link rel="stylesheet" href="/css/bootstrap.css" id="bscss">
   <!-- =============== APP STYLES ===============-->
   <link rel="stylesheet" href="/css/angel.css" id="maincss">
-   <!-- Piwik -->
-   <script type="text/javascript">
-     var _paq = _paq || [];
-     /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-     _paq.push(['trackPageView']);
-     _paq.push(['enableLinkTracking']);
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+    var _paq = _paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
     (function() {
         var u="//pluto.nihil.co/";
         _paq.push(['setTrackerUrl', u+'piwik.php']);
-        _paq.push(['setSiteId', '2']);
+        _paq.push(['setSiteId', '6']);
         var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNod    e.insertBefore(g,s);
     })();
-   </script>
-   <!-- End Piwik Code -->
+    </script>
+    <!-- End Piwik Code -->
+       
   <!-- Scripts -->
   <script>
       window.Laravel = {!! json_encode([
@@ -48,7 +50,7 @@
                <div class="panel panel-dark panel-flat">
                   <div class="panel-heading text-center">
                      <a href="{{ url('/') }}">
-                       {{ config('app.name', 'NIHIL Framework') }}
+                       <img src="/img/taraloka-logo-wide.png" alt="The Taraloka Foundation" style="width:100%;padding:10px;" />
                      </a>
                   </div>
 
@@ -56,7 +58,7 @@
 
                <!-- END panel-->
                <div class="p-lg text-center">
-                <span>Copyright &copy; 2009-<?= date('Y') ?> The NIHIL Corporation.</span><br />
+                <span>Copyright &copy; 2014-<?= date('Y') ?> The Taraloka Foundation.</span><br />
                 <span>All rights reserved.</span>
          </div>
       </div>
@@ -74,6 +76,7 @@
   <script src="/vendor/parsleyjs/dist/parsley.min.js"></script>
   <!-- =============== APP SCRIPTS ===============-->
   <script src="/js/angel.js"></script>
+  <script src="https://js.stripe.com/v3/"></script>
 </body>
 
 </html>

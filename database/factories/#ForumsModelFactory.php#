@@ -1,0 +1,45 @@
+<?php
+
+/**
+ *
+ *
+ **/
+$factory->define(NIHILCo\Forums\Models\Forum::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => function () {
+            return factory('App\User')->create()->id;
+        },
+        'title' => $faker->sentence,
+        'description' => $faker->paragraph,
+    ];
+});
+
+$factory->define(NIHILCo\Forums\Models\Thread::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => function () {
+            return factory('App\User')->create()->id;
+        },
+        'forum_id' => function () {
+            return factory('NIHILCo\Forums\Models\Forum')->create()->id;
+        },
+        'title' => $faker->sentence,
+        'body' => $faker->paragraph,
+        'votes_up' => ,
+        'votes_down' => ,
+        'last_viewed_at' => ,
+    ];
+});
+
+$factory->define(NIHILCo\Forums\Models\Reply::class, function (Faker\Generator $faker) {
+    return [
+        'thread_id' => function () {
+            return factory('NIHILCo\Forums\Models\Thread')->create()->id;
+        },
+        'user_id' => function () {
+            return factory('App\User')->create()->id;
+        },
+        'body' => $faker->paragraph,
+        'votes_up' => ,
+        'votes_down' => ,
+    ];
+});

@@ -165,6 +165,74 @@ Route::get('/statuses', 'StatusesController@index');
 Route::get('/statuses/{status}', 'StatusesController@show');
 Route::delete('/statuses/{status}', 'StatusesController@destroy');
 
+//
+Route::get('/trips/create', 'TripsController@create');
+Route::post('/trips', 'TripsController@store');
+Route::get('/trips', 'TripsController@index');
+Route::get('/trips/{trip}', 'TripsController@show');
+Route::delete('/trips/{trip}', 'TripsController@destroy');
+
+Route::get('/trippers/create', 'TrippersController@create');
+Route::post('/trippers', 'TrippersController@store');
+Route::get('/trippers', 'TrippersController@index');
+Route::get('/trippers/{tripper}', 'TrippersController@show');
+Route::delete('/trippers/{tripper}', 'TrippersController@destroy');
+
+Route::get('/trip-groups/create', 'TripGroupsController@create');
+Route::post('/trip-groups', 'TripGroupsController@store');
+Route::get('/trip-groups', 'TripGroupsController@index');
+Route::get('/trip-groups/{tripgroup}', 'TripGroupsController@show');
+Route::delete('/trip-groups/{tripGroup}', 'TripGroupsController@destroy');
+
+Route::get('/trip-activities/create', 'TripActivitiesController@create');
+Route::post('/trip-activities', 'TripActivitiesController@store');
+Route::get('/trip-activities', 'TripActivitiesController@index');
+Route::get('/trip-activities/{tripActivity}', 'TripActivitiesController@show');
+Route::delete('/trip-activities/{tripActivity}', 'TripActivitiesController@destroy');
+
+Route::get('/tripper-types/create', 'TripperTypesController@create');
+Route::post('/tripper-types', 'TripperTypeesController@store');
+Route::get('/tripper-types', 'TripperTypesController@index');
+Route::get('/tripper-types/{tripperType}', 'TripperTypesController@show');
+Route::delete('/tripper-types/{tripperType}', 'TripperTypesController@destroy');
+
+Route::get('/tripper-meals/create', 'TripperMealsController@create');
+Route::post('/tripper-meals', 'TripperMealsController@store');
+Route::get('/tripper-meals', 'tripperMealsController@index');
+Route::get('/tripper-meals/{tripperMeal}', 'TripperMealsController@show');
+Route::delete('/tripper-meals/{tripperMeal}', 'TripperMealsController@destroy');
+
+Route::get('/tripper-beds/create', 'TripperBedsController@create');
+Route::post('/tripper-beds', 'TripperBedsController@store');
+Route::get('/tripper-beds', 'TripperBedsController@index');
+Route::get('/tripper-beds/{tripperBed}', 'TripperBedsController@show');
+Route::delete('/tripper-beds/{tripperBed}', 'TripperBedsController@destroy');
+
+//
+Route::get('/sources/create', 'SourcesController@create');
+Route::post('/sources', 'SourcesController@store');
+Route::get('/sources', 'SourcesController@index');
+Route::get('/sources/{source}', 'SourcesController@show');
+Route::delete('/sources/{source}', 'SourcesController@destroy');
+
+Route::get('/source-types/create', 'SourceTypesController@create');
+Route::post('/source-types', 'SourceTypesController@store');
+Route::get('/source-types', 'SourceTypesController@index');
+Route::get('/source-types/{sourceType}', 'SourceTypesController@show');
+Route::delete('/source-types/{sourceType}', 'SourceTypesController@destroy');
+
+Route::get('/transactions/create', 'TransactionsController@create');
+Route::post('/transactions', 'TransactionsController@store');
+Route::get('/transactions', 'TransactionsController@index');
+Route::get('/transactions/{transaction}', 'TransactionsController@show');
+Route::delete('/transactions/{transaction}', 'TransactionsController@destroy');
+
+Route::get('/transaction-types/create', 'TransactionTypesController@create');
+Route::post('/transaction-types', 'TransactionTypesController@store');
+Route::get('/transaction-types', 'TransactionTypesController@index');
+Route::get('/transaction-types/{transactionType}', 'TransactionTypesController@show');
+Route::delete('/transaction-types/{transactionType}', 'TransactionTypesController@destroy');
+
 // PAGES
 Route::get('/pages/create', 'PagesController@create');
 Route::post('/pages', 'PagesController@store');

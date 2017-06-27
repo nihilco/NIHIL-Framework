@@ -21,7 +21,7 @@ class TicketsControllerTest extends TestCase
         $response->assertStatus(302);
 
         //
-        $reponse = $this->get('/tickets');
+        $response = $this->get('/tickets');
         $response->assertStatus(302);
     }
 }

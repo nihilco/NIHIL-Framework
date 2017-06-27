@@ -179,6 +179,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         //
         App\Providers\StripeServiceProvider::class,
+        //
+        NIHILCo\Forums\ForumsServiceProvider::class,
     ],
 
     /*

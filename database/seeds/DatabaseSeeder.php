@@ -27,6 +27,11 @@ class DatabaseSeeder extends Seeder
         $this->call(TripGroupsTableSeeder::class);
         $this->call(TripActivitiesTableSeeder::class);
         //
+        $this->call(SourceTypesTableSeeder::class);
+        $this->call(TransactionTypesTableSeeder::class);
+        //
+        $this->call(ForumsTableSeeder::class);
+        //
         $this->call(StripeDataSeeder::class);
     }
 }

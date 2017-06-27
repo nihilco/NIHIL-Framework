@@ -20,8 +20,8 @@ class TripActivitiesTableSeeder extends Seeder
         ]);
 
         DB::table('trip_activities')->insert([
-            'name' => 'Section II',
-            'description' => 'Section II activity.',
+            'name' => 'Canoeing',
+            'description' => 'Canoeing activity.',
             'created_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
         ]);

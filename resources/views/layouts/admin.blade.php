@@ -195,9 +195,9 @@
                      </a>
                   </li>
                   <li class="">
-                     <a href="/payments" title="Single View">
+                     <a href="/transactions" title="Single View">
                         <em class="fa fa-usd"></em>
-                        <span>Payments</span>
+                        <span>Transactions</span>
                      </a>
                   </li>
                   <li class="">

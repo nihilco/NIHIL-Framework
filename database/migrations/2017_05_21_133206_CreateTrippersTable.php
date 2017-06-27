@@ -16,6 +16,7 @@ class CreateTrippersTable extends Migration
         //
         Schema::create('trippers', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('trip_id');
             $table->integer('tripper_type_id');
             $table->integer('trip_group_id')->nullable();
             $table->string('first_name');

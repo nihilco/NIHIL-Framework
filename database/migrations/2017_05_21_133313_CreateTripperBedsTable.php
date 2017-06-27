@@ -14,7 +14,7 @@ class CreateTripperBedsTable extends Migration
     public function up()
     {
         //
-        Schema::create('trippers_beds', function (Blueprint $table) {
+        Schema::create('tripper_beds', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tripper_id');
             $table->date('date');
@@ -31,6 +31,6 @@ class CreateTripperBedsTable extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('trippers_beds');
+        Schema::dropIfExists('tripper_beds');
     }
 }
