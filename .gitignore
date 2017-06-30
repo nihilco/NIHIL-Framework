@@ -5,7 +5,6 @@
 /public/hot
 /storage/*.key
 /vendor
-/packages
 /.idea
 Homestead.json
 Homestead.yaml

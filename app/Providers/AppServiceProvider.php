@@ -25,5 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        if(\App::environment(['local', 'staging', 'development', 'testing'])) {
+            $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
+        }
     }
 }

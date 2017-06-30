@@ -27,6 +27,11 @@ class User extends Authenticatable
         'password', 'remember_token', 
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
+
     public static function byUsername($username)
     {
         return static::where('username', $username)->first();
@@ -45,6 +50,16 @@ class User extends Authenticatable
     public function customers()
     {
         return $this->hasMany(Customer::class);
+    }
+
+    public function threads()
+    {
+        return $this->hasMany(\NIHILCo\Forums\Models\Thread::class)->latest();
+    }
+
+    public function activity()
+    {
+        return $this->hasMany(Activity::class)->latest();
     }
 
 }

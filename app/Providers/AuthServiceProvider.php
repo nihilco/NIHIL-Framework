@@ -13,7 +13,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        \NIHILCo\Forums\Models\Forum::class => \NIHILCo\Forums\Policies\ForumPolicy::class,
+        \NIHILCo\Forums\Models\Thread::class => \NIHILCo\Forums\Policies\ThreadPolicy::class,
+        \NIHILCo\Forums\Models\Reply::class => \NIHILCo\Forums\Policies\ReplyPolicy::class,
     ];
 
     /**
