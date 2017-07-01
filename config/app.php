@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://nihilframework.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -64,7 +64,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    /*'timezone' => 'UTC',*/
+    'timezone' => 'America/New_York',
 
     /*
     |--------------------------------------------------------------------------
@@ -178,9 +179,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         //
-        App\Providers\StripeServiceProvider::class,
+        //App\Providers\StripeServiceProvider::class,
         //
-        NIHILCo\Forums\ForumsServiceProvider::class,
+        //NIHILCo\Forums\ForumsServiceProvider::class,
     ],
 
     /*

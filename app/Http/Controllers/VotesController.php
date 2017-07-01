@@ -2,56 +2,105 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vote;
+use App\Models\Forum;
+use App\Models\Thread;
+use App\Models\Reply;
 use Illuminate\Http\Request;
-use App\Vote;
 
 class VotesController extends Controller
 {
-    //
     public function __construct()
     {
         $this->middleware('auth');
     }
-
+    
     /**
-     * Get a validator for an incoming registration request.
+     * Display a listing of the resource.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return \Illuminate\Http\Response
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-     
-        ]);
-    }
-
-    //
     public function index()
     {
-        $votes = Vote::all();
-        return view('votes.index', compact('voates'));
+        //
     }
 
-    //
-    public function store(Vote $vote)
-    {
-        Vote::create([
-
-        ]);
-
-        return redirect()->route('home');
-    }
-
-    //
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        return view('votes.create');
+        //
     }
 
-    //
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \NIHILCo\Forums\Models\Thread  $thread
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Forum $forum, Thread $thread, Reply $reply = null, Request $request)
+    {
+        //
+        $this->validate($request, [
+            'vote' => 'required',
+        ]);
+        
+        //
+        if(isset($reply) && $reply->id > 0) {
+            $reply->castVote(request('vote'));
+        } elseif(isset($thread) && $thread->id > 0) {
+            $thread->castVote(request('vote'));
+        }
+
+        return back();
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \NIHILCo\Forums\Models\Vote  $vote
+     * @return \Illuminate\Http\Response
+     */
     public function show(Vote $vote)
     {
-        return view('votes.show', compact('vote'));
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \NIHILCo\Forums\Models\Vote  $vote
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Vote $vote)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \NIHILCo\Forums\Models\Vote  $vote
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Vote $vote)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \NIHILCo\Forums\Models\Vote  $vote
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Vote $vote)
+    {
+        //
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Source;
+use App\Models\Source;
 
 class SourcesController extends Controller
 {

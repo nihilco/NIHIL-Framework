@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Payment;
-use App\User;
-use App\CreditCard;
-use App\Account;
-use App\Customer;
-use App\Plan;
-use App\Subscription;
+use App\Models\Payment;
+use App\Models\User;
+use App\Models\CreditCard;
+use App\Models\Account;
+use App\Models\Customer;
+use App\Models\Plan;
+use App\Models\Subscription;
 
 class PaymentsController extends Controller
 {

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Payment;
 
 class AdminController extends Controller
 {
@@ -15,8 +14,6 @@ class AdminController extends Controller
     //
     public function index()
     {
-        $paymentsTotal = Payment::totalOverPeriod('day');
-        
-        return view('admin.index', compact('paymentsTotal'));
+        return view('admin.index');
     }
 }

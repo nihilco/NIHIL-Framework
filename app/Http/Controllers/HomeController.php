@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Account;
-use App\CreditCard;
-use App\Customer;
-use App\Payment;
-use App\User;
-use App\Girl;
+use App\Models\Account;
+use App\Models\CreditCard;
+use App\Models\Customer;
+use App\Models\Payment;
+use App\Models\User;
+use App\Models\Girl;
 
 class HomeController extends Controller
 {

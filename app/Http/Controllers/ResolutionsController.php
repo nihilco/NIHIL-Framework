@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Resolution;
+use App\Models\Resolution;
 
 class ResolutionsController extends Controller
 {

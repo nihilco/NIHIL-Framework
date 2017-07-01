@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Account;
-use App\Customer;
-use App\Payment;
+use App\Models\Account;
+use App\Models\Customer;
+use App\Models\Payment;
 
 class WebhooksController extends Controller
 {

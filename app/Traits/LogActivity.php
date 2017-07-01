@@ -36,5 +36,4 @@ trait LogActivity
         $type = strtolower(str_plural((new \ReflectionClass($this))->getShortName()));
         return 'forums.' . $type . '.' . $action;
     }
-
 }

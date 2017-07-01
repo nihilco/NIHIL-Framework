@@ -11,7 +11,7 @@ return [
       | application that does not require dynamically changing the theme.
       |
     */
-    'active' => 'bootstrap',
+    'active' => 'nihilframework',
     /*
       |--------------------------------------------------------------------------
       | Theme Paths

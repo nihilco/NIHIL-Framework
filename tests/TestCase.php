@@ -21,7 +21,7 @@ abstract class TestCase extends BaseTestCase
         
     }
 
-    public function signIn($class = 'App\User', $overrides = [])
+    public function signIn($class = 'App\Models\User', $overrides = [])
     {
         $user = create($class, $overrides);
         $this->actingAs($user);

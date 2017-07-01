@@ -2,56 +2,112 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reply;
+use App\Models\Thread;
+use App\Models\Forum;
 use Illuminate\Http\Request;
-use App\Reply;
 
 class RepliesController extends Controller
 {
-    //
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Show the form for creating a new resource.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return \Illuminate\Http\Response
      */
-    protected function validator(array $data)
+    public function create(Forum $forum, Thread $thread)
     {
-        return Validator::make($data, [
-     
+        //
+        return view('replies.create', compact(['forum', 'thread']));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \NIHILCo\Forums\Models\Thread  $thread
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Forum $forum, Thread $thread, Request $request)
+    {
+        //
+        $this->validate($request, [
+            'body' => 'required',
         ]);
-    }
-    
-    //
-    public function index()
-    {
-        $replies = Reply::all();
-        return view('replies.index', compact('replies'));
-    }
-
-    //
-    public function store(Reply $reply)
-    {
-        Reply::create([
-
+        
+        //
+        $thread->addReply([
+            'body' => request('body'),
+            'user_id' => auth()->id(),
         ]);
 
-        return redirect(0->route('home');
+        return redirect($thread->path());
     }
 
-    //
-    public function create()
+    /**
+     * Display the specified resource.
+     *
+     * @param  \NIHILCo\Forums\Models\Reply  $reply
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Forum $forum, Thread $thread, Reply $reply)
     {
-        return view('replies.create');
+        //
     }
 
-    //
-    public function show(Reply $reply)
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\ThreadReply  $threadReply
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Reply $reply)
     {
-        return view('replies.show', compact('reply'));
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \NIHILCo\Forums\Models\Reply  $reply
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Reply $reply)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \NIHILCo\Forums\Models\Reply  $reply
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Forum $forum, Thread $thread, Reply $reply)
+    {
+        $this->authorize('update', $reply);
+
+        $reply->delete();
+
+        if(request()->wantsJson()) {
+            return response([], 204);
+        }
+
+        return back();
     }
 }

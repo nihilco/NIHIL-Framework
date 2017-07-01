@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\BankAccount;
+use App\Models\BankAccount;
 
 class BankAccountsController extends Controller
 {
