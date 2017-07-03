@@ -1,11 +1,10 @@
 <?php
 
-namespace NIHILCo\Forums\Controllers;
+namespace App\Http\Controllers;
 
-use NIHILCo\Forums\Models\Thread;
-use NIHILCo\Forums\Models\Forum;
-use App\Http\Controllers\Controller;
-use NIHILCo\Forums\Filters\ThreadFilters;
+use App\Models\Thread;
+use App\Models\Forum;
+use App\Filters\ThreadFilters;
 use Illuminate\Http\Request;
 
 class ThreadsController extends Controller
@@ -28,7 +27,7 @@ class ThreadsController extends Controller
             return $threads;
         }
 
-        return view('forums::threads.index', compact('threads'));
+        return view('threads.index', compact('threads'));
     }
 
     /**
@@ -39,7 +38,7 @@ class ThreadsController extends Controller
     public function create(Forum $forum)
     {
         //
-        return view('forums::threads.create', compact(['forum']));
+        return view('threads.create', compact(['forum']));
     }
 
     /**
@@ -76,7 +75,7 @@ class ThreadsController extends Controller
      */
     public function show(Forum $forum, Thread $thread)
     {
-        return view('forums::threads.show', [
+        return view('threads.show', [
             'thread' => $thread,
             'replies' => $thread->replies()->paginate(10),
         ]);

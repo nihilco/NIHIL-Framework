@@ -11,7 +11,12 @@ class Rating extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $table = 'core_ratings';
+    protected $table = 'ratings';
 
     protected $fillable = ['user_id', 'resource_id', 'resource_type'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

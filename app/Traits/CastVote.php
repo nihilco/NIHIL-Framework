@@ -1,8 +1,10 @@
 <?php
 
-namespace NIHILCo\Forums\Models;
+namespace App\Traits;
 
-trait CanVote
+use App\Models\Vote;
+
+trait CastVote
 {
     public static function bootCanVote()
     {

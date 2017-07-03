@@ -13,9 +13,10 @@ class CurrenciesTableSeeder extends Seeder
     {
         //
         DB::table('currencies')->insert([
+            'user_id' => 1,
             'name' => 'United States Dollar',
             'slug' => 'usd',
-            'abbr' => 'USD',
+            'code' => 'USD',
             'sign' => '$',
             'description' => 'United States Dollar is the default currency',
             'created_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),

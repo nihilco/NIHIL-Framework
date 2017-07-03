@@ -15,14 +15,14 @@ class CreateVotesTable extends Migration
     {
         Schema::create('votes', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('subject_id');
-            $table->string('subject_type', 50);
+            $table->unsignedInteger('user_id')->index();
+            $table->unsignedInteger('resource_id');
+            $table->string('resource_type', 50);
             $table->string('vote', 50);
             $table->softDeletes();
             $table->timestamps();
             
-            $table->unique(['user_id', 'subject_id', 'subject_type']);
+            $table->unique(['user_id', 'resource_id', 'resource_type']);
         });
     }
 

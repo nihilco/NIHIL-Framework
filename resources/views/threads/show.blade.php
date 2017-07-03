@@ -33,7 +33,7 @@
       <tbody>
     
     @forelse($replies as $reply)
-      @include('forums::threads.reply')
+      @include('threads.reply')
     @empty
       <tr><td>No replies at this time.</td></tr>
     @endforelse

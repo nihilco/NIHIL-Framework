@@ -1,22 +1,22 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Currency extends Model
 {
-    //
-    public static function allAsSlugIndexedArray()
-    {
-        $currencies = static::all();
+    use SoftDeletes;
 
-        $ret = array();
-        
-        foreach($currencies as $currency) {
-            $ret[$currency->slug] = $currency;
-        }
-        
-        return $ret;
+    protected $dates = ['deleted_at'];
+
+    protected $table = 'currencies';
+
+    protected $fillable = ['name', 'symbol', 'abbr', 'description'];
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

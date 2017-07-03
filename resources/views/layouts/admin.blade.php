@@ -371,7 +371,7 @@
    <!-- =============== APP SCRIPTS ===============-->
    <script src="/js/angel.js"></script>
    <script type="text/javascript">
-     var stripe = Stripe('<?php if($account = \App\Account::find(constant('NF_ACCOUNT_ID'))){echo $account->publishable_key; }else{ echo env('STRIPE_PUBLISHABLE_KEY'); } ?>');
+     var stripe = Stripe('<?php if($account = \App\Models\Account::find(constant('NF_ACCOUNT_ID'))){echo $account->publishable_key; }else{ echo env('STRIPE_PUBLISHABLE_KEY'); } ?>');
      var elements = stripe.elements();
 
 // Custom styling can be passed to options when creating an Element.

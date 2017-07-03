@@ -1,6 +1,6 @@
 <?php
 
-namespace NIHILCo\Forums\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,13 +19,13 @@ class Vote extends Model
      *
      * @var string
      */
-    protected $table = 'forums_votes';
+    protected $table = 'votes';
 
     protected $fillable = ['user_id', 'resource_id', 'resource_type', 'vote'];
     
     public function user()
     {
-        return $this->belongsTo(\App\User::class);
+        return $this->belongsTo(User::class);
     }
 
     //public function resource()

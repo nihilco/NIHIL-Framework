@@ -16,9 +16,10 @@ class CreateSourcesTable extends Migration
         //
         Schema::create('sources', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('account_id');
-            $table->integer('customer_id');
-            $table->integer('source_type_id');
+            $table->unsignedInteger('user_id')->index();
+            $table->unsignedInteger('account_id');
+            $table->unsignedInteger('customer_id');
+            $table->unsignedInteger('type_id');
             $table->string('stripe_id');
             $table->string('fingerprint');
             $table->string('nickname');

@@ -16,9 +16,12 @@ class CreateTypesTable extends Migration
         Schema::create('types', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parent_id')->nullable();
+            $table->unsignedInteger('user_id')->index();
             $table->string('name', 100);
-            $table->string('slug', 100)->unique();
+            $table->string('slug',100)->unique();
             $table->text('description');
+            $table->string('resource_type', 50);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -23,5 +23,5 @@
 </th>
         </tr>
         <tr>
-          <td colspan="2">{{ $reply->body }}</td>
+          <td colspan="2">{{ $reply->content }}</td>
         </tr>

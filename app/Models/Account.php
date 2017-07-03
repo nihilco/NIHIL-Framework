@@ -1,14 +1,31 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Account extends Model
 {
-    //
-    protected $fillable = [];
+    use SoftDeletes;
 
+    protected $dates =['deleted_at'];
+    
+    protected $table = 'accounts';
+
+    //
+    protected $fillable = ['stripe_id', 'secret_key', 'publishable_key', 'user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+        
     public static function byStripeAccountId($said)
     {
         return static::where('account_id', $said)->first();

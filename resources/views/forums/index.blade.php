@@ -33,7 +33,7 @@
           <th>Title</th>
           <th>Threads</th>
           <th>Replies</th>
-          <th>Last Update</th>
+          <th>Created At</th>
           <th></th>
         </tr>
       </thead>
@@ -42,8 +42,8 @@
         <tr>
           <th><h4><a href="{{ $forum->path() }}">{{ $forum->title }}</a></h4></th>
           <td>{{ $forum->threads_count }}</td>
-          <td>{{ $forum->replyCount() }}</td>
-          <td>{{ $forum->lastUpdate() }}</td>
+          <td>{{ $forum->getReplyCount() }}</td>
+          <td>{{ $forum->created_at->diffForHumans() }}</td>
           <td>
 
 @can('update', $forum)

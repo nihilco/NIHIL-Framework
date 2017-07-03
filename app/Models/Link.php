@@ -11,7 +11,12 @@ class Link extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $table = 'core_links';
+    protected $table = 'links';
 
     protected $fillable = ['user_id', 'label', 'destination', 'uses', 'expires_at'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

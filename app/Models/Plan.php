@@ -1,12 +1,19 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Currency;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Currency;
 
 class Plan extends Model
 {
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+
+    protected $table = 'plans';
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -14,6 +21,11 @@ class Plan extends Model
      */
     protected $fillable = ['account_id', 'name', 'amount', 'currency_id', 'interval', 'interval_count'];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
     public static function findUniquePlan($aid, $a, $cid, $i, $ic)
     {
         return Plan::where('account_id', $aid)

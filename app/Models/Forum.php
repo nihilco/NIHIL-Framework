@@ -1,6 +1,6 @@
 <?php
 
-namespace NIHILCo\Forums\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,7 +16,7 @@ class Forum extends Model
      *
      * @var string
      */
-    protected $table = 'forums_forums';
+    protected $table = 'forums';
 
     protected $fillable = ['title', 'slug', 'description', 'user_id'];
 
@@ -55,13 +55,13 @@ class Forum extends Model
 
     public function threads()
     {
-        return $this->hasMany(Thread::class)->orderBy('created_at', 'asc')
+        return $this->hasMany(Thread::class)->latest()
                     ->with(['user', 'forum']);
     }
 
     public function user()
     {
-        return $this->belongsTo(\App\User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function addThread($thread)
@@ -69,23 +69,12 @@ class Forum extends Model
         $this->threads()->create($thread);
     }
 
-    public function replyCount()
+    public function getReplyCount()
     {
-        $ret = 0;
-        foreach($this->threads as $thread) {
-            $ret += $thread->replies_count;
+        $count = 0;
+        foreach($this->threads() as $thread) {
+            $count += $thread->replies()->count();
         }
-        return $ret;
+        return $count;
     }
-
-    public function lastUpdate()
-    {
-        $threads = $this->threads;
-        if($threads->count() > 0) {
-            return $threads->first()->updated_at->diffForHumans();
-        }else{
-            return '';
-        }
-    }
-
 }

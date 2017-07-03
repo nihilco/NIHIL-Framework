@@ -11,12 +11,18 @@ class Activity extends Model
     
     protected $dates = ['deleted_at'];
 
-    protected $table = 'core_activities';
+    protected $table = 'activities';
+    
+    protected $fillable = ['user_id', 'action', 'resource_id', 'resource_type'];
 
-    protected $fillable = ['user_id', 'action', 'subject_id', 'subject_type'];
-
-    public function subject()
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
+    public function resource()
     {
         return $this->morphTo();
     }
+    
 }

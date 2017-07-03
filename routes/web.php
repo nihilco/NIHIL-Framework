@@ -21,6 +21,11 @@ Route::get('/', function () {
     return view('home.index');
 })->name('home');
 
+//
+//
+//
+Route::post('webhooks', 'WebhooksController@handle');
+
 //Auth::routes();
 Route::get('/signup', 'RegistrationController@create')->name('signup');
 Route::post('/signup', 'RegistrationController@store');
@@ -30,184 +35,47 @@ Route::post('/logout', 'SessionsController@destroy')->name('logout');
 Route::get('/password/request', 'PasswordsController@request')->name('password.request');
 Route::get('/password/reset', 'PasswordsController@reset')->name('password.reset');
 
-
-Route::get('/astral-shoe-fundraiser', 'HomeController@astral')->name('astral');
-Route::post('/astral-shoe-fundraiser', 'HomeController@process');
-Route::get('/confirm', 'HomeController@confirm')->name('confirm');
-Route::get('/about', 'HomeController@about')->name('about');
-Route::get('/mission', 'HomeController@mission')->name('mission');
-Route::get('/newsletters', 'HomeController@newsletters')->name('newsletters');
-Route::get('/partners', 'HomeController@partners')->name('partners');
-Route::get('/contact', 'HomeController@contact')->name('contact');
-
-// WEBHOOKS
-Route::post('/stripe/webhooks', 'WebhooksController@handle');
-
 // ADMIN
 Route::get('/dashboard', 'AdminController@index')->name('dashboard');
 //Route::get('/home', 'AuthController@home')->name('home');
 
-// INVOICES
-Route::get('/invoices/create', 'InvoicesController@create');
-Route::post('/invoices', 'InvoicesController@store');
-Route::get('/invoices', 'InvoicesController@index');
-Route::get('/invoices/{invoice}', 'InvoicesController@show');
-Route::delete('/invoices/{invoice}', 'InvoicesController@destroy');
-
-// CUSTOMERS
-Route::get('/customers/create', 'CusotmersController@create');
-Route::post('/customers', 'CustomersController@store');
-Route::get('/customers', 'CustomersController@index');
-Route::get('/customers/{customer}', 'CustomersController@show');
-Route::delete('/customers/{customer}', 'CustomersController@destroy');
-
-// CATEGORIES
-Route::get('/categories/create', 'CategoriesController@create');
-Route::post('/categories', 'CategoriesController@store');
-Route::get('/categories', 'CategoriesController@index');
-Route::get('/categories/{category}', 'CategoriesController@show');
-Route::delete('/categories/{category}', 'CategoriesController@destroy');
-
-// TAGS
-Route::get('/tags/create', 'TagsController@create');
-Route::post('/tags', 'TagsController@store');
-Route::get('/tags', 'TagsController@index');
-Route::get('/tags/{tag}', 'TagsController@show');
-Route::delete('/tags/{tag}', 'TagsController@destroy');
-
-// ACCOUNTS
-Route::get('/accounts/create', 'AccountsController@create');
-Route::post('/accounts', 'AccountsController@store');
-Route::get('/accounts', 'AccountsController@index');
-Route::get('/accounts/{account}', 'AccountsController@show');
-Route::delete('/accounts/{account}', 'AccountsController@destroy');
-
-// PRODUCTS
-Route::get('/products/create', 'ProductsController@create');
-Route::post('/products', 'ProductsController@store');
-Route::get('/products', 'ProductsController@index');
-Route::get('/products/{product}', 'ProductsController@show');
-Route::delete('/products/{product}', 'ProductsController@destroy');
-
-// PAYMENTS
-Route::get('/payments/create', 'PaymentsController@create');
-Route::post('/payments', 'PaymentsController@store');
-Route::get('/payments', 'PaymentsController@index');
-Route::get('/payments/{payment}', 'PaymentsController@show');
-Route::delete('/payments/{payment}', 'PaymentsController@destroy');
-Route::get('/payments/make', 'PaymentsController@make');
-Route::get('/donate', 'PaymentsController@donate');
-Route::post('/donate', 'PaymentsController@process');
-
-// USERS
-Route::get('/users/create', 'UsersController@create');
-Route::post('/users', 'UsersController@store');
-Route::get('/users', 'UsersController@index');
-Route::get('/users/{user}', 'UsersController@show');
-Route::delete('/users/{user}', 'UsersController@destroy');
-
-// PLANS
-Route::get('/plans/create', 'PlansController@create');
-Route::post('/plans', 'PlansController@store');
-Route::get('/plans', 'PlansController@index');
-Route::get('/plans/{plan}', 'PlansController@show');
-Route::delete('/plans/{plan}', 'PlansController@destroy');
-
-// SUBSCRIPTIONS
-Route::get('/subscriptions/create', 'Controller@create');
-Route::post('/subscriptions', 'SubscriptionsController@store');
-Route::get('/subscriptions', 'SubscriptionsController@index');
-Route::get('/subscriptions/{subscription}', 'SubscriptionsController@show');
-Route::delete('/subscriptions/{subscription}', 'SubscriptionsController@destroy');
-
-// POSTS
-Route::get('/posts/create', 'PostsController@create');
-Route::post('/posts', 'PostsController@store');
-Route::get('/posts', 'PostsController@index');
-Route::get('/posts/{post}', 'PostsController@show');
-Route::delete('posts/{post}', 'PostsController@destroy');
-Route::post('/posts/{post}/comments', 'CommentsController@store');
-Route::delete('/comments/{comment}', 'CommentsController@destroy');
-Route::get('/blog', 'PostsController@blog');
-Route::get('/comments', 'CommentsController@index');
-
-// TICKETS
-Route::get('/tickets/create', 'TicketsController@create');
-Route::post('/tickets' ,'TicketsController@store');
-Route::get('/tickets' ,'TicketsController@index');
-Route::get('/tickets/{ticket}', 'TicketsController@show');
-Route::get('/tickets', 'TicketsController@index');
-
-Route::post('/tickets/{ticket}/reply', 'RepliesController@store');
-Route::delete('/tickets/replies/{reply}', 'RepliesController@destroy');
-
-Route::get('/types/create', 'TypesController@create');
-Route::post('/types', 'TypesController@store');
-Route::get('/types', 'TypesController@index');
-Route::get('/types/{type}', 'TypesController@show');
-Route::delete('/types/{type}', 'TypesController@destroy');
-
-Route::get('/priorities/create', 'PrioritiesController@create');
-Route::post('/priorities', 'PrioritiesController@store');
-Route::get('/priorities', 'PrioritiesController@index');
-Route::get('/priorities/{priority}', 'PrioritiesController@show');
-Route::delete('/priorities/{priority}', 'PrioritiesController@destroy');
-
-Route::get('/resolutions/create', 'ResolutionsController@create');
-Route::post('/resolutions', 'ResolutionsController@store');
-Route::get('/resolutions', 'ResolutionsController@index');
-Route::get('/resolutions/{resolution}', 'ResolutionsController@show');
-Route::delete('/resolutions/{resolution}', 'ResolutionsController@destroy');
-
-Route::get('/statuses/create', 'StatusesController@create');
-Route::post('/statuses', 'StatusesController@store');
-Route::get('/statuses', 'StatusesController@index');
-Route::get('/statuses/{status}', 'StatusesController@show');
-Route::delete('/statuses/{status}', 'StatusesController@destroy');
-
 //
-Route::get('/sources/create', 'SourcesController@create');
-Route::post('/sources', 'SourcesController@store');
-Route::get('/sources', 'SourcesController@index');
-Route::get('/sources/{source}', 'SourcesController@show');
-Route::delete('/sources/{source}', 'SourcesController@destroy');
-
 //
-Route::get('/transactions/create', 'TransactionsController@create');
-Route::post('/transactions', 'TransactionsController@store');
-Route::get('/transactions', 'TransactionsController@index');
-Route::get('/transactions/{transaction}', 'TransactionsController@show');
-Route::delete('/transactions/{transaction}', 'TransactionsController@destroy');
-
 //
-// USERS
-Route::get('/forums/profiles/{user}', 'ProfilesController@show');
-    
-// FORUMS
-Route::get('/forums', 'ForumsController@index');
-Route::post('/forums', 'ForumsController@store');
-Route::get('/forums/threads', 'ThreadsController@index');
-Route::get('/forums/create', 'ForumsController@create');
-Route::get('/forums/{forum}', 'ForumsController@show');
-Route::delete('/forums/{forum}', 'ForumsController@destroy');
-Route::get('/forums/{forum}/edit', 'ForumsController@edit');
-
-// THREADS
-Route::post('/forums/{forum}/threads', 'ThreadsController@store');
-Route::get('/forums/{forum}/threads/create', 'ThreadsController@create');
-Route::get('/forums/{forum}/{thread}', 'ThreadsController@show');
-Route::delete('/forums/{forum}/{thread}', 'ThreadsController@destroy');
-Route::post('/forums/{forum}/{thread}/vote', 'VotesController@store');
-
-// REPLIES
-Route::post('/forums/{forum}/{thread}/replies', 'RepliesController@store');
-Route::get('/forums/{forum}/{thread}/replies/create', 'RepliesController@create');
-Route::get('/forums/{forum}/{thread}/{reply}', 'RepliesController@show');
-Route::delete('/forums/{forum}/{thread}/{reply}', 'RepliesController@destroy');
-Route::post('/forums/{forum}/{thread}/{reply}/vote', 'VotesController@store');
-
-// PAGES
-Route::get('/pages/create', 'PagesController@create');
-Route::post('/pages', 'PagesController@store');
-Route::get('/pages', 'PagesController@index');
-//Route::get('{page}', 'PagesController@show');
+Route::resource('accounts', 'Controller');
+Route::resource('activity', 'Controller');
+Route::resource('categories', 'Controller');
+Route::resource('countries', 'Controller');
+Route::resource('currencies', 'CurrenciesController');
+Route::resource('customers', 'CustomersController');
+Route::resource('emails', 'EmailsController');
+Route::resource('exceptions', 'ExceptionsController');
+Route::resource('favorites', 'FavoritesController');
+Route::resource('forums', 'ForumsController');
+Route::resource('group', 'GroupsController');
+Route::resource('invoices', 'InvoicesController');
+Route::resource('invoice-items', 'InvoiceItemsController');
+Route::resource('issues', 'IssuesController');
+Route::resource('link', 'LinksController');
+Route::resource('orders', 'OrdersController');
+Route::resource('pages', 'PagesController');
+Route::resource('password-resests', 'PasswordResetsController');
+Route::resource('payments', 'PaymentsController');
+Route::resource('plans', 'PlansController');
+Route::resource('posts', 'PostsController');
+Route::resource('priorities', 'PrioritiesController');
+Route::resource('products', 'ProductsController');
+Route::resource('ratings', 'RatingsController');
+Route::resource('replies', 'RepliesController');
+Route::resource('sessions', 'SessionsController');
+Route::resource('sources', 'SourcesController');
+Route::resource('states', 'StatesController');
+Route::resource('statuses', 'StatusesController');
+Route::resource('subscription', 'SubscriptionsController');
+Route::resource('tags', 'TagsController');
+Route::resource('themes', 'ThemesController');
+Route::resource('threads', 'ThreadsController');
+Route::resource('transaction', 'TransactionsController');
+Route::resource('types', 'TypesController');
+Route::resource('users', 'UsersController');
+Route::resource('votes', 'VotesController');

@@ -1,11 +1,18 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Type extends Model
 {
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+
+    protected $table = 'types';
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -13,10 +20,9 @@ class Type extends Model
      */
     protected $fillable = [];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

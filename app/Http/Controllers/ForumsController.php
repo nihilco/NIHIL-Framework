@@ -62,7 +62,7 @@ class ForumsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \NIHILCo\Forums\Models\Forum  $forum
+     * @param  \App\Models\Forum  $forum
      * @return \Illuminate\Http\Response
      */
     public function show(Forum $forum)

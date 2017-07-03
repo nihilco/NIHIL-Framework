@@ -11,7 +11,7 @@ class Page extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $table = 'core_pages';
+    protected $table = 'pages';
     
     protected $fillable = ['user_id', 'title', 'keywords', 'description', 'content', 'posted_at'];
 

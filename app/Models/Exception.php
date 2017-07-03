@@ -11,7 +11,17 @@ class Exception extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $table = 'core_exceptions';
+    protected $table = 'exceptions';
 
     protected $fillable = ['user_id', 'message', 'stacktrace'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Exception::class);
+    }
 }

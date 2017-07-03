@@ -1,6 +1,6 @@
 <?php
 
-namespace NIHILCo\Forums\Filters;
+namespace App\Filters;
 
 use Illuminate\Http\Request;
 
@@ -9,7 +9,7 @@ abstract class Filters
     protected $request, $builder;
 
     protected $filters = [];
-    
+
     public function __construct(Request $request)
     {
         $this->request = $request;
@@ -24,7 +24,7 @@ abstract class Filters
                 $this->$filter($value);
             }
         }
-
+        
         return $this->builder;
     }
 

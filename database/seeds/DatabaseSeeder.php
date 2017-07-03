@@ -16,19 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ResolutionsTableSeeder::class);
         $this->call(StatusesTableSeeder::class);
         $this->call(PrioritiesTableSeeder::class);
-        $this->call(InvoiceTypesTableSeeder::class);
         $this->call(CurrenciesTableSeeder::class);
         $this->call(AccountsTableSeeder::class);
-        $this->call(AccountsTableSeeder::class);
-        //
-        $this->call(TripsTableSeeder::class);
-        $this->call(TrippersTableSeeder::class);
-        $this->call(TripperTypesTableSeeder::class);
-        $this->call(TripGroupsTableSeeder::class);
-        $this->call(TripActivitiesTableSeeder::class);
-        //
-        $this->call(SourceTypesTableSeeder::class);
-        $this->call(TransactionTypesTableSeeder::class);
         //
         $this->call(ForumsTableSeeder::class);
         //

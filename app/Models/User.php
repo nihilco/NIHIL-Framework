@@ -12,7 +12,7 @@ class User extends Authenticatable
 
     protected $dates = ['deleted_at'];
 
-    protected $table = 'core_users';
+    protected $table = 'users';
     
     protected $fillable = [
         'name', 'username', 'email', 'password', 'tos_acceptance_at'
@@ -57,9 +57,9 @@ class User extends Authenticatable
     //    return $this->hasMany(\NIHILCo\Forums\Models\Thread::class)->latest();
     //}
 
-    //public function activity()
-    //{
-    //    return $this->hasMany(Activity::class)->latest();
-    //}
+    public function activity()
+    {
+        return $this->hasMany(Activity::class)->latest();
+    }
 
 }

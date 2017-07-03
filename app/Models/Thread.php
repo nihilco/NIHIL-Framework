@@ -1,14 +1,16 @@
 <?php
 
-namespace NIHILCo\Forums\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\LogActivity;
+use App\Traits\CastVote;
+use App\Traits\VoiceReply;
 
 class Thread extends Model
 {
-    use SoftDeletes, CanVote, LogActivity;
+    use SoftDeletes, CastVote, LogActivity, VoiceReply;
 
     protected $dates = ['deleted_at'];
     /**
@@ -16,7 +18,7 @@ class Thread extends Model
      *
      * @var string
      */
-    protected $table = 'forums_threads';
+    protected $table = 'threads';
 
     protected $fillable = ['title', 'slug', 'body', 'user_id'];
     
@@ -46,27 +48,19 @@ class Thread extends Model
     
     public function path()
     {
-        return $this->forum->path() . '/' . $this->slug;
-    }
-
-    public function replies()
-    {
-        return $this->hasMany(Reply::class)->orderBy('created_at', 'asc');
+        //return $this->forum->path() . '/' . $this->slug;
+        return '/threads/' . $this->slug;
     }
 
     public function user()
     {
-        return $this->belongsTo(\App\User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function forum()
     {
         return $this->belongsTo(Forum::class);
     }    
-    public function addReply($reply)
-    {
-        $this->replies()->create($reply);
-    }
 
     public function scopeFilter($query, $filters)
     {

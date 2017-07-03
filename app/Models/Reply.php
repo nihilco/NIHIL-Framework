@@ -1,15 +1,15 @@
 <?php
 
-namespace NIHILCo\Forums\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use NIHILCo\Forums\Models\CanVote;
+use App\Traits\CastVote;
 use App\Traits\LogActivity;
 
 class Reply extends Model
 {
-    use SoftDeletes, CanVote, LogActivity;
+    use SoftDeletes, CastVote, LogActivity;
 
     protected $dates = ['deleted_at'];
     /**
@@ -17,11 +17,11 @@ class Reply extends Model
      *
      * @var string
      */
-    protected $table = 'forums_replies';
+    protected $table = 'replies';
 
     protected $fillable = ['body', 'user_id'];
 
-    protected $with = ['thread', 'user'];
+    protected $with = ['user'];
 
     public static function boot()
     {
@@ -34,17 +34,16 @@ class Reply extends Model
     
     public function path()
     {
-        return $this->thread->path() . '/' . $this->id;
+        return $this->resource->path() . '/' . $this->id;
     }
     
     public function user()
     {
-        return $this->belongsTo(\App\User::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function thread()
+    public function resource()
     {
-        return $this->belongsTo(Thread::class);
+        return $this->morphTo();
     }
-
 }

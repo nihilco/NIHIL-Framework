@@ -11,7 +11,7 @@ class Password extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $table = 'core_passwords';
+    protected $table = 'passwords';
 
     protected $fillable = ['user_id', 'password', 'retired_at'];
 }

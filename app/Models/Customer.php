@@ -1,11 +1,20 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Customer extends Model
 {
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+
+    protected $table = 'customers';
+
+    protected $fillable = ['user_id', 'stripe_id', 'account_id'];
+    
     //
     public static function byStripeId($sid)
     {
@@ -51,13 +60,13 @@ class Customer extends Model
     //
     public function user()
     {
-        return $this->hasOne(User::class, 'id');
+        return $this->belongsTo(User::class);
     }
 
     //
     public function account()
     {
-        return $this->hasOne(Account::class, 'id');
+        return $this->belongsTo(Account::class);
     }
 
     //

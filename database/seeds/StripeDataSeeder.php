@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Plan;
-use App\Payment;
-use App\User;
+use App\Models\Plan;
+use App\Models\Payment;
+use App\Models\User;
 
 class StripeDataSeeder extends Seeder
 {

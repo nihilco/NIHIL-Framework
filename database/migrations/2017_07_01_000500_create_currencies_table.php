@@ -15,9 +15,10 @@ class CreateCurrenciesTable extends Migration
     {
         Schema::create('currencies', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id')->index();
             $table->string('name', 100);
             $table->string('slug', 100)->unique();
-            $table->string('abbr')->nullable();
+            $table->string('code')->nullable();
             $table->string('sign')->nullable();
             $table->text('description');
             $table->softDeletes();

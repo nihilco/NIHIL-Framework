@@ -11,7 +11,13 @@ class Tag extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $table = 'core_tags';
+    protected $table = 'tags';
 
     protected $fillable = ['user_id', 'name', 'description'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

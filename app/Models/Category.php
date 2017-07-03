@@ -11,7 +11,18 @@ class Category extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $table = 'core_categories';
+    protected $table = 'categories';
 
     protected $fillable = ['parent_id', 'name', 'description'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    
 }

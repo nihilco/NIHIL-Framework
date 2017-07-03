@@ -20,15 +20,17 @@ trait LogActivity
     
     protected function recordActivity($action)
     {
+        $uid = (auth()->id()) ? auth()->id() : 1;
+        
         $this->activity()->create([
-            'user_id' => auth()->id(),
+            'user_id' => $uid,
             'action' => $this->getActivityAction($action),
         ]);
     }
 
     public function activity()
     {
-        return $this->morphMany('App\Activity', 'subject');
+        return $this->morphMany('App\Models\Activity', 'resource');
     }
 
     protected function getActivityAction($action)

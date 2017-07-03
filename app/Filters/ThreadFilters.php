@@ -1,9 +1,9 @@
 <?php
 
-namespace NIHILCo\Forums\Filters;
+namespace App\Filters;
 
-use App\User;
-use NIHILCo\Forums\Models\Forum;
+use App\Models\User;
+use App\Models\Forum;
 
 class ThreadFilters extends Filters
 {

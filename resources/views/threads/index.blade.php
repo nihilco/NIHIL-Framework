@@ -34,12 +34,15 @@
           <th>Owner</th>
           <th>Replies</th>
           <th>Last Update</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
 
+
+
     @foreach($threads as $thread)
-    @include('forums::forums.thread')
+    @include('threads.thread')
     @endforeach
     
       </tbody>
