@@ -15,16 +15,13 @@ class ReplyTest extends TestCase
     {
         parent::setUp();
 
-        $this->reply = create('App\Models\Reply');
-    }
-    
-    public function test_reply_has_user()
-    {
-        $this->assertInstanceOf('App\Models\User', $this->reply->user);
+        $this->thread = create('App\Models\Thread');
+        $this->reply = create('App\Models\Reply', ['resource_id' => $this->thread->id, 'resource_type' => get_class($this->thread)]);
     }
 
-    public function test_a_reply_has_a_thread()
+    
+    public function test_a_reply_has_a_user()
     {
-        $this->assertInstanceOf('App\Models\Thread', $this->reply->thread);
+        $this->assertInstanceOf('App\Models\User', $this->reply->user);
     }
 }

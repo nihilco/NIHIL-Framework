@@ -3,12 +3,18 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class PostsControllerTest extends TestCase
 {
+    protected $post;
+    
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->post = create('App\Models\Post');
+    }
+    
     /**
      * A basic test example.
      *

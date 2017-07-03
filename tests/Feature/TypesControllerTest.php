@@ -3,12 +3,18 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TypesControllerTest extends TestCase
 {
+    protected $type;
+    
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->type = create('App\Models\Type');
+    }
+    
     /**
      * A basic test example.
      *

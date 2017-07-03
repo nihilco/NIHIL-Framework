@@ -4,17 +4,31 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\Models\Activity;
 
 class ActivityTest extends TestCase
 {
     use Databasetransactions;
 
+    protected $activity;
+    
     public function setUp()
     {
         parent::setUp();
+
+        $this->activity = create('App\Models\Activity');
     }
+
+    public function test_an_activity_has_a_user()
+    {
+        $this->assertInstanceOf('App\Models\User', $this->activity->user);
+    }
+
+    //public function test_an_activity_has_a_resource()
+    //{
+    //    $this->assertInstanceOf($this->activity->resource_type, $this->activity->resource);
+    //}
     
+    /*   
     public function test_records_activity_when_a_thread_is_created()
     {
         $this->signIn();
@@ -63,5 +77,5 @@ class ActivityTest extends TestCase
             'subject_type' => get_class($forum),
         ]);
     }
-
+*/
 }

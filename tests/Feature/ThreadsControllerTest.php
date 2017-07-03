@@ -3,12 +3,9 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ThreadsTest extends TestCase
+class ThreadsControllerTest extends TestCase
 {
-    use DatabaseTransactions;
-
     protected $forum;
     protected $thread;
     
@@ -19,7 +16,7 @@ class ThreadsTest extends TestCase
         $this->forum = create('App\Models\Forum');
         $this->thread = create('App\Models\Thread', ['forum_id' => $this->forum->id]);
     }
-
+/*
     public function publishThread($overrides = [])
     {
         $this->signIn();
@@ -203,5 +200,5 @@ class ThreadsTest extends TestCase
         $this->assertSoftDeleted('forums_votes', ['id' => $newThreadVote->id]);
         $this->assertSoftDeleted('forums_votes', ['id' => $newReplyVote->id]);
     }
-
+*/
 }

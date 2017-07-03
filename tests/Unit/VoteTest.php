@@ -22,4 +22,5 @@ class VoteTest extends TestCase
     {
         $this->assertInstanceOf('App\Models\User', $this->vote->user);
     }
+
 }

@@ -27,7 +27,7 @@ class ForumTest extends TestCase
     {
         $this->assertInstanceOf('App\Models\User', $this->forum->user);
     }
-
+/*
     public function test_a_forum_can_add_a_thread()
     {
         $this->forum->addThread([
@@ -44,4 +44,5 @@ class ForumTest extends TestCase
     {
         $this->assertEquals('/forums/' . $this->forum->slug, $this->forum->path());
     }
+*/
 }

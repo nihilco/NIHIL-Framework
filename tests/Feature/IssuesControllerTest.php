@@ -3,25 +3,31 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class TicketsControllerTest extends TestCase
+class IssuesControllerTest extends TestCase
 {
+    protected $issue;
+    
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->issue = create('App\Models\Issue');
+    }
+
     /**
      * A basic test example.
      *
      * @return void
      */
-    public function test_tickets_controller_routes()
+    public function test_issues_controller_routes()
     {
         // User not logged in, redirect to login
-        $response = $this->get('/tickets/create');
+        $response = $this->get('/issues/create');
         $response->assertStatus(302);
 
         //
-        $response = $this->get('/tickets');
+        $response = $this->get('/issues');
         $response->assertStatus(302);
     }
 }

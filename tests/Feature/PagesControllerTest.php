@@ -3,12 +3,18 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class PagesControllerTest extends TestCase
 {
+    protected $page;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->page = create('App\Models\Page');
+    }
+
     /**
      * A basic test example.
      *

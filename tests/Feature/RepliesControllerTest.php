@@ -3,12 +3,9 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class RepliesTest extends TestCase
+class RepliesControllerTest extends TestCase
 {
-    use DatabaseTransactions;
-    
     protected $forum;
     protected $thread;
     
@@ -19,7 +16,7 @@ class RepliesTest extends TestCase
         $this->forum = create('App\Models\Forum');
         $this->thread = create('App\Models\Thread', ['forum_id' => $this->forum->id]);
     }
-
+/*
     public function test_a_guest_cannot_add_replies()
     {
         $newReply = make('App\Models\Reply');
@@ -135,4 +132,5 @@ class RepliesTest extends TestCase
         $this->assertSoftDeleted('forums_replies', ['id' => $newReply->id]);
         $this->assertSoftDeleted('forums_votes', ['id' => $newReplyVote->id]);
     }
+*/
 }

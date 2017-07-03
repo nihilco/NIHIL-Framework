@@ -1,20 +1,15 @@
 <?php
 
-namespace App\Tests\Feature;
+namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\Vote;
-use Illuminate\Foundation\Testing\Databasetransactions;
 
-class VotesTest extends TestCase
+class VotesControllerTest extends TestCase
 {
-    use Databasetransactions;
-    
     protected $forum;
     protected $thread;
     protected $reply;
     
-    //use DatabaseMigrations;
     public function setUp()
     {
         parent::setUp();
@@ -23,7 +18,7 @@ class VotesTest extends TestCase
         $this->thread = create('App\Models\Thread', ['forum_id' => $this->forum->id]);
         $this->reply = create('App\Models\Reply', ['thread_id' => $this->thread->id]);
     }
-
+/*
     public function test_a_guest_cannot_vote()
     {
         \Session::start();
@@ -76,4 +71,5 @@ class VotesTest extends TestCase
         
         $this->assertCount(1, $this->reply->votes);
     }
+*/
 }
