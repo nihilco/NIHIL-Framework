@@ -22,5 +22,10 @@ class ResolutionTest extends TestCase
     {
         $this->assertInstanceOf('App\Models\User', $this->resolution->user);
     }
+
+    public function test_a_resolution_has_issues()
+    {
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->resolution->issues);
+    }
     
 }

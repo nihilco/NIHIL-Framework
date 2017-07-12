@@ -10,7 +10,7 @@ class StatusesController extends Controller
     //
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
     /**
@@ -53,5 +53,12 @@ class StatusesController extends Controller
     public function show(Status $status)
     {
         return view('statuses.show', compact('status'));
+    }
+
+    public function destroy(Status $status)
+    {
+        $status->delete();
+
+        return back();
     }
 }

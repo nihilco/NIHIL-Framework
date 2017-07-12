@@ -29,6 +29,7 @@ class CreateSourcesTable extends Migration
             $table->timestamp('added_at')->nullable();
             $table->timestamp('deactived_at')->nullable();
             $table->timestamp('last_used_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

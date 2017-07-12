@@ -19,7 +19,7 @@ class ForumsController extends Controller
      */
     public function index()
     {
-        $forums = Forum::with('threads')->orderBy('created_at', 'asc')->get();
+        $forums = Forum::all();
         return view('forums.index', compact('forums'));
     }
 
@@ -56,7 +56,11 @@ class ForumsController extends Controller
         $forum->user_id = auth()->id();
         $forum->save();
 
-        return redirect('/forums');
+        return redirect('/forums')->with('flash', [
+            'type' => 'success',
+            'title' => 'Created Forum',
+            'message' => 'You created a forum.',
+        ]);
     }
 
     /**
@@ -67,6 +71,7 @@ class ForumsController extends Controller
      */
     public function show(Forum $forum)
     {
+        //dd($forum);
         return view('forums.show', compact('forum'));
     }
 
@@ -101,7 +106,8 @@ class ForumsController extends Controller
      */
     public function destroy(Forum $forum)
     {
-        $this->authorize('update', $forum);
+        //dd([auth()->id(), $forum->id, $forum->title]);
+        $this->authorize('delete', $forum);
 
         $forum->delete();
         
@@ -109,6 +115,10 @@ class ForumsController extends Controller
             return response([], 204);
         }
         
-        return back();    
+        return back()->with('flash', [
+            'type' => 'success',
+            'title' => 'Deleted Forum',
+            'message' => 'You deleted a forum.',
+        ]);    
     }
 }

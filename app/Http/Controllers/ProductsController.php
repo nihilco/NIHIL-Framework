@@ -10,7 +10,7 @@ class ProductsController extends Controller
         //
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
     //
@@ -48,5 +48,12 @@ class ProductsController extends Controller
     public function show(Product $product)
     {
         return view('products.show', compact('product'));
+    }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+
+        return back();
     }
 }

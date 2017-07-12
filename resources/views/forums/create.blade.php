@@ -13,19 +13,24 @@
       <meta name="og:description" property="og:description" content="The Taraloka Foundation is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
       <meta name="og:image" property="og:image" content="https://taraloka.org/img/taraloka-logo-og-dark.png">
 
-      <title>Create Forum - Taraloka</title>
+      <title>Create Forum</title>
 @endsection
     
 @section('content')
 
-<section class="container site-content">
+    @include('layouts.breadcrumbs', ['breadcrumbs' => [
+        ['label' => 'Forums', 'url' => '/forums'],
+        ['label' => 'Create', 'url' => '/forums/create'],
+    ]])
+  <div class="container-fluid">
+    
   <div class="row">
-    <div class="col-sm-12">
-      <h1>Create Forum</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h1>Create Forum</h1>
+        </div>
+        <div class="card-block">
 
     @if (count($errors) > 0)
         <div class="alert alert-danger">
@@ -41,7 +46,7 @@
           {{ csrf_field() }}
         <div class="form-group{{ $errors->first('title') ? ' has-danger' : '' }}">
         <label class="form-control-label" for="title">Title</label>
-        <input type="text" class="form-control{{ $errors->first('title') ? ' form-control-danger' : '' }}" id="title" name="title" title="title" aria-describedby="titleHelp" placeholder="Let us name this biatch." value="{{ old('title') }}" required>
+        <input type="text" class="form-control{{ $errors->first('title') ? ' form-control-danger' : '' }}" id="title" name="title" title="title" aria-describedby="titleHelp" placeholder="Let us name this biatch" value="{{ old('title') }}" required>
     @if($errors->first('title'))
     <small id="titleHelp" class="form-control-feedback">{{ $errors->first('title') }}</small>
     @endif
@@ -49,7 +54,7 @@
   </div>
             <div class="form-group{{ $errors->first('slug') ? ' has-danger' : '' }}">
         <label for="slug">Slug</label>
-        <input type="text" class="form-control{{ $errors->first('slug') ? ' form-control-danger' : '' }}" id="slug" name="slug" title="slug" aria-describedby="slugHelp" placeholder="Let us name this biatch." value="{{ old('slug') }}" required>
+        <input type="text" class="form-control{{ $errors->first('slug') ? ' form-control-danger' : '' }}" id="slug" name="slug" title="slug" aria-describedby="slugHelp" placeholder="let-us-name-this-biatch" value="{{ old('slug') }}" required>
         @if($errors->first('slug'))
     <small id="slugHelp" class="form-control-feedback">{{ $errors->first('slug') }}</small>
     @endif
@@ -67,9 +72,11 @@
     </div>
       </form>
     
+        </div>
+      </div>
     </div>
   </div>
 
-</section>
+    </div>
     
-@endsection    
+@endsection

@@ -22,5 +22,15 @@ class PlanTest extends TestCase
     {
         $this->assertInstanceOf('App\Models\User', $this->plan->user);
     }
+
+    public function test_a_plan_has_an_account()
+    {
+        $this->assertInstanceOf('App\Models\Account', $this->plan->account);
+    }
+
+    public function test_a_plan_has_subscriptions()
+    {
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->plan->subscriptions);
+    }
     
 }

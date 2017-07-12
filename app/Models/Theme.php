@@ -19,4 +19,9 @@ class Theme extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function path()
+    {
+        return '/themes/' . $this->id;
+    }
 }

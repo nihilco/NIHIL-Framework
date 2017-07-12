@@ -29,4 +29,9 @@ class Resolution extends Model
     {
         return $this->hasMany(Issue::class);
     }
+
+    public function path()
+    {
+        return '/resolutions/' . $this->id;
+    }
 }

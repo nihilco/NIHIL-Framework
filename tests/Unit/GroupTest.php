@@ -22,5 +22,15 @@ class GroupTest extends TestCase
     {
         $this->assertInstanceOf('App\Models\User', $this->group->user);
     }
+
+    public function test_a_group_has_a_parent()
+    {
+        $result = false;
+        if(($this->group->parent == null) || (get_class($this->group->parent) == 'App\Models\Group')) {
+            $result = true;
+        }
+
+        $this->assertTrue($result);
+    }
     
 }

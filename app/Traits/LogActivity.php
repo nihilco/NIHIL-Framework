@@ -11,6 +11,10 @@ trait LogActivity
                 $model->recordActivity($event);
             });
         }
+
+        static::deleting(function($resource) {
+            $resource->activity()->delete();
+        });
     }
 
     protected static function getActionsToLog()
@@ -36,6 +40,6 @@ trait LogActivity
     protected function getActivityAction($action)
     {
         $type = strtolower(str_plural((new \ReflectionClass($this))->getShortName()));
-        return 'forums.' . $type . '.' . $action;
+        return $type . '.' . $action;
     }
 }

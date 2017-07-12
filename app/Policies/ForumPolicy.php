@@ -1,10 +1,10 @@
 <?php
 
-namespace NIHILCo\Forums\Policies;
+namespace App\Policies;
 
-use App\User;
-use NIHILCo\Forums\Models\Forum;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\User;
+use App\Models\Forum;
 
 class ForumPolicy
 {
@@ -16,6 +16,11 @@ class ForumPolicy
     }
 
     public function update(User $user, Forum $forum)
+    {
+        return $forum->user_id === $user->id;
+    }
+
+    public function delete(User $user, Forum $forum)
     {
         return $forum->user_id === $user->id;
     }

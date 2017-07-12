@@ -27,6 +27,7 @@ class RegistrationController extends Controller
             'username' => 'required|unique:users,username',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed',
+            'password_confirmation' => 'required',
             'agreed' => 'required|in:on'
         ]);
 

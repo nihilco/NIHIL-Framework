@@ -25,20 +25,6 @@ class Thread extends Model
     public static function boot()
     {
         parent::boot();
-
-        static::addGlobalScope('replyCount', function ($builder) {
-            $builder->withCount('replies');
-        });
-
-        static::deleting(function ($thread) {
-            foreach($thread->replies as $reply) {
-                foreach($reply->votes as $vote) {
-                    $vote->delete();
-                }
-                $reply->delete();
-            }
-            $thread->votes()->delete();
-        });
     }
 
     public function getRouteKeyName()
@@ -48,8 +34,8 @@ class Thread extends Model
     
     public function path()
     {
-        //return $this->forum->path() . '/' . $this->slug;
-        return '/threads/' . $this->slug;
+        //dd($this);
+        return $this->forum->path() . '/'  . $this->slug;
     }
 
     public function user()

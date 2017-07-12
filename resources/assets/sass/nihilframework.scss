@@ -1,0 +1,32 @@
+
+// Fonts
+//@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Variables
+@import "variables";
+
+// Bootstrap
+//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+
+
+.has-danger .switch-success-outline-alt > .switch-input ~ .switch-label {
+    border-color: #f86c6b;
+}
+
+.has-danger .switch.switch-icon .switch-label::before {
+    color: #f86c6b;
+}
+
+.input-group-addon, .input-group-btn {
+  min-width:5px;
+}
+
+/*.card-header .input-group-btn, .card-header .input-group-addon {
+  min-width:5px;
+}*/
+
+.card-header .input-group-btn .btn{
+  margin-top:0;
+}

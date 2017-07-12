@@ -25,6 +25,21 @@ class Plan extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function path()
+    {
+        return '/plans/' . $this->id;
+    }
     
     public static function findUniquePlan($aid, $a, $cid, $i, $ic)
     {

@@ -22,5 +22,20 @@ class SourceTest extends TestCase
     {
         $this->assertInstanceOf('App\Models\User', $this->source->user);
     }
+
+    public function test_a_source_has_an_account()
+    {
+        $this->assertInstanceOf('App\Models\Account', $this->source->account);
+    }
+
+    public function test_a_source_has_a_customer()
+    {
+        $this->assertInstanceOf('App\Models\Customer', $this->source->customer);
+    }
+
+    public function test_a_source_has_a_type()
+    {
+        $this->assertInstanceOf('App\Models\Type', $this->source->type);
+    }
     
 }

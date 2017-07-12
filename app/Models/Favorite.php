@@ -19,4 +19,14 @@ class Favorite extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function resource()
+    {
+        return $this->morphTo();
+    }
+
+    public function path()
+    {
+        return '/favorites/' . $this->id;
+    }
 }

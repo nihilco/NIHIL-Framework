@@ -10,7 +10,7 @@ class TagsController extends Controller
         //
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
     //
@@ -48,5 +48,12 @@ class TagsController extends Controller
     public function show(Tag $tag)
     {
         return view('tags.show', compact('tag'));
+    }
+
+    public function destroy(Tag $tag)
+    {
+        $tag->delete();
+
+        return back();
     }
 }

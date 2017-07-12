@@ -54,4 +54,11 @@ class TransactionsController extends Controller
     {
         return view('transactions.show', compact('transaction'));
     }
+
+    public function destroy(Transaction $transaction)
+    {
+        $transaction->delete();
+
+        return back();
+    }
 }

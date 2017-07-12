@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\LogActivity;
 
 class Vote extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, LogActivity;
         
     const VOTE_UP = 'up';
     const VOTE_DOWN = 'down';
@@ -27,17 +28,6 @@ class Vote extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    //public function resource()
-    //{
-    //    if($this->resource_type == 'thread') {
-    //        $resource = Thread::find($this->resource_id);
-    //    }elseif($this->resource_type == 'reply') {
-    //        $resource = Reply::find($this->resource_id);
-    //    }
-    //
-    //      return $resource;
-    //}
 
     public function resource()
     {
@@ -62,5 +52,10 @@ class Vote extends Model
     public function scopeDown($query)
     {
         return $query->where('vote', Vote::VOTE_DOWN);
+    }
+
+    public function path()
+    {
+        return '/votes/' . $this->id;
     }
 }

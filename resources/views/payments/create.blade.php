@@ -1,46 +1,45 @@
-@extends('layouts.admin')
+@extends('layouts.master')
 
+@section('meta')
+      <meta description="The Taraloka Foundation is a registered 501(c)3 organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
+      <meta keywords="taraloka, sikkim, india, foundation, nihil">
+      <meta author="Uriah M. Clemmer IV">
+
+      <meta property="fb:app_id" content="187097078310518">
+    
+      <meta name="og:url" property="og:url" content="https://taraloka.org/about">
+      <meta name="og:type" property="og:type" content="article">
+      <meta name="og:title" property="og:title" content="Taraloka Foundation">
+      <meta name="og:description" property="og:description" content="The Taraloka Foundation is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
+      <meta name="og:image" property="og:image" content="https://taraloka.org/img/taraloka-logo-og-dark.png">
+
+      <title>Create Payment</title>
+@endsection
+    
 @section('content')
-      <!-- Main section-->
-      <section>
-         <!-- Page content-->
-         <div class="content-wrapper">
-            <div class="content-heading">
-               Create Payment
-               <small>some small phrase</small>
-            </div>
-                <!-- START row-->
-                <div class="row">
-                   <div class="col-sm-9">
-                      <!-- START panel-->
-                      <div class="panel panel-default">
-                         <div class="panel-body">
-                            <form role="form" method="POST" action="/payments" >
-                               {{ csrf_field() }}
-                               <div class="form-group{{ $errors->has('charge_id') ? ' has-error' : '' }}">
-                                  <label>Charge ID</label>
-                                  <input type="text" name="charge_id" placeholder="Enter charge id" class="form-control">
-    @if ($errors->has('charge_id'))
-    <span class="help-block">
-    <strong>{{ $errors->first('charge_id') }}</strong>
-    </span>
-    @endif
-                               </div>
-                               <div class="form-group{{ $errors->has('notes') ? ' has-error' : '' }}">
-                                   <label>Notes</label>
-                                   <textarea name="notes" class="form-control" rows="5" placeholder="Enter notes..."></textarea>
-        @if ($errors->has('notes'))
-    <span class="help-block">
-    <strong>{{ $errors->first('notes') }}</strong>
-    </span>
-    @endif
-                               </div>
-                               <button type="submit" class="btn btn-sm btn-primary pull-right">Create Payment</button>
-                            </form>
-                         </div>
-                      </div>
-                      <!-- END panel-->
-                   </div>
-         </div>
-      </section>
+
+    @include('layouts.breadcrumbs', ['breadcrumbs' => [
+        ['label' => 'Payments', 'url' => '/payments'],
+        ['label' => 'Create', 'url' => '/payments/create'],
+    ]])
+  <div class="container-fluid">
+  <div class="animated fadeIn">    
+    
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h1>Create Payment</h1>
+        </div>
+        <div class="card-block">
+
+
+    
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  </div>
+  </div>
 @endsection

@@ -22,5 +22,20 @@ class PaymentTest extends TestCase
     {
         $this->assertInstanceOf('App\Models\User', $this->payment->user);
     }
+
+    public function test_a_payment_has_an_account()
+    {
+        $this->assertInstanceOf('App\Models\Account', $this->payment->account);
+    }
+
+    public function test_a_payment_has_a_customer()
+    {
+        $this->assertInstanceOf('App\Models\Customer', $this->payment->customer);
+    }
+    
+    public function test_a_payment_has_an_invoice()
+    {
+        $this->assertInstanceOf('App\Models\Invoice', $this->payment->invoice);
+    }
     
 }

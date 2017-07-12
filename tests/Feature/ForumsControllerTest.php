@@ -14,7 +14,30 @@ class ForumsControllerTest extends TestCase
 
         $this->forum = create('App\Models\Forum');
     }
-/*
+
+    public function test_forums_controller_routes_entry()
+    {
+        // INDEX
+        $response = $this->get('/forums');
+        $response->assertStatus(200);
+
+        // SHOW 
+        $response = $this->get($this->forum->path());
+        $response->assertStatus(200);
+        
+        // CREATE  - User not logged in, redirect to login
+        $response = $this->get('/forums/create');
+        $response->assertStatus(302);
+
+        // UPDATE  - User not logged in, redirect to login
+        $response = $this->post('/forums');
+        $response->assertStatus(302);
+
+        // DELETE  - User not logged in, redirect to login
+        $response = $this->delete($this->forum->path());
+        $response->assertStatus(302);
+    }
+
     public function test_a_guest_can_view_forums()
     {
         $response = $this->get('forums');
@@ -43,10 +66,7 @@ class ForumsControllerTest extends TestCase
     
         $newForum = make('App\Models\Forum');
     
-        \Session::start();
-        $a = array_merge($newForum->toArray(), ['_token' => csrf_token()]);
-        
-        $this->post('/forums', $a);
+        $this->post('/forums', $newForum->toArray());
     
         $response = $this->get('/forums');
         $response->assertSee($newForum->title);
@@ -57,10 +77,7 @@ class ForumsControllerTest extends TestCase
     {
         $newForum = make('App\Models\Forum');
 
-        \Session::start();
-        $a = array_merge($newForum->toArray(), ['_token' => csrf_token()]);
-
-        $response = $this->post('/forums', $a);
+        $response = $this->post('/forums', $newForum->toArray());
         $response->assertRedirect('/login');
     }
 
@@ -102,18 +119,14 @@ class ForumsControllerTest extends TestCase
         
         $newForum = make('App\Models\Forum', $overrides);
 
-        \Session::start();
-        $a = array_merge($newForum->toArray(), ['_token' => csrf_token()]);
-        
-        return $this->post('/forums', $a);
+        return $this->post('/forums', $newForum->toArray());
     }
 
     public function test_a_guest_cannot_delete_forums()
     {
         $newForum = create('App\Models\Forum');
                
-        \Session::start();
-        $response = $this->delete($newForum->path(), ['_token' => csrf_token()]);
+        $response = $this->delete($newForum->path());
 
         $response->assertRedirect('/login');
     }
@@ -124,8 +137,7 @@ class ForumsControllerTest extends TestCase
 
         $newForum = create('App\Models\Forum');
                
-        \Session::start();
-        $response = $this->delete($newForum->path(), ['_token' => csrf_token()]);
+        $response = $this->delete($newForum->path());
 
         $response->assertStatus(403);
     }
@@ -134,11 +146,9 @@ class ForumsControllerTest extends TestCase
     {
         // TODO
     }
-
+/*
     public function test_a_forum_can_be_deleted()
     {
-        \Session::start();
-        
         $this->signIn();
 
         $newForum = create('App\Models\Forum', ['user_id' => auth()->id()]);
@@ -146,12 +156,13 @@ class ForumsControllerTest extends TestCase
 //        $newReply = create('App\Models\Reply', ['thread_id' => $newThread->id]);
 //        $newThreadVote = create('App\Models\Vote', ['resource_id' => $newThread->id, 'resource_type' => App\Models\Thread::class]);
 //        $newReplyVote = create('App\Models\Vote', ['resource_id' => $newReply->id, 'resource_type' => App\Models\Reply::class]);
+
         
-        $response = $this->json('DELETE', $newForum->path(), ['_token' => csrf_token()]);
+        $response = $this->delete($newForum->path());
 
         //dd($response);
-        //dd([$newForum->user_id, auth()->id(), auth()->user()->can('update', $newForum)]);
-        
+        //dd([$newForum->user_id, auth()->id(), auth()->user()->can('delete', $newForum)]);
+
         $response->assertStatus(204);
         $this->assertSoftDeleted('forums_forums', ['id' => $newForum->id]);
         $this->assertSoftDeleted('forums_threads', ['id' => $newThread->id]);
@@ -159,5 +170,5 @@ class ForumsControllerTest extends TestCase
         $this->assertSoftDeleted('forums_votes', ['id' => $newThreadVote->id]);
         $this->assertSoftDeleted('forums_votes', ['id' => $newReplyVote->id]);
     }
-    */
+*/
 }

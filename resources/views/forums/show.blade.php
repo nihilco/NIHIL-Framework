@@ -13,53 +13,81 @@
       <meta name="og:description" property="og:description" content="The Taraloka Foundation is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
       <meta name="og:image" property="og:image" content="https://taraloka.org/img/taraloka-logo-og-dark.png">
 
-      <title>Forum - Taraloka</title>
+    <title>{{ $forum->title }}</title>
 @endsection
     
 @section('content')
 
-<section class="container site-content">
+    @include('layouts.breadcrumbs', ['breadcrumbs' => [
+        ['label' => 'Forums', 'url' => '/forums'],
+        ['label' => $forum->title, 'url' => $forum->path()],
+    ]])
+  <div class="container-fluid">
+    
   <div class="row">
-    <div class="col-sm-12">
-      <h1>{{ $forum->title }}</h1>
-      <h2><a href="#">{{ $forum->user->name }}</a></h2>
-      {{ $forum->description }}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-
-    <table class="table table-striped table-bordered">
-      <thead>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h1>{{ $forum->title }}</h1>
+        </div>
+        <div class="card-block">
+    @if($forum->threads->count() > 0)
+    <table class="table table-bordered">
+      <thead class="thead-default">
         <tr>
           <th>Thread</th>
-          <th>Owner</th>
           <th>Replies</th>
-          <th>Last Update</th>
-          <th></th>
+          <th>Last Reply</th>
+          <th>&nbsp;</th>
         </tr>
       </thead>
       <tbody>
+@foreach($forum->threads as $thread)
+        <tr>
+          <th scope="row"><a href="{{ $thread->path() }}">{{ $thread->title }}</a></th>
+          <td>{{ $thread->replies->count() }}</td>
+          <td>{{  $thread->created_at->diffForHumans() }}</td>
+          <th>
+@if(!Auth::guest())
+    @include('votes.voter', ['resource' => $thread])
+    @endif
 
-    @forelse($forum->threads as $thread)
-    @include('forums::forums.thread')
-    @empty
-      <tr><td colspan="5">No threads.</td></tr>
-    @endforelse
-    
+@can ('update', $thread)
+             <form action="{{ $thread->path() }}" method="POST" style="display:inline-block;">
+               {{ csrf_field() }}
+               {{ method_field('DELETE') }}
+               <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+             </form>
+@endcan
+          </th>
+        </tr>
+        @endforeach
       </tbody>
     </table>
+    @else
+    <p>No threads at this time.</td></tr>
+    @endif
+    
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-12">
+
+      <div class="row">
+    <div class="col">
+      <div class="card">
+            <div class="card-block">
     @if(!Auth::guest())
-        <a href="{{ $forum->path() . '/threads/create' }}" class="btn btn-lg btn-primary pull-right">New Thread</a>
+        <a href="{{ $forum->path() }}/threads/create" class="btn btn-lg btn-primary pull-right">New Thread</a>
     @else
     Please <a href="{{ route('login') }}">login</a> to participate in this discussion.
-    @endif
+    @endif    
+    
+        </div>
+      </div>
     </div>
   </div>
-</section>
+
+    </div>
     
 @endsection    

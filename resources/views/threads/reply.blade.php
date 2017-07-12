@@ -1,27 +1,35 @@
-        <tr>
-          <th>{{ $reply->updated_at->diffForHumans()  }} by <a href="/forums/profiles/{{ $reply->user->username }}">{{ $reply->user->name }}</a></th>
-<th class="text-right">
-<form method="POST" action="{{ $reply->path() . '/vote' }}" class="form-inline" style="display:inline-block;">
-          {{ csrf_field() }}
-                                                                            {{ $reply->votesDownCount() }}
-<div class="btn-group" role="group" aria-label="Basic example">
-                                                                                <button type="submit" name="vote" value="down" class="btn btn-sm btn-primary{{ $reply->hasVoteDown() ? ' active' : '' }}"><i class="fa fa-thumbs-down" aria-hidden="true"></i></button>
-               <button type="submit" name="vote" value="up" class="btn btn-sm btn-primary{{$reply->hasVoteUp() ? ' active' : '' }}"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
-             </div>
-{{ $reply->votesUpCount() }}
-</form>
+  <div class="row">
+    <div class="col">
+      <div class="card" id="reply-{{ $reply->id }}">
+        <div class="card-header">
+          <div class="row">
+       <div class="col">
+          {{ $reply->updated_at->diffForHumans()  }} by <a href="/users/{{ $reply->user->username }}">{{ $reply->user->name }}</a>
+</div>
+<div class="col text-right">
+    @if(!Auth::guest())
+       @include('votes.voter', ['resource' => $reply])
+    @endif                   
+</div>
+</div>
 
-@can('update', $reply)
+        </div>
+        <div class="card-block">
+         {{ $reply->content }}
+        </div>
+        <div class="card-footer text-muted">
+              @can('delete', $reply)
 
              <form action="{{ $reply->path() }}" method="POST" style="display:inline-block">
                {{ csrf_field() }}
                {{ method_field('DELETE') }}
-               <button class="btn btn-sm btn-primary"><i class="fa fa-trash" aria-hidden="true"></i></button>
+               <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
              </form>
 @endcan
-                   
-</th>
-        </tr>
-        <tr>
-          <td colspan="2">{{ $reply->content }}</td>
-        </tr>
+                   @can('update', $reply)
+             <a href="{{ $reply->path() . '/edit' }}" class="btn btn-sm btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+                   @endcan
+        </div>
+      </div>
+    </div>
+  </div>

@@ -20,9 +20,23 @@ class Invoice extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
     public function items()
     {
         return $this->hasMany(InvoiceItem::class);
     }
-    
+
+    public function path()
+    {
+        return '/invoices/' . $this->id;
+    }
 }

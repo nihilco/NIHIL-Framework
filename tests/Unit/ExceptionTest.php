@@ -26,7 +26,7 @@ class ExceptionTest extends TestCase
     public function test_an_exception_has_a_parent()
     {
         $result = false;
-        if(($this->exception->parent == null) || (get_class($this->exception>parent) == 'App\Models\Exception')) {
+        if(($this->exception->parent == null) || (get_class($this->exception->parent) == 'App\Models\Exception')) {
             $result = true;
         }
 

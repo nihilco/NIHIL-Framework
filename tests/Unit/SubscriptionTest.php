@@ -22,5 +22,20 @@ class SubscriptionTest extends TestCase
     {
         $this->assertInstanceOf('App\Models\User', $this->subscription->user);
     }
+
+    public function test_a_subscription_has_an_account()
+    {
+        $this->assertInstanceOf('App\Models\Account', $this->subscription->account);
+    }
+
+    public function test_a_subscription_has_a_customer()
+    {
+        $this->assertInstanceOf('App\Models\Customer', $this->subscription->customer);
+    }
+
+    public function test_a_subscription_has_a_plan()
+    {
+        $this->assertInstanceOf('App\Models\Plan', $this->subscription->plan);
+    }
     
 }

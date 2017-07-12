@@ -29,4 +29,9 @@ class Status extends Model
     {
         return $this->hasMany(Issue::class);
     }
+
+    public function path()
+    {
+        return '/statuses/' . $this->id;
+    }
 }

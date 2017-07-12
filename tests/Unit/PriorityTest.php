@@ -22,5 +22,10 @@ class PriorityTest extends TestCase
     {
         $this->assertInstanceOf('App\Models\User', $this->priority->user);
     }
+
+    public function test_a_priority_has_issues()
+    {
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->priority->issues);
+    }
     
 }

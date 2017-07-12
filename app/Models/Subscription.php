@@ -29,4 +29,24 @@ class Subscription extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function plan()
+    {
+        return $this->belongsTo(Plan::class);
+    }
+
+    public function path()
+    {
+        return '/subscriptions/' . $this->id;
+    }
 }

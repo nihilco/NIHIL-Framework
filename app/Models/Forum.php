@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\LogActivity;
+use App\Traits\MarkFavorite;
 
 class Forum extends Model
 {
-    use SoftDeletes, LogActivity;
+    use SoftDeletes, LogActivity, MarkFavorite;
 
     protected $dates = ['deleted_at'];
     /**
@@ -28,17 +29,8 @@ class Forum extends Model
             $builder->withCount('threads');
         });
 
-        static::deleting(function ($forum) {
-            foreach($forum->threads as $thread) {
-                foreach($thread->replies as $reply) {
-                    foreach($reply->votes as $vote) {
-                        $vote->delete();
-                    }
-                    $reply->delete();
-                }
-                $thread->votes()->delete();
-                $thread->delete();
-            }
+        static::deleting(function($forum) {
+            $forum->threads->each->delete();
         });
 
     }
@@ -56,12 +48,22 @@ class Forum extends Model
     public function threads()
     {
         return $this->hasMany(Thread::class)->latest()
-                    ->with(['user', 'forum']);
+            ->with(['user', 'forum']);
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Forum::class, 'parent_id');
+    }
+
+    public function forums()
+    {
+        return $this->hasMany(Forum::class, 'id', 'parent_id')->latest();
     }
 
     public function addThread($thread)

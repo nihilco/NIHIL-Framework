@@ -27,5 +27,30 @@ class CustomerTest extends TestCase
     {
         $this->assertInstanceOf('App\Models\Account', $this->customer->account);
     }
+
+    public function test_a_customer_has_invoices()
+    {
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->customer->invoices);
+    }
+
+    public function test_a_customer_has_orders()
+    {
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->customer->orders);
+    }
+
+    public function test_a_customer_has_payments()
+    {
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->customer->payments);
+    }
+
+    public function test_a_customer_has_sources()
+    {
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->customer->sources);
+    }
+
+    public function test_a_customer_has_subscriptions()
+    {
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->customer->subscriptions);
+    }
     
 }

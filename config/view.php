@@ -1,12 +1,12 @@
 <?php
 
-$paths = array();
-
-if(defined('NF_THEME')) {
-    $paths[] = realpath(base_path('themes/' . NF_THEME . '/resources/views'));
-}
-
-$paths[] = realpath(base_path('resources/views'));
+//$paths = array();
+//
+//if(defined('NF_THEME')) {
+//    $paths[] = realpath(base_path('themes/' . NF_THEME . '/resources/views'));
+//}
+//
+//$paths[] = realpath(base_path('resources/views'));
 
 return [
 
@@ -21,7 +21,7 @@ return [
     |
     */
 
-    'paths' => $paths,
+    'paths' => [realpath(base_path('resources/views'))],
 
     /*
     |--------------------------------------------------------------------------

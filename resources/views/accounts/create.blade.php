@@ -1,56 +1,45 @@
-@extends('layouts.admin')
+@extends('layouts.master')
 
+@section('meta')
+      <meta description="The Taraloka Foundation is a registered 501(c)3 organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
+      <meta keywords="taraloka, sikkim, india, foundation, nihil">
+      <meta author="Uriah M. Clemmer IV">
+
+      <meta property="fb:app_id" content="187097078310518">
+    
+      <meta name="og:url" property="og:url" content="https://taraloka.org/about">
+      <meta name="og:type" property="og:type" content="article">
+      <meta name="og:title" property="og:title" content="Taraloka Foundation">
+      <meta name="og:description" property="og:description" content="The Taraloka Foundation is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
+      <meta name="og:image" property="og:image" content="https://taraloka.org/img/taraloka-logo-og-dark.png">
+
+      <title>Create Account</title>
+@endsection
+    
 @section('content')
-      <!-- Main section-->
-      <section>
-         <!-- Page content-->
-         <div class="content-wrapper">
-            <div class="content-heading">
-               Create Account
-               <small>some small phrase</small>
-            </div>
-                <!-- START row-->
-                <div class="row">
-                   <div class="col-sm-9">
-                      <!-- START panel-->
-                      <div class="panel panel-default">
-                         <div class="panel-body">
-                            <form role="form" method="POST" action="/accounts" >
-                               {{ csrf_field() }}
-                               <div class="form-group{{ $errors->has('account_id') ? ' has-error' : '' }}">
-                                  <label>Account ID</label>
-                                  <input type="text" name="account_id" placeholder="Enter account id" class="form-control">
-    @if ($errors->has('account_id'))
-    <span class="help-block">
-    <strong>{{ $errors->first('account_id') }}</strong>
-    </span>
-    @endif
-                               </div>
-                               <div class="form-group{{ $errors->has('publishable_key') ? ' has-error' : '' }}">
-                                  <label>Publishable Key</label>
-                                  <input type="text" name="publishable_key" placeholder="Enter publishable key" class="form-control">
-    @if ($errors->has('publishable_key'))
-    <span class="help-block">
-    <strong>{{ $errors->first('publishable_key') }}</strong>
-    </span>
-    @endif
-                               </div>
-                               <div class="form-group{{ $errors->has('secret_key') ? ' has-error' : '' }}">
-                                  <label>Secret Key</label>
-                                  <input type="text" name="secret_key" placeholder="Enter secret key" class="form-control">
-    @if ($errors->has('secret_key'))
-    <span class="help-block">
-    <strong>{{ $errors->first('secret_key') }}</strong>
-    </span>
-    @endif
-                               </div>
 
-                               <button type="submit" class="btn btn-sm btn-primary pull-right">Create Account</button>
-                            </form>
-                         </div>
-                      </div>
-                      <!-- END panel-->
-                   </div>
-         </div>
-      </section>
+    @include('layouts.breadcrumbs', ['breadcrumbs' => [
+        ['label' => 'Accounts', 'url' => '/accounts'],
+        ['label' => 'Create', 'url' => '/accounts/create'],
+    ]])
+  <div class="container-fluid">
+  <div class="animated fadeIn">    
+    
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h1>Create Account</h1>
+        </div>
+        <div class="card-block">
+
+
+    
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  </div>
+  </div>
 @endsection

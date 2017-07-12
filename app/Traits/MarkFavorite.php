@@ -8,4 +8,9 @@ trait MarkFavorite
     {
 
     }
+
+    public function favorites()
+    {
+        return $this->morphMany('App\Models\Favorite', 'resource');
+    }
 }

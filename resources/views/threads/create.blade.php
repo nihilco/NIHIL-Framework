@@ -13,32 +13,50 @@
       <meta name="og:description" property="og:description" content="The Taraloka Foundation is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
       <meta name="og:image" property="og:image" content="https://taraloka.org/img/taraloka-logo-og-dark.png">
 
-      <title>Create Threads - Taraloka</title>
+      <title>Create Thread</title>
 @endsection
     
 @section('content')
 
-<section class="container site-content">
-  <div class="row">
-    <div class="col-sm-12">
-      <h1>Create Thread</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
 
-      <form method="POST" action="{{ $forum->path() . '/threads'}}">
+
+    @include('layouts.breadcrumbs', ['breadcrumbs' => [
+        ['label' => 'Forums', 'url' => '/forums'],
+        ['label' => $forum->title, 'url' => $forum->path()],
+        ['label' => 'Create Thread', 'url' => $forum->path() . '/threads/create'],
+    ]])
+  <div class="container-fluid">
+    
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h1>Create Thread</h1>
+        </div>
+        <div class="card-block">
+
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+    @foreach ($errors->all() as $error)
+    <li>{{ $error }}</li>
+            @endforeach
+                        </ul>
+    </div>
+@endif
+    
+      <form method="POST" action="{{ $forum->path(). '/threads'}}">
         {{ csrf_field() }}
         <div class="form-group{{ $errors->first('title') ? ' has-danger' : '' }}">
           <label class="form-control-label" for="title">Title</label>
-          <input type="text" class="form-control{{ $errors->first('title') ? ' form-control-danger' : '' }}" id="title" name="title" title="title" aria-describedby="titleHelp" placeholder="Let us name this biatch." value="{{ old('title') }}" required>
+          <input type="text" class="form-control{{ $errors->first('title') ? ' form-control-danger' : '' }}" id="title" name="title" title="title" aria-describedby="titleHelp" placeholder="Let us name this biatch" value="{{ old('title') }}" required>
           @if($errors->first('title'))
           <small id="titleHelp" class="form-control-feedback">{{ $errors->first('title') }}</small>
           @endif
         </div>
         <div class="form-group{{ $errors->first('slug') ? ' has-danger' : '' }}">
           <label class="form-control-label" for="slug">Slug</label>
-          <input type="text" class="form-control{{ $errors->first('slug') ? ' form-control-danger' : '' }}" id="slug" name="slug" title="slug" aria-describedby="slugHelp" placeholder="Let us name this biatch." value="{{ old('slug') }}" required>
+          <input type="text" class="form-control{{ $errors->first('slug') ? ' form-control-danger' : '' }}" id="slug" name="slug" title="slug" aria-describedby="slugHelp" placeholder="let-us-name-this-biatch" value="{{ old('slug') }}" required>
           @if($errors->first('slug'))
           <small id="slugHelp" class="form-control-feedback">{{ $errors->first('slug') }}</small>
           @endif
@@ -54,9 +72,12 @@
           <button type="submit" class="btn btn-lg btn-primary pull-right">Create Thread</button>
         </div>
       </form>
-
+    
+        </div>
+      </div>
     </div>
   </div>
-</section>
+
+    </div>
     
-@endsection    
+@endsection

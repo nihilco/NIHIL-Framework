@@ -23,4 +23,8 @@ class VoteTest extends TestCase
         $this->assertInstanceOf('App\Models\User', $this->vote->user);
     }
 
+    public function test_vote_has_a_resource()
+    {
+        $this->assertInstanceOf($this->vote->resource_type, $this->vote->resource);
+    }
 }

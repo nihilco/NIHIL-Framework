@@ -39,24 +39,41 @@ Route::get('/password/reset', 'PasswordsController@reset')->name('password.reset
 Route::get('/dashboard', 'AdminController@index')->name('dashboard');
 //Route::get('/home', 'AuthController@home')->name('home');
 
+// FORUMS
+Route::get('/forums', 'ForumsController@index')->name('forums');
+Route::get('/forums/create', 'ForumsController@create');
+Route::get('/forums/threads', 'ThreadsController@index');
+Route::get('/forums/{forum}', 'ForumsController@show');
+Route::post('/forums', 'ForumsController@store');
+Route::post('/forums/{forum}/threads', 'ThreadsController@store');
+Route::delete('/forums/{forum}', 'ForumsController@destroy');
+Route::get('/forums/{forum}/threads/create', 'ThreadsController@create');
+Route::get('/forums/{forum}/{thread}', 'ThreadsController@show');
+Route::delete('/forums/{forum}/{thread}', 'ThreadsController@destroy');
+Route::get('/forums/{forum}/{thread}/{reply}', 'RepliesController@show');
+
+// ISSUES
+Route::get('/issues', 'IssuesController@index');
+Route::get('/issues/create', 'IssuesController@create');
+Route::get('/issues/{issue}', 'IssuesController@show');
+Route::delete('/issues/{issue}', 'IssuesController@destroy');
+Route::post('/issues', 'IssuesController@store');
+
 //
 //
 //
-Route::resource('accounts', 'Controller');
-Route::resource('activity', 'Controller');
-Route::resource('categories', 'Controller');
-Route::resource('countries', 'Controller');
+Route::resource('accounts', 'AccountsController');
+Route::resource('activities', 'ActivitiesController');
+Route::resource('categories', 'CategoriesController');
+Route::resource('countries', 'CountriesController');
 Route::resource('currencies', 'CurrenciesController');
 Route::resource('customers', 'CustomersController');
 Route::resource('emails', 'EmailsController');
 Route::resource('exceptions', 'ExceptionsController');
 Route::resource('favorites', 'FavoritesController');
-Route::resource('forums', 'ForumsController');
-Route::resource('group', 'GroupsController');
+Route::resource('groups', 'GroupsController');
 Route::resource('invoices', 'InvoicesController');
-Route::resource('invoice-items', 'InvoiceItemsController');
-Route::resource('issues', 'IssuesController');
-Route::resource('link', 'LinksController');
+Route::resource('links', 'LinksController');
 Route::resource('orders', 'OrdersController');
 Route::resource('pages', 'PagesController');
 Route::resource('password-resests', 'PasswordResetsController');
@@ -67,15 +84,16 @@ Route::resource('priorities', 'PrioritiesController');
 Route::resource('products', 'ProductsController');
 Route::resource('ratings', 'RatingsController');
 Route::resource('replies', 'RepliesController');
-Route::resource('sessions', 'SessionsController');
+Route::resource('resolutions', 'ResolutionsController');
+//Route::resource('sessions', 'SessionsController');
 Route::resource('sources', 'SourcesController');
 Route::resource('states', 'StatesController');
 Route::resource('statuses', 'StatusesController');
-Route::resource('subscription', 'SubscriptionsController');
+Route::resource('subscriptions', 'SubscriptionsController');
 Route::resource('tags', 'TagsController');
 Route::resource('themes', 'ThemesController');
-Route::resource('threads', 'ThreadsController');
-Route::resource('transaction', 'TransactionsController');
+//Route::resource('threads', 'ThreadsController');
+Route::resource('transactions', 'TransactionsController');
 Route::resource('types', 'TypesController');
 Route::resource('users', 'UsersController');
 Route::resource('votes', 'VotesController');

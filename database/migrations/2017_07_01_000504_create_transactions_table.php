@@ -16,12 +16,12 @@ class CreateTransactionsTable extends Migration
         //
         Schema::create('transactions', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id')->index();
             $table->integer('type_id');
             $table->integer('account_id');
             $table->integer('from_source_id');
             $table->integer('to_source_id');
             $table->integer('amount');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

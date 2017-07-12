@@ -13,66 +13,99 @@
       <meta name="og:description" property="og:description" content="The Taraloka Foundation is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
       <meta name="og:image" property="og:image" content="https://taraloka.org/img/taraloka-logo-og-dark.png">
 
-      <title>Forums - Taraloka</title>
+      <title>Forums</title>
 @endsection
     
 @section('content')
 
-<section class="container site-content">
+    @include('layouts.breadcrumbs', ['breadcrumbs' => [
+        ['label' => 'Forums', 'url' => '/forums'],
+    ]])
+  <div class="container-fluid">
+  <div class="animated fadeIn">    
+    @forelse($forums->where('parent_id',null) as $tlforum)
+    
   <div class="row">
-    <div class="col-sm-12">
-      <h1>Forums</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-
-<table class="table table-striped table-bordered">
-      <thead>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h1>
+            {{ $tlforum->title }}
+          </h1>
+        </div>
+        <div class="card-block">
+    @if($forums->where('parent_id', $tlforum->id)->count() > 0)
+    <table class="table table-bordered">
+      <thead class="thead-default">
         <tr>
-          <th>Title</th>
+          <th>Forum</th>
           <th>Threads</th>
           <th>Replies</th>
-          <th>Created At</th>
-          <th></th>
+          <th>Last Reply</th>
+          <th>&nbsp;</th>
         </tr>
       </thead>
       <tbody>
-      @forelse ($forums as $forum)
+@foreach($forums->where('parent_id', $tlforum->id) as $forum)
         <tr>
-          <th><h4><a href="{{ $forum->path() }}">{{ $forum->title }}</a></h4></th>
+          <th scope="row"><a href="{{ $forum->path() }}">{{ $forum->title }}</a></th>
           <td>{{ $forum->threads_count }}</td>
-          <td>{{ $forum->getReplyCount() }}</td>
-          <td>{{ $forum->created_at->diffForHumans() }}</td>
-          <td>
-
-@can('update', $forum)
-             <form action="{{ $forum->path() }}" method="POST" style="display:inline-block">
+          <td>0</td>
+          <td>{{  $forum->updated_at->diffForHumans() }}</td>
+          <th>
+        @can ('delete', $forum)
+             <form action="{{ $forum->path() }}" method="POST" style="display:inline-block;">
                {{ csrf_field() }}
                {{ method_field('DELETE') }}
-               <button class="btn btn-sm btn-primary"><i class="fa fa-trash" aria-hidden="true"></i></button>
+               <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
              </form>
 @endcan
-
-          </td>
+          </th>
         </tr>
-      @empty
-          <tr><td colspan="5">No forums.</td></tr>
-      @endforelse
+        @endforeach
       </tbody>
     </table>
-   
+    @else
+    <p>No forums in this parent forum.</td></tr>
+    @endif
+    
+        </div>
+        <div class="card-footer text-muted">
+        @can ('delete', $tlforum)
+             <form action="{{ $tlforum->path() }}" method="POST" style="display:inline-block;">
+               {{ csrf_field() }}
+               {{ method_field('DELETE') }}
+               <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+             </form>
+@endcan
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-12">
+    
+    @empty
+    <div class="row">
+      <div class="col">
+        <p>No forums at this time.</p>
+      </div>
+    </div>
+    @endforelse
+
+      <div class="row">
+    <div class="col">
+      <div class="card">
+            <div class="card-block">
     @if(!Auth::guest())
         <a href="/forums/create" class="btn btn-lg btn-primary pull-right">New Forum</a>
     @else
     Please <a href="{{ route('login') }}">login</a> to participate in this discussion.
-    @endif
+    @endif    
+    
+        </div>
+      </div>
     </div>
   </div>
-</section>
-    
+
+    </div>
+    </div>
 @endsection    

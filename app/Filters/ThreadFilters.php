@@ -30,10 +30,10 @@ class ThreadFilters extends Filters
         return $this->builder->where('user_id', $user->id);
     }
 
-    public function replies()
-    {
-        $this->builder->getQuery()->orders = [];
-        
-        $this->builder->orderBy('replies_count', 'desc');
-    }
+    //public function replies()
+    //{
+    //    $this->builder->getQuery()->orders = [];
+    //    
+    //    $this->builder->orderBy('replies_count', 'desc');
+    //}
 }

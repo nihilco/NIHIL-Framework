@@ -27,7 +27,17 @@ class ForumTest extends TestCase
     {
         $this->assertInstanceOf('App\Models\User', $this->forum->user);
     }
-/*
+
+    public function test_a_forum_has_a_parent()
+    {
+        $result = false;
+        if(($this->forum->parent == null) || (get_class($this->forum->parent) == 'App\Models\Forum')) {
+            $result = true;
+        }
+
+        $this->assertTrue($result);
+    }
+
     public function test_a_forum_can_add_a_thread()
     {
         $this->forum->addThread([
@@ -44,5 +54,5 @@ class ForumTest extends TestCase
     {
         $this->assertEquals('/forums/' . $this->forum->slug, $this->forum->path());
     }
-*/
+
 }

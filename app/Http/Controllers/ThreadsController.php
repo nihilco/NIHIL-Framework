@@ -64,7 +64,11 @@ class ThreadsController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        return redirect($forum->path());
+        return redirect($forum->path())->with('flash', [
+            'type' => 'success',
+            'title' => 'Created Thread',
+            'message' => 'You created a thread.',
+        ]);
     }
 
     /**
@@ -76,6 +80,7 @@ class ThreadsController extends Controller
     public function show(Forum $forum, Thread $thread)
     {
         return view('threads.show', [
+            'forum' => $forum,
             'thread' => $thread,
             'replies' => $thread->replies()->paginate(10),
         ]);
@@ -120,7 +125,11 @@ class ThreadsController extends Controller
             return response([], 204);
         }
 
-        return back();
+        return back()->with('flash', [
+            'type' => 'success',
+            'title' => 'Deleted Thread',
+            'message' => 'You deleted a thread.',
+        ]);
     }
 
     public function getThreads($filters)

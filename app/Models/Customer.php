@@ -22,18 +22,6 @@ class Customer extends Model
     }
 
     //
-    public function cards()
-    {
-        return $this->hasMany(CreditCard::class);
-    }
-    
-    //
-    public function bankAccounts()
-    {
-        return $this->hasMany(BankAccount::class);
-    }
-
-        //
     public function invoices()
     {
         return $this->hasMany(Invoice::class);
@@ -67,6 +55,11 @@ class Customer extends Model
     public function account()
     {
         return $this->belongsTo(Account::class);
+    }
+
+    public function sources()
+    {
+        return $this->hasMany(Source::class);
     }
 
     //
@@ -132,4 +125,8 @@ class Customer extends Model
         }
     }
 
+    public function path()
+    {
+        return '/customers/' . $this->id;
+    }
 }

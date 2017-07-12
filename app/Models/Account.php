@@ -16,6 +16,11 @@ class Account extends Model
     //
     protected $fillable = ['stripe_id', 'secret_key', 'publishable_key', 'user_id'];
 
+    public function path()
+    {
+        return '/accounts/' . $this->id;
+    }
+    
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -24,6 +29,51 @@ class Account extends Model
     public function country()
     {
         return $this->belongsTo(Country::class);
+    }
+
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+    }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function plans()
+    {
+        return $this->hasMany(Plan::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function sources()
+    {
+        return $this->hasMany(Source::class);
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
     }
         
     public static function byStripeAccountId($said)

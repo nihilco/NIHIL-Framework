@@ -22,5 +22,5 @@ class FavoriteTest extends TestCase
     {
         $this->assertInstanceOf('App\Models\User', $this->favorite->user);
     }
-    
+
 }

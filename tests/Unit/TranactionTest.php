@@ -18,9 +18,24 @@ class TransactionTest extends TestCase
         $this->transaction = create('App\Models\Transaction');
     }
 
-    public function test_a_transaction_has_a_user()
+    public function test_a_transaction_has_a_type()
     {
-        $this->assertInstanceOf('App\Models\User', $this->transaction->user);
+        $this->assertInstanceOf('App\Models\Type', $this->transaction->type);
+    }
+
+    public function test_a_transaction_has_an_account()
+    {
+        $this->assertInstanceOf('App\Models\Account', $this->transaction->account);
+    }
+
+    public function test_a_transaction_has_a_fromSource()
+    {
+        $this->assertInstanceOf('App\Models\Source', $this->transaction->fromSource);
+    }
+
+    public function test_a_transaction_has_a_toSource()
+    {
+        $this->assertInstanceOf('App\Models\Source', $this->transaction->toSource);
     }
     
 }

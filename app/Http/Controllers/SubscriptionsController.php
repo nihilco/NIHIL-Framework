@@ -49,4 +49,11 @@ class SubscriptionsController extends Controller
     {
         return view('subscriptions.show', compact('subscription'));
     }
+
+    public function destroy(Subscription $subscription)
+    {
+        $subscription->delete();
+
+        return back();
+    }
 }

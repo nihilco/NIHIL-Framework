@@ -38,7 +38,7 @@ $factory->define(App\Models\Activity::class, function (Faker\Generator $faker) {
             return factory('App\Models\User')->create()->id;
         },
         'resource_id' => 0,
-        'resource_type' => 'Test\Resource',
+        'resource_type' => App\Models\Forum::class,
         'action' => 'test.action',
     ];
 });
@@ -143,7 +143,7 @@ $factory->define(App\Models\Favorite::class, function (Faker\Generator $faker) {
             return factory('App\Models\User')->create()->id;
         },
         'resource_id' => 0,
-        'resource_type' => 'Test\Resource',
+        'resource_type' => App\Models\Forum::class,
     ];
 });
 
@@ -153,7 +153,7 @@ $factory->define(App\Models\Forum::class, function (Faker\Generator $faker) {
         'user_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
-        'title' => $faker->sentence(rand(2,5)),
+        'title' => $faker->sentence(rand(2,3)),
         'slug' => $faker->slug,
         'description' => $faker->paragraph,
     ];
@@ -389,7 +389,7 @@ $factory->define(App\Models\Rating::class, function (Faker\Generator $faker) {
         },
         'rating' => rand (10, 100) / 10,
         'resource_id' => 0,
-        'resource_type' => 'Test\Resource',
+        'resource_type' => App\Models\Forum::class,
     ];
 });
 
@@ -401,7 +401,7 @@ $factory->define(App\Models\Reply::class, function (Faker\Generator $faker) {
         },
         'content' => $faker->paragraph,
         'resource_id' => 0,
-        'resource_type' => 'Test\Resource',        
+        'resource_type' => App\Models\Forum::class,        
     ];
 });
 
@@ -555,9 +555,6 @@ $factory->define(App\Models\Transaction::class, function (Faker\Generator $faker
         'account_id' => function() {
             return factory('App\Models\Account')->create()->id;
         },
-        'user_id' => function() {
-            return factory('App\Models\User')->create()->id;
-        },
         'type_id' => function() {
             return factory('App\Models\Type')->create(['resource_type' => App\Models\Transaction::class])->id;
         },
@@ -580,7 +577,7 @@ $factory->define(App\Models\Type::class, function (Faker\Generator $faker) {
         'name' => $faker->sentence(rand(1,2)),
         'slug' => $faker->slug,
         'description' => $faker->paragraph,
-        'resource_type' => 'Test\Resource',
+        'resource_type' => App\Models\Issue::class,
     ];
 });
 
@@ -604,7 +601,7 @@ $factory->define(App\Models\Vote::class, function (Faker\Generator $faker) {
             return factory('App\Models\User')->create()->id;
         },
         'resource_id' => 1,
-        'resource_type' => rand(0,1) ? App\Models\Thread::class : App\Models\Reply::class,
+        'resource_type' => App\Models\Thread::class,
         'vote' => rand(0,1) ? App\Models\Vote::VOTE_UP : App\Models\Vote::VOTE_DOWN,
     ];
 });

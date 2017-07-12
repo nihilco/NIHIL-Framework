@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Activity;
 
 class UsersController extends Controller
 {
@@ -52,6 +53,17 @@ class UsersController extends Controller
     //
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        return view('users.show', [
+            'user' => $user,
+            'activities' => Activity::feed($user),
+        ]);
     }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+
+        return back();
+    }
+
 }

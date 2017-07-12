@@ -10,7 +10,7 @@ class Transaction extends Model
 {
     use SoftDeletes, HasTypes;
 
-    protected $dates = ['created_at'];
+    protected $dates = ['deleted_at'];
 
     protected $table = 'transactions';
     
@@ -24,5 +24,25 @@ class Transaction extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
+
+    public function fromSource()
+    {
+        return $this->belongsTo(Source::class);
+    }
+
+    public function toSource()
+    {
+        return $this->belongsTo(Source::class);
+    }
+
+    public function path()
+    {
+        return '/transactions/' . $this->id;
     }
 }

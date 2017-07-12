@@ -22,5 +22,10 @@ class StatusTest extends TestCase
     {
         $this->assertInstanceOf('App\Models\User', $this->status->user);
     }
+
+    public function test_a_status_has_issues()
+    {
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->status->issues);
+    }
     
 }

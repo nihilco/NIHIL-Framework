@@ -6,10 +6,10 @@ use App\Models\Vote;
 
 trait CastVote
 {
-    public static function bootCanVote()
+    public static function bootCastVote()
     {
         static::deleting(function ($resource) {
-            $resource->votes()->delete();
+            $resource->votes->each->delete();
         });
     }
     

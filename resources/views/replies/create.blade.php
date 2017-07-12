@@ -13,36 +13,33 @@
       <meta name="og:description" property="og:description" content="The Taraloka Foundation is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
       <meta name="og:image" property="og:image" content="https://taraloka.org/img/taraloka-logo-og-dark.png">
 
-      <title>Replies - Taraloka</title>
+      <title>Create Reply</title>
 @endsection
     
 @section('content')
 
-<section class="container site-content">
-  <div class="row">
-    <div class="col-sm-12">
-      <h1>Create Reply</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-
-      <form method="POST" action="{{ $thread->path() . '/replies'}}">
-          {{ csrf_field() }}
-        <div class="form-group{{ $errors->first('body') ? ' has-danger' : '' }}">
-    <label class="form-control-label" for="">Body</label>
-    <textarea class="form-control{{ $errors->first() ? ' form-control-danger' : '' }}" id="body" name="body" title="body"  placeholder="Have something to say?" rows="5" required>{{ old('body') }}</textarea>
-@if($errors->first('body'))
-    <small class="form-control-feedback">{{ $errors->first('body') }}</small>
-    @endif
-        </div>
-<div class="form-group">
-        <button type="submit" class="btn btn-lg btn-primary pull-right">Create Reply</button>
-    </div>
-      </form>
-
-    </div>
-  </div>
-</section>
+    @include('layouts.breadcrumbs', ['breadcrumbs' => [
+        ['label' => 'Replies', 'url' => '/replies'],
+        ['label' => 'Create', 'url' => '/replies/create'],
+    ]])
+  <div class="container-fluid">
+  <div class="animated fadeIn">    
     
-@endsection    
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h1>Create Reply</h1>
+        </div>
+        <div class="card-block">
+
+
+    
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  </div>
+  </div>
+@endsection

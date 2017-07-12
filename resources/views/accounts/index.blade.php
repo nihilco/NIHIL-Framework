@@ -1,85 +1,77 @@
-@extends('layouts.admin')
+@extends('layouts.master')
 
+@section('meta')
+      <meta description="The Taraloka Foundation is a registered 501(c)3 organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
+      <meta keywords="taraloka, sikkim, india, foundation, nihil">
+      <meta author="Uriah M. Clemmer IV">
+
+      <meta property="fb:app_id" content="187097078310518">
+    
+      <meta name="og:url" property="og:url" content="https://taraloka.org/about">
+      <meta name="og:type" property="og:type" content="article">
+      <meta name="og:title" property="og:title" content="Taraloka Foundation">
+      <meta name="og:description" property="og:description" content="The Taraloka Foundation is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
+      <meta name="og:image" property="og:image" content="https://taraloka.org/img/taraloka-logo-og-dark.png">
+
+      <title>Accounts</title>
+@endsection
+    
 @section('content')
 
-          <!-- Main section-->
-          <section>
-               <!-- Page content-->
-                   <div class="content-wrapper">
-               <div class="content-heading">
-               Accounts
-               <small>some small phrase</small>
-            </div>
-                <div class="row">
-                   <!-- Blog Content-->
-                   <div class="col-lg-9">
-
-                        <!-- START panel-->
-                    <div class="panel panel-default">
-                        <!-- START table-responsive-->
-                        <div class="table-responsive">
-                            <table id="table-ext-1" class="table table-bordered table-hover">
-                                <thead class="panel-footer">
-                                    <tr>
-                                        <th data-check-all>
-                                            <div data-toggle="tooltip" data-title="Check All" class="checkbox c-checkbox">
-                                                <label>
-                                                    <input type="checkbox">
-                                                        <span class="fa fa-check"></span>
-                                                </label>
-                                            </div>
-                                        </th>
-                                        <th>#</th>
-                                        <th>Mode</th>
-                                        <th>Name</th>
-                                        <th>Stripe ID</th>
-                                        <th>Date Created</th>
-                                        <th>&nbsp;</th>              
-                                    </tr>
-                                </thead>
-                                <tbody>
-@if(count($accounts) > 0)
-                                    @php
-                                        $c=0;
-                                    @endphp
-                                    @foreach($accounts as $account)
-                                        @php
-                                            $c++;
-                                        @endphp
-                                        @include('accounts.table-row', compact($account, $c))
-                                    @endforeach
-                                            @else
-<tr><td colspan="5">No accounts found.</td></tr>
-                                                @endif
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- END table-responsive-->
-                        <div class="panel-footer">
-                                            <div class="row">
-                                            <div class="col-sm-3">
-                            <div class="input-group">
-                               <select class="input-sm form-control">
-                                  <option value="0">Bulk action</option>
-                                  <option value="1">Delete</option>
-                                  <option value="2">Clone</option>
-                                  <option value="3">Export</option>
-                               </select>
-                               <span class="input-group-btn">
-                                  <button class="btn btn-sm btn-default">Apply</button>
-                               </span>
-                           </div>
-
-</div>
-                                            </div>
-                                            
-                       </div>
-                </div>
-                <!-- END panel-->
-
-                   </div>
-                </div>
-             </div>
-          </section>
+    @include('layouts.breadcrumbs', ['breadcrumbs' => [
+        ['label' => 'Accounts', 'url' => '/accounts'],
+    ]])
+  <div class="container-fluid">
+  <div class="animated fadeIn">    
     
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h1>Accounts</h1>
+        </div>
+        <div class="card-block">
+    @if($accounts->count() > 0)
+    <table class="table table-bordered">
+      <thead class="thead-default">
+        <tr>
+          <th>Name</th>
+          <th>Country</th>
+          <th>Managed</th>
+          <th>Last Update</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($accounts as $account)
+        <tr>
+          <th scope="row"><a href="{{ $account->path() }}">{{ $account->name }}</a></th>
+          <td>{{ $account->country->name }}</td>
+          <td>{{ $account->managed ? 'true' : 'false' }}</td>
+          <td>{{ $account->updated_at->diffForHumans() }}</td>
+          <th>&nbsp;</th>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+    @else
+    <p>No accounts at this time.</td></tr>
+    @endif
+    
+        </div>
+      </div>
+    </div>
+  </div>
+    
+      <div class="row">
+    <div class="col">
+      <div class="card">
+            <div class="card-block">
+        <a href="/accounts/create" class="btn btn-lg btn-primary pull-right">New Account</a>        </div>
+      </div>
+    </div>
+  </div>
+
+    </div>
+    </div>
 @endsection

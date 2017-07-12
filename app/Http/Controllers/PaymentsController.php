@@ -192,4 +192,11 @@ class PaymentsController extends Controller
     {
         return number_format($amount*100, 0, '.', '');
     }
+
+    private function destroy(Payment $payment)
+    {
+        $payment->delete();
+
+        return back();
+    }
 }

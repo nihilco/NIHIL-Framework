@@ -54,4 +54,11 @@ class PrioritiesController extends Controller
     {
         return view('priorities.show', compact('priority'));
     }
+
+    public function destroy(Priority $priority)
+    {
+        $priority->delete();
+
+        return back();
+    }
 }

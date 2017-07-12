@@ -29,4 +29,9 @@ class Priority extends Model
     {
         return $this->hasMany(Issue::class);
     }
+
+    public function path()
+    {
+        return '/priorities/' . $this->id;
+    }
 }

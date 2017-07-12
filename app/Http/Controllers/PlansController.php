@@ -49,4 +49,11 @@ class PlansController extends Controller
     {
         return view('plans.show', compact('plan'));
     }
+
+    public function destroy(Plan $plan)
+    {
+        $plan->delete();
+
+        return back();
+    }
 }

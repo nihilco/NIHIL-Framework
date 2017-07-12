@@ -20,4 +20,14 @@ class Country extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function states()
+    {
+        return $this->hasMany(State::class);
+    }
+
+    public function path()
+    {
+        return '/countries/' . $this->id;
+    }
+
 }

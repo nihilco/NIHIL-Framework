@@ -50,4 +50,17 @@ class AccountsController extends Controller
     {
         return view('accounts.show', compact('account'));
     }
+
+    public function destroy(Account $account)
+    {
+        //$this->authorize('update', $account);
+
+        $account->delete();
+        
+        if(request()->wantsJson()) {
+            return response([], 204);
+        }
+        
+        return back();    
+    }
 }

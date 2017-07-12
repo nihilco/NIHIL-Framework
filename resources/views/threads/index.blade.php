@@ -13,24 +13,30 @@
       <meta name="og:description" property="og:description" content="The Taraloka Foundation is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
       <meta name="og:image" property="og:image" content="https://taraloka.org/img/taraloka-logo-og-dark.png">
 
-      <title>Threads - Taraloka</title>
+      <title>Threads</title>
 @endsection
     
 @section('content')
 
-<section class="container site-content">
+        @include('layouts.breadcrumbs', ['breadcrumbs' => [
+        ['label' => 'Forums', 'url' => '/forums'],
+        ['label' => 'Threads', 'url' => '/forums/threads'],
+    ]])
+  <div class="container-fluid">
+    
   <div class="row">
-    <div class="col-sm-12">
-      <h1>Threads</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h1>Threads</h1>
+        </div>
+        <div class="card-block">
 
     <table class="table table-striped table-bordered">
-      <thead>
+      <thead class="thead-default">
         <tr>
           <th>Thread</th>
+          <th>Forum</th>
           <th>Owner</th>
           <th>Replies</th>
           <th>Last Update</th>
@@ -39,17 +45,19 @@
       </thead>
       <tbody>
 
-
-
-    @foreach($threads as $thread)
-    @include('threads.thread')
-    @endforeach
+    @forelse($threads as $thread)
+      @include('threads.thread')
+    @empty
+      <tr><td colspan="6">No threads at this time.</td></tr>
+    @endforelse
     
       </tbody>
     </table>
-    
+
+
+        </div>
+      </div>
     </div>
   </div>
-</section>
-    
-@endsection    
+
+@endsection

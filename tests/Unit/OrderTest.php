@@ -22,5 +22,15 @@ class OrderTest extends TestCase
     {
         $this->assertInstanceOf('App\Models\User', $this->order->user);
     }
+
+    public function test_an_order_has_an_account()
+    {
+        $this->assertInstanceOf('App\Models\Account', $this->order->account);
+    }
+
+    public function test_an_order_has_a_customer()
+    {
+        $this->assertInstanceOf('App\Models\Customer', $this->order->customer);
+    }
     
 }

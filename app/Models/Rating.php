@@ -19,4 +19,14 @@ class Rating extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function resource()
+    {
+        return $this->morphTo();
+    }
+
+    public function path()
+    {
+        return '/ratings/' . $this->id;
+    }
 }

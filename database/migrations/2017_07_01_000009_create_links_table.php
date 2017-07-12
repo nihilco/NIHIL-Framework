@@ -20,7 +20,7 @@ class CreateLinksTable extends Migration
             $table->string('label');
             $table->string('destination');
             $table->unsignedInteger('uses')->nullable();
-            $table->timestamp('expires_at');
+            $table->timestamp('expires_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

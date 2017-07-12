@@ -8,6 +8,7 @@ class RepliesControllerTest extends TestCase
 {
     protected $forum;
     protected $thread;
+    protected $reply;
     
     public function setUp()
     {
@@ -15,6 +16,30 @@ class RepliesControllerTest extends TestCase
 
         $this->forum = create('App\Models\Forum');
         $this->thread = create('App\Models\Thread', ['forum_id' => $this->forum->id]);
+        $this->reply = create('App\Models\Reply', ['resource_id' => $this->thread->id, 'resource_type' => get_class($this->thread)]);
+    }
+
+    public function test_replies_controller_routes_entry()
+    {
+        // INDEX
+        $response = $this->get('/replies');
+        $response->assertStatus(200);
+
+        // SHOW 
+        $response = $this->get($this->reply->path());
+        $response->assertStatus(200);
+        
+        // CREATE  - User not logged in, redirect to login
+        $response = $this->get('/replies/create');
+        $response->assertStatus(302);
+
+        // UPDATE  - User not logged in, redirect to login
+        //$response = $this->post('/replies');
+        //$response->assertStatus(302);
+
+        // DELETE  - User not logged in, redirect to login
+        //$response = $this->delete($this->reply->path());
+        //$response->assertStatus(302);
     }
 /*
     public function test_a_guest_cannot_add_replies()

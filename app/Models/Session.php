@@ -19,4 +19,9 @@ class Session extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public function path()
+    {
+        return '/sessions/' . $this->id;
+    }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace NIHILCo\Forums\Policies;
+namespace App\Policies;
 
-use App\User;
-use NIHILCo\Forums\Models\Thread;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\User;
+use App\Models\Thread;
 
 class ThreadPolicy
 {
@@ -16,6 +16,11 @@ class ThreadPolicy
     }
 
     public function update(User $user, Thread $thread)
+    {
+        return $thread->user_id === $user->id;
+    }
+
+    public function delete(User $user, Thread $thread)
     {
         return $thread->user_id === $user->id;
     }

@@ -25,4 +25,8 @@ class Type extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function parent()
+    {
+        return $this->belongsTo(Type::class);
+    }
 }

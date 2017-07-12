@@ -24,4 +24,9 @@ class Exception extends Model
     {
         return $this->belongsTo(Exception::class);
     }
+
+    public function path()
+    {
+        return '/exceptions/' . $this->id;
+    }
 }

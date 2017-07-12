@@ -1,10 +1,10 @@
 <?php
 
-namespace NIHILCo\Forums\Policies;
+namespace App\Policies;
 
-use App\User;
-use NIHILCo\Forums\Models\Reply;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\User;
+use App\Models\Reply;
 
 class ReplyPolicy
 {
@@ -15,7 +15,17 @@ class ReplyPolicy
 
     }
 
+    public function create(User $user)
+    {
+        return true;
+    }
+
     public function update(User $user, Reply $reply)
+    {
+        return $reply->user_id === $user->id;
+    }
+
+    public function delete(User $user, Reply $reply)
     {
         return $reply->user_id === $user->id;
     }

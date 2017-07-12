@@ -10,7 +10,7 @@ abstract class TestCase extends BaseTestCase
     use CreatesApplication, DatabaseTransactions;
 
     protected static $migrationsRun = false;
-    
+
     public function setUp()
     {
         parent::setUp();
@@ -19,12 +19,17 @@ abstract class TestCase extends BaseTestCase
             \Artisan::call('migrate');
             static::$migrationsRun = true;
         }
-        
+
+        \Session::start();
     }
 
     public function signIn($class = 'App\Models\User', $overrides = [])
     {
-        $user = create($class, $overrides);
+        if(isset($overrides['user'])) {
+            $user = $overrides['user'];
+        }else{
+            $user = create($class, $overrides);
+        }
         $this->actingAs($user);
         return $this;
     }

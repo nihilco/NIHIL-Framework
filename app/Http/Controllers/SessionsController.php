@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Session;
 
 class SessionsController extends Controller
 {
@@ -11,6 +12,12 @@ class SessionsController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'destroy']);
+    }
+
+    public function index()
+    {
+        $sessions = Session::all();
+        return view('sessions.index', compact('sessions'));
     }
     
     //

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reply;
-use App\Models\Thread;
-use App\Models\Forum;
 use Illuminate\Http\Request;
 
 class RepliesController extends Controller
@@ -22,6 +20,8 @@ class RepliesController extends Controller
     public function index()
     {
         //
+        $replies = Reply::all();
+        return view('replies.index', compact('replies'));
     }
 
     /**
@@ -29,10 +29,12 @@ class RepliesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Forum $forum, Thread $thread)
+    public function create()
     {
+        $this->authorize('create', $reply);
+
         //
-        return view('replies.create', compact(['forum', 'thread']));
+        return view('replies.create');
     }
 
     /**
@@ -42,20 +44,28 @@ class RepliesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Forum $forum, Thread $thread, Request $request)
+    public function store(Request $request)
     {
         //
         $this->validate($request, [
-            'body' => 'required',
+            'resource_id' => 'required',
+            'resource_type' => 'required',
+            'content' => 'required',
         ]);
         
         //
-        $thread->addReply([
-            'body' => request('body'),
+        Reply::create([
             'user_id' => auth()->id(),
+            'resource_id' => request('resource_id'),
+            'resource_type' => request('resource_type'),
+            'content' => request('content'),           
         ]);
 
-        return redirect($thread->path());
+        return back()->with('flash', [
+            'type' => 'success',
+            'title' => 'Created Reply',
+            'message' => 'You created a reply.',
+        ]);
     }
 
     /**
@@ -64,9 +74,10 @@ class RepliesController extends Controller
      * @param  \NIHILCo\Forums\Models\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function show(Forum $forum, Thread $thread, Reply $reply)
+    public function show(Reply $reply)
     {
         //
+        return view('replies.show', compact('reply'));
     }
 
     /**
@@ -77,7 +88,10 @@ class RepliesController extends Controller
      */
     public function edit(Reply $reply)
     {
+        $this->authorize('update', $reply);
+        
         //
+        return view('replies.edit', compact('reply'));
     }
 
     /**
@@ -89,7 +103,23 @@ class RepliesController extends Controller
      */
     public function update(Request $request, Reply $reply)
     {
+        $this->authorize('update', $reply);
+                
         //
+        $this->validate($request, [
+            'content' => 'required',
+        ]);
+        
+        //
+
+        $reply->content = request('content');
+        $reply->save();
+
+        return redirect($reply->resource->path())->with('flash', [
+            'type' => 'success',
+            'title' => 'Updated Reply',
+            'message' => 'You updated a reply.',
+        ]);
     }
 
     /**
@@ -98,9 +128,9 @@ class RepliesController extends Controller
      * @param  \NIHILCo\Forums\Models\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Forum $forum, Thread $thread, Reply $reply)
+    public function destroy(Reply $reply)
     {
-        $this->authorize('update', $reply);
+        $this->authorize('delete', $reply);
 
         $reply->delete();
 
@@ -108,6 +138,10 @@ class RepliesController extends Controller
             return response([], 204);
         }
 
-        return back();
+        return back()->with('flash', [
+            'type' => 'success',
+            'title' => 'Deleted Reply',
+            'message' => 'You deleted a reply.',
+        ]);
     }
 }

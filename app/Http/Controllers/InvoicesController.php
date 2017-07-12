@@ -54,4 +54,11 @@ class InvoicesController extends Controller
     {
         return view('invoices.show', compact('invoice'));
     }
+
+    public function destroy(Invoice $invoice)
+    {
+        $invoice->delete();
+
+        return back();
+    }
 }

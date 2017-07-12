@@ -18,16 +18,21 @@ class ThreadTest extends TestCase
         $this->thread = create('App\Models\Thread');   
     }
     
-    public function test_thread_has_replies()
-    {
-
-        //$this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->thread->replies);
-    }
-
     public function test_a_thread_has_a_user()
     {
         $this->assertInstanceOf('App\Models\User', $this->thread->user);
     }
+
+    public function test_thread_has_replies()
+    {
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->thread->replies);
+    }
+
+    public function test_thread_has_votes()
+    {
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->thread->votes);
+    }
+
 /*
     public function test_a_thread_can_add_a_reply()
     {

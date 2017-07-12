@@ -22,5 +22,10 @@ class ProductTest extends TestCase
     {
         $this->assertInstanceOf('App\Models\User', $this->product->user);
     }
+
+    public function test_a_product_has_an_account()
+    {
+        $this->assertInstanceOf('App\Models\Account', $this->product->account);
+    }
     
 }

@@ -54,4 +54,11 @@ class ResolutionsController extends Controller
     {
         return view('resolutions.show', compact('resolution'));
     }
+
+    public function destroy(Resolution $resolution)
+    {
+        $resolution->delete();
+        
+        return back();
+    }
 }

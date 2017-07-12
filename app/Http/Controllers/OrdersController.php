@@ -54,4 +54,11 @@ class OrdersController extends Controller
     {
         return view('orders.show', compact('order'));
     }
+
+    public function destroy(Order $order)
+    {
+        $order->delete();
+
+        return back();
+    }
 }

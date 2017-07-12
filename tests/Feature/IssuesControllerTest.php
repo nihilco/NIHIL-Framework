@@ -15,19 +15,26 @@ class IssuesControllerTest extends TestCase
         $this->issue = create('App\Models\Issue');
     }
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function test_issues_controller_routes()
+    public function test_issues_controller_routes_entry()
     {
-        // User not logged in, redirect to login
+        // INDEX
+        $response = $this->get('/issues');
+        $response->assertStatus(200);
+
+        // SHOW
+        $response = $this->get($this->issue->path());
+        $response->assertStatus(200);
+        
+        // CREATE  - User not logged in, redirect to login
         $response = $this->get('/issues/create');
         $response->assertStatus(302);
 
-        //
-        $response = $this->get('/issues');
+        // UPDATE  - User not logged in, redirect to login
+        $response = $this->post('/issues');
+        $response->assertStatus(302);
+
+        // DELETE  - User not logged in, redirect to login
+        $response = $this->delete($this->issue->path());
         $response->assertStatus(302);
     }
 }

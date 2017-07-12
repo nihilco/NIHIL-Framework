@@ -19,4 +19,9 @@ class Currency extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function path()
+    {
+        return '/currencies/' . $this->id;
+    }
 }

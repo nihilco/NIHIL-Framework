@@ -54,4 +54,11 @@ class SourcesController extends Controller
     {
         return view('sources.show', compact('source'));
     }
+
+    public function destroy(Source $source)
+    {
+        $source->delete();
+
+        return back();
+    }
 }

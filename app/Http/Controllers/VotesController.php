@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vote;
-use App\Models\Forum;
-use App\Models\Thread;
-use App\Models\Reply;
 use Illuminate\Http\Request;
 
 class VotesController extends Controller
@@ -23,6 +20,8 @@ class VotesController extends Controller
     public function index()
     {
         //
+        $votes = Vote::all();
+        return view('votes.index', compact('votes'));
     }
 
     /**
@@ -33,6 +32,7 @@ class VotesController extends Controller
     public function create()
     {
         //
+        return view('votes.create');
     }
 
     /**
@@ -42,21 +42,28 @@ class VotesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Forum $forum, Thread $thread, Reply $reply = null, Request $request)
+    public function store(Request $request)
     {
         //
         $this->validate($request, [
+            'resource_id' => 'required',
+            'resource_type' => 'required',
             'vote' => 'required',
         ]);
-        
-        //
-        if(isset($reply) && $reply->id > 0) {
-            $reply->castVote(request('vote'));
-        } elseif(isset($thread) && $thread->id > 0) {
-            $thread->castVote(request('vote'));
-        }
 
-        return back();
+        //
+        Vote::create([
+            'user_id' => auth()->id(),
+            'resource_id' => request('resource_id'),
+            'resource_type' => request('resource_type'),
+            'vote' => request('vote'),
+        ]);
+        
+        return back()->with('flash', [
+            'type' => 'success',
+            'title' => 'You Voted',
+            'message' => 'You voted.',
+        ]);;
     }
 
     /**
@@ -68,6 +75,7 @@ class VotesController extends Controller
     public function show(Vote $vote)
     {
         //
+        return view('votes.show', compact('vote'));
     }
 
     /**
@@ -91,6 +99,18 @@ class VotesController extends Controller
     public function update(Request $request, Vote $vote)
     {
         //
+        $this->validate($request, [
+            'vote' => 'required',
+        ]);
+
+        $vote->vote = request('vote');
+        $vote->save();
+        
+        return back()->with('flash', [
+            'type' => 'success',
+            'title' => 'Updated Voted',
+            'message' => 'You changed your vote.',
+        ]);;
     }
 
     /**
@@ -102,5 +122,8 @@ class VotesController extends Controller
     public function destroy(Vote $vote)
     {
         //
+        $vote->delete();
+
+        return back();
     }
 }

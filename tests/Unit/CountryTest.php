@@ -22,5 +22,10 @@ class CountryTest extends TestCase
     {
         $this->assertInstanceOf('App\Models\User', $this->country->user);
     }
+
+    public function test_a_country_has_states()
+    {
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->country->states);
+    }
     
 }

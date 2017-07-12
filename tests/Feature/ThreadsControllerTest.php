@@ -16,7 +16,30 @@ class ThreadsControllerTest extends TestCase
         $this->forum = create('App\Models\Forum');
         $this->thread = create('App\Models\Thread', ['forum_id' => $this->forum->id]);
     }
-/*
+
+    public function test_threads_controller_routes_entry()
+    {
+        // INDEX
+        $response = $this->get('/forums/threads');
+        $response->assertStatus(200);
+
+        // SHOW 
+        $response = $this->get($this->thread->path());
+        $response->assertStatus(200);
+        
+        // CREATE  - User not logged in, redirect to login
+        $response = $this->get($this->forum->path() . '/threads/create');
+        $response->assertStatus(302);
+
+        // UPDATE  - User not logged in, redirect to login
+        $response = $this->post($this->forum->path() . '/threads');
+        $response->assertStatus(302);
+
+        // DELETE  - User not logged in, redirect to login
+        $response = $this->delete($this->thread->path());
+        $response->assertStatus(302);
+    }    
+
     public function publishThread($overrides = [])
     {
         $this->signIn();
@@ -24,11 +47,8 @@ class ThreadsControllerTest extends TestCase
         $overrides['forum_id'] = $this->forum->id;
         
         $newThread = make('App\Models\Thread', $overrides);
-
-        \Session::start();
-        $a = array_merge($newThread->toArray(), ['_token' => csrf_token()]);
         
-        return $this->post($this->forum->path() . '/threads', $a);
+        return $this->post($this->forum->path() . '/threads', $newThread->toArray());
     }
     
     public function test_a_guest_can_view_threads()
@@ -47,10 +67,10 @@ class ThreadsControllerTest extends TestCase
 
     public function test_a_guest_can_read_replies_associated_with_a_thread()
     {
-        $reply = create('App\Models\Reply', ['thread_id' => $this->thread->id]);
+        $reply = create('App\Models\Reply', ['resource_id' => $this->thread->id, 'resource_type' => get_class($this->thread)]);
 
         $response = $this->get($this->thread->path());
-        $response->assertSee($reply->body);
+        $response->assertSee($reply->content);
     }
 
     public function test_a_user_can_create_a_new_thread()
@@ -59,9 +79,7 @@ class ThreadsControllerTest extends TestCase
 
         $newThread = make('App\Models\Thread');
 
-        \Session::start();
-        $a = array_merge($newThread->toArray(), ['_token' => csrf_token()]);
-        $this->post($this->forum->path() . '/threads', $a);
+        $this->post($this->forum->path() . '/threads', $newThread->toArray());
 
         $response = $this->get($this->forum->path());
 
@@ -72,9 +90,7 @@ class ThreadsControllerTest extends TestCase
     {
         $newThread = make('App\Models\Thread');
 
-        \Session::start();
-        $a = array_merge($newThread->toArray(), ['_token' => csrf_token()]);
-        $response = $this->post($this->forum->path() . '/threads', $a);
+        $response = $this->post($this->forum->path() . '/threads', $newThread->toArray());
         $response->assertRedirect('/login');
     }
 
@@ -123,7 +139,7 @@ class ThreadsControllerTest extends TestCase
 
     public function test_a_user_can_filter_threads_by_username()
     {
-        $this->signIn('App\User', ['username' => 'jdoe']);
+        $this->signIn('App\Models\User', ['username' => 'jdoe']);
 
         $threadByJohn = create('App\Models\Thread', ['user_id' => auth()->id()]);
         $threadNotByJohn = create('App\Models\Thread');
@@ -132,17 +148,17 @@ class ThreadsControllerTest extends TestCase
              ->assertSee($threadByJohn->title)
              ->assertDontSee($threadNotByJohn->title);
     }
-
+/*
     public function test_a_user_can_filter_threads_by_reply_count()
     {
         $threadWithTwentySevenReplies = create('App\Models\Thread');
-        create('App\Models\Reply', ['thread_id' => $threadWithTwentySevenReplies->id], 27);
+        create('App\Models\Reply', ['resource_id' => $threadWithTwentySevenReplies->id, 'resource_type' => get_class($threadWithTwentySevenReplies)], 27);
 
         $threadWithTwentyEightReplies = create('App\Models\Thread');
-        create('App\Models\Reply', ['thread_id' => $threadWithTwentyEightReplies->id], 28);
+        create('App\Models\Reply', ['resource_id' => $threadWithTwentyEightReplies->id, 'resource_type' => get_class($threadWithTwentyEightReplies)], 28);
 
         $threadWithTwentySixReplies = create('App\Models\Thread');
-        create('App\Models\Reply', ['thread_id' => $threadWithTwentySixReplies->id], 26);
+        create('App\Models\Reply', ['resource_id' => $threadWithTwentySixReplies->id, 'resource_type' => get_class($threadWithTwentySixReplies)], 26);
         
         $response = $this->getJson('/forums/threads?replies=1')->json();
         $c = count($response);
@@ -154,13 +170,12 @@ class ThreadsControllerTest extends TestCase
 
         $this->assertEquals(['28', '27', '26'], array_column($response, 'replies_count'));
     }
-
+*/
     public function test_a_guest_cannot_delete_threads()
     {
         $newThread = create('App\Models\Thread');
                
-        \Session::start();
-        $response = $this->delete($newThread->path(), ['_token' => csrf_token()]);
+        $response = $this->delete($newThread->path());
 
         $response->assertRedirect('/login');
     }
@@ -171,34 +186,42 @@ class ThreadsControllerTest extends TestCase
 
         $newThread = create('App\Models\Thread');
                
-        \Session::start();
-        $response = $this->delete($newThread->path(), ['_token' => csrf_token()]);
+        $response = $this->delete($newThread->path());
 
         $response->assertStatus(403);
     }
 
     public function test_threads_may_only_be_deleted_by_those_who_have_permission()
     {
-        
+        // TODO
     }
-
+/*
     public function test_a_thread_can_be_deleted()
     {
         $this->signIn();
 
         $newThread = create('App\Models\Thread', ['user_id' => auth()->id()]);
-        $newReply = create('App\Models\Reply', ['thread_id' => $newThread->id]);
+        $newReply = create('App\Models\Reply', ['resource_id' => $newThread->id, 'resource_type' => get_class($newThread)]);
         $newThreadVote = create('App\Models\Vote', ['resource_id' => $newThread->id, 'resource_type' => App\Models\Thread::class]);
         $newReplyVote = create('App\Models\Vote', ['resource_id' => $newReply->id, 'resource_type' => App\Models\Reply::class]);
 
-        \Session::start();
-        $response = $this->json('DELETE', $newThread->path(), ['_token' => csrf_token()]);
+        $response = $this->json('DELETE', $newThread->path());
 
         $response->assertStatus(204);
-        $this->assertSoftDeleted('forums_threads', ['id' => $newThread->id]);
-        $this->assertSoftDeleted('forums_replies', ['id' => $newReply->id]);
-        $this->assertSoftDeleted('forums_votes', ['id' => $newThreadVote->id]);
-        $this->assertSoftDeleted('forums_votes', ['id' => $newReplyVote->id]);
+        $this->assertSoftDeleted('threads', ['id' => $newThread->id]);
+        $this->assertSoftDeleted('replies', ['id' => $newReply->id]);
+        $this->assertSoftDeleted('votes', ['id' => $newThreadVote->id]);
+        $this->assertSoftDeleted('votes', ['id' => $newReplyVote->id]);
+        $this->assertSoftDeleted('activities', [
+            'user_id' => auth()->id(),
+            'resource_id' => $newThread->id,
+            'resource_type' => get_class($newThread),
+        ]);
+        $this->assertSoftDeleted('activities', [
+            'user_id' => auth()->id(),
+            'resource_id' => $newReply->id,
+            'resource_type' => get_class($newReply),
+        ]);
     }
 */
 }

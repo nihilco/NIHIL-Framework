@@ -10,7 +10,7 @@ class TypesController extends Controller
     //
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['show']);
     }
 
     /**
@@ -53,5 +53,12 @@ class TypesController extends Controller
     public function show(Type $type)
     {
         return view('types.show', compact('type'));
+    }
+
+    public function destroy(Type $type)
+    {
+        $type->delete();
+
+        return back();
     }
 }

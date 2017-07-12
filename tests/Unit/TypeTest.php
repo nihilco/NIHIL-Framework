@@ -22,5 +22,15 @@ class TypeTest extends TestCase
     {
         $this->assertInstanceOf('App\Models\User', $this->type->user);
     }
+
+    public function test_a_type_has_a_parent()
+    {
+        $result = false;
+        if(($this->type->parent == null) || (get_class($this->type->parent) == 'App\Models\Type')) {
+            $result = true;
+        }
+
+        $this->assertTrue($result);
+    }
     
 }
