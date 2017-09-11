@@ -18,9 +18,9 @@ class ExceptionTest extends TestCase
         $this->exception = create('App\Models\Exception');
     }
 
-    public function test_an_exception_has_a_user()
+    public function test_an_exception_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->exception->user);
+        $this->assertInstanceOf('App\Models\User', $this->exception->creator);
     }
 
     public function test_an_exception_has_a_parent()

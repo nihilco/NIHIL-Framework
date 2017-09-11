@@ -13,10 +13,20 @@ class Post extends Model
     
     protected $table = 'posts';
     
-    protected $fillable = ['user_id', 'title', 'content'];
+    protected $fillable = ['creator_id', 'title', 'slug', 'description', 'content'];
 
-    public function user()
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+        
+    public function creator()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function path()
+    {
+        return '/posts/' . $this->slug;
     }
 }

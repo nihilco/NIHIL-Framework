@@ -31,6 +31,7 @@
           <h1>Accounts</h1>
         </div>
         <div class="card-block">
+
     @if($accounts->count() > 0)
     <table class="table table-bordered">
       <thead class="thead-default">

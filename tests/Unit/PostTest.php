@@ -18,9 +18,9 @@ class PostTest extends TestCase
         $this->post = create('App\Models\Post');
     }
 
-    public function test_a_post_has_a_user()
+    public function test_a_post_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->post->user);
+        $this->assertInstanceOf('App\Models\User', $this->post->creator);
     }
     
 }

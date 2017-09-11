@@ -18,6 +18,11 @@ class CustomerTest extends TestCase
         $this->customer = create('App\Models\Customer');
     }
 
+    public function test_a_customer_has_a_creator()
+    {
+        $this->assertInstanceOf('App\Models\User', $this->customer->creator);
+    }
+
     public function test_a_customer_has_a_user()
     {
         $this->assertInstanceOf('App\Models\User', $this->customer->user);
@@ -51,6 +56,11 @@ class CustomerTest extends TestCase
     public function test_a_customer_has_subscriptions()
     {
         $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->customer->subscriptions);
+    }
+
+    public function test_a_customer_has_addresses()
+    {
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->customer->addresses);
     }
     
 }

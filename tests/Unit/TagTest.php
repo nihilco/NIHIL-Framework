@@ -18,9 +18,9 @@ class TagTest extends TestCase
         $this->tag = create('App\Models\Tag');
     }
 
-    public function test_a_tag_has_a_user()
+    public function test_a_tag_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->tag->user);
+        $this->assertInstanceOf('App\Models\User', $this->tag->creator);
     }
     
 }

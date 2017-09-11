@@ -34,21 +34,20 @@ class RepliesControllerTest extends TestCase
         $response->assertStatus(302);
 
         // UPDATE  - User not logged in, redirect to login
-        //$response = $this->post('/replies');
-        //$response->assertStatus(302);
+        $response = $this->post('/replies');
+        $response->assertStatus(302);
 
         // DELETE  - User not logged in, redirect to login
-        //$response = $this->delete($this->reply->path());
-        //$response->assertStatus(302);
+        $response = $this->delete($this->reply->path());
+        $response->assertStatus(302);
     }
-/*
+
     public function test_a_guest_cannot_add_replies()
     {
         $newReply = make('App\Models\Reply');
         
-        \Session::start();
-        $a = array_merge($newReply->toArray(), ['_token' => csrf_token()]);
-        $response = $this->post($this->thread->path() . '/replies', $a);
+        $response = $this->post('/replies', $newReply->toArray());
+        $response->assertStatus(302);
         $response->assertRedirect('/login');
     }
 
@@ -56,20 +55,19 @@ class RepliesControllerTest extends TestCase
     {
         $this->signIn();
 
-        $newReply = make('App\Models\Reply');
+        $newReply = make('App\Models\Reply', ['creator_id' => auth()->id(), 'user_id' => auth()->id(), 'resource_id' => $this->thread->id, 'resource_type' => get_class($this->thread)]);
 
-        \Session::start();
-        $a = array_merge($newReply->toArray(), ['_token' => csrf_token()]);
-        $this->post($this->thread->path() . '/replies', $a);
+        $r = $this->post('/replies', $newReply->toArray());
 
         $response = $this->get($this->thread->path());
 
-        $response->assertSee($newReply->body);
+        $response->assertSee($newReply->content);
+        $this->assertEquals(2, $this->thread->fresh()->replies_count);
     }
 
     public function test_a_guest_cannot_view_reply_create_page()
     {
-        $this->get($this->thread->path() . '/replies/create')
+        $this->get('/replies/create')
              ->assertRedirect('/login');
     }
 
@@ -77,48 +75,45 @@ class RepliesControllerTest extends TestCase
     {
         $this->signIn();
 
-        $response = $this->get($this->thread->path() . '/replies/create');
+        $response = $this->get('/replies/create');
         $response->assertStatus(200);
     }
 
-    public function test_a_reply_requires_a_body()
+    public function test_a_reply_requires_content()
     {
-        $this->publishReply(['body' => null])
-             ->assertSessionHasErrors('body');
+        $this->publishReply(['content' => null])
+             ->assertSessionHasErrors('content');
     }
 
     public function test_replies_are_grouped_by_thread()
     {
         $newThread = create('App\Models\Thread', ['forum_id' => $this->forum->id]);
-        $newReplyInThread = create('App\Models\Reply', ['thread_id' => $newThread->id]);
+        $newReplyInThread = create('App\Models\Reply', ['resource_id' => $newThread->id, 'resource_type' => get_class($newThread)]);
         $newReplyNotInThread = create('App\Models\Reply');
 
         $response = $this->get($newThread->path());
-        $response->assertSee($newReplyInThread->body);
-        $response->assertDontSee($newReplyNotInThread->body);
-        
+        $response->assertSee($newReplyInThread->content);
+        $response->assertDontSee($newReplyNotInThread->content);
     }
 
     public function publishReply($overrides = [])
     {
         $this->signIn();
 
-        $overrides['thread_id'] = $this->thread->id;
+        $overrides['resource_id'] = $this->thread->id;
+        $overrides['resource_type'] = get_class($this->thread);
+        $overrides['user_id'] = auth()->id();
         
         $newReply = make('App\Models\Reply', $overrides);
 
-        \Session::start();
-        $a = array_merge($newReply->toArray(), ['_token' => csrf_token()]);
-        
-        return $this->post($this->thread->path() . '/replies', $a);
+        return $this->post('/replies', $newReply->toArray());
     }
 
     public function test_a_guest_cannot_delete_reply()
     {
         $newReply = create('App\Models\Reply');
                
-        \Session::start();
-        $response = $this->delete($newReply->path(), ['_token' => csrf_token()]);
+        $response = $this->delete($newReply->path());
 
         $response->assertRedirect('/login');
     }
@@ -127,14 +122,13 @@ class RepliesControllerTest extends TestCase
     {
         $this->signIn();
 
-        $newReply = create('App\Forums\Models\Reply');
+        $newReply = create('App\Models\Reply');
                
-        \Session::start();
-        $response = $this->delete($newReply->path(), ['_token' => csrf_token()]);
+        $response = $this->delete($newReply->path());
 
         $response->assertStatus(403);
     }
-
+/*
     public function test_replies_may_only_be_deleted_by_those_who_have_permission()
     {
         // TODO
@@ -142,20 +136,20 @@ class RepliesControllerTest extends TestCase
 
     public function test_a_reply_can_be_deleted()
     {
-        \Session::start();
-        
         $this->signIn();
 
-        $newReply = create('App\Models\Reply', ['user_id' => auth()->id()]);
-        $newReplyVote = create('App\Models\Vote', ['resource_id' => $newReply->id, 'resource_type' => App\Models\Reply::class]);
+        $newReply = create('App\Models\Reply', ['user_id' => auth()->id(), 'resource_id' => $this->thread->id, 'resource_type' => get_class($this->thread)]);
+        $newReplyVote = create('App\Models\Vote', ['resource_id' => $newReply->id, 'resource_type' => get_class($newReply)]);
 
-        $response = $this->json('DELETE', $newReply->path(), ['_token' => csrf_token()]);
+        $response = $this->json('DELETE', $newReply->path());
 
-        //dd([$newReply->user_id, auth()->id(), auth()->user()->can('update', $newReply)]);
+        //dd($response);
+        //dd([$newReply->user_id, auth()->id(), auth()->user()->can('delete', $newReply)]);
         
         $response->assertStatus(204);
-        $this->assertSoftDeleted('forums_replies', ['id' => $newReply->id]);
-        $this->assertSoftDeleted('forums_votes', ['id' => $newReplyVote->id]);
+        $this->assertSoftDeleted('replies', ['id' => $newReply->id]);
+        $this->assertSoftDeleted('votes', ['id' => $newReplyVote->id]);
+        $this->assertEquals(0, $this->thread->replies_count);
     }
 */
 }

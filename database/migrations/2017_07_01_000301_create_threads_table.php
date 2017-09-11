@@ -16,10 +16,15 @@ class CreateThreadsTable extends Migration
         Schema::create('threads', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('forum_id')->index();
+            $table->unsignedInteger('creator_id')->index();
             $table->unsignedInteger('user_id')->index();
             $table->string('title', 100);
             $table->string('slug', 100)->unique();
             $table->text('body');
+            $table->unsignedInteger('replies_count')->default(0);
+            $table->unsignedInteger('votes_up_count')->default(0);
+            $table->unsignedInteger('votes_down_count')->default(0);
+            $table->unsignedInteger('favorites_count')->default(0);
             $table->boolean('closed')->default(false);
             $table->timestamp('last_viewed_at')->nullable();
             $table->softDeletes();

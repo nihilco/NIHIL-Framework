@@ -26,11 +26,41 @@ class FavoritesController extends Controller
         return view('favorites.index', compact('favorites'));
     }
 
-    public function store(Favorite $favorite)
+    public function store(Request $request)
     {
-        Favorite::create([]);
+                //
+        $this->validate($request, [
+            'resource_id' => 'required',
+            'resource_type' => 'required',
+        ]);
 
-        return back();
+        if($favorite = Favorite::withTrashed()->where([
+            'user_id' => auth()->id(),
+            'resource_id' => request('resource_id'),
+            'resource_type' => request('resource_type'),
+        ])->first()) {
+
+            $favorite->restore();
+            
+        } else {
+        
+            $favorite = Favorite::create([
+                'user_id' => auth()->id(),
+                'resource_id' => request('resource_id'),
+                'resource_type' => request('resource_type'),
+            ]);
+
+        }
+        
+        if(request()->expectsJson()) {
+            return $favorite->load('user');
+        }
+
+        return back()->with('flash', [
+            'type' => 'success',
+            'title' => 'Created Favorite',
+            'message' => 'You created a favorite.',
+        ]);
     }
 
     public function create()
@@ -45,8 +75,15 @@ class FavoritesController extends Controller
 
     public function destroy(Favorite $favorite)
     {
+        $this->authorize('delete', $favorite);
+        
+        //
         $favorite->delete();
 
-        return back();
+        return back()->with('flash', [
+            'type' => 'success',
+            'title' => 'Deleted Favorite',
+            'message' => 'You deleted your favorite.',
+        ]);;;
     }
 }

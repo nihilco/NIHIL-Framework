@@ -18,6 +18,11 @@ class VoteTest extends TestCase
         $this->vote = create('App\Models\Vote');
     }
     
+    public function test_vote_has_an_creator()
+    {
+        $this->assertInstanceOf('App\Models\User', $this->vote->creator);
+    }
+
     public function test_vote_has_an_user()
     {
         $this->assertInstanceOf('App\Models\User', $this->vote->user);

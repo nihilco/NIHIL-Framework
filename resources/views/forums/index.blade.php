@@ -52,7 +52,7 @@
           <td>{{ $forum->threads_count }}</td>
           <td>0</td>
           <td>{{  $forum->updated_at->diffForHumans() }}</td>
-          <th>
+          <td>
         @can ('delete', $forum)
              <form action="{{ $forum->path() }}" method="POST" style="display:inline-block;">
                {{ csrf_field() }}
@@ -60,7 +60,11 @@
                <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
              </form>
 @endcan
-          </th>
+                   @if(!Auth::guest())
+             @include('favorites.favoriter', ['resource' => $forum])
+             @include('follows.follower', ['resource' => $forum])
+                   @endif
+          </td>
         </tr>
         @endforeach
       </tbody>
@@ -78,6 +82,8 @@
                <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
              </form>
 @endcan
+                   @include('favorites.favoriter', ['resource' => $tlforum])
+                   @include('follows.follower', ['resource' => $tlforum])
         </div>
       </div>
     </div>

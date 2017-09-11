@@ -11,7 +11,7 @@ class PostsController extends Controller
     //
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
     /**
@@ -36,15 +36,32 @@ class PostsController extends Controller
     }
 
     //
-    public function store(Post $post)
-    {        
-        Post::create([
-            'title' => $post->title,
-            'content' => $post->content,
-            'user_id' => auth()->id(),
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'title' => 'required',
+            'slug' => 'required',
+            'description' => 'required',
+            'content' => 'required',
         ]);
         
-        return redirect()->route('home');
+        $post = Post::create([
+            'user_id' => auth()->id(),
+            'title' => request('title'),
+            'slug' => request('slug'),
+            'description' => request('description'),
+            'content' => request('content'),
+        ]);
+
+        if(request()->expectsJson()) {
+            return $post->load('user');
+        }
+
+        return redirect('/posts')->with('flash', [
+            'type' => 'success',
+            'title' => 'Created Post',
+            'message' => 'You created a post.',
+        ]);
     }
 
     //

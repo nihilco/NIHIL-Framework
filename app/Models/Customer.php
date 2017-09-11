@@ -13,43 +13,12 @@ class Customer extends Model
 
     protected $table = 'customers';
 
-    protected $fillable = ['user_id', 'stripe_id', 'account_id'];
-    
-    //
-    public static function byStripeId($sid)
-    {
-        return static::where('stripe_id', $sid)->first();
-    }
-
-    //
-    public function invoices()
-    {
-        return $this->hasMany(Invoice::class);
-    }
-
-    //
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
-    
-    //
-    public function payments()
-    {
-        return $this->hasMany(Payment::class);
-    }
-
-    //
-    public function subscriptions()
-    {
-        return $this->hasMany(Subscription::class);
-    }
-
-    //
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    protected $fillable = [
+        'user_id',
+        'stripe_id',
+        'account_id',
+        'description',
+    ];
 
     //
     public function account()
@@ -57,76 +26,82 @@ class Customer extends Model
         return $this->belongsTo(Account::class);
     }
 
-    public function sources()
+    //
+    public function creator()
     {
-        return $this->hasMany(Source::class);
+        return $this->belongsTo(User::class);
     }
 
-    //
-    public static function byAccountAndUserIds($aid, $uid)
+    public function user()
     {
-        return static::where('account_id', $aid)
-            ->where('user_id', $uid)
-            ->first();
+        return $this->belongsTo(User::class);
     }
 
-    //
-    public static function createStripeCustomerId(User $user)
+    public function addresses()
     {
-        if($account = Account::find(constant('NF_ACCOUNT_ID'))) {
-            \Stripe\Stripe::setApiKey(\Crypt::decrypt($account->secret_key));
-        }else{
-            \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-        }
-
-        $customers = \Stripe\Customer::all();
-        $customer = null;
-        
-        foreach($customers['data'] as $c) {
-            if($c->email == $user->email) {
-                $customer = $c;
-                break;
-            }
-        }
-        
-        if(!$customer) {
-            $customer = \Stripe\Customer::create(array(
-                "description" => "Customer for " . $user->email . ".",
-                "email" => $user->email,
-            ));
-        }
-
-        Customer::insert([
-            'user_id' => $user->id,
-            'account_id' => constant('NF_ACCOUNT_ID'),
-            'stripe_id' => $customer->id,
-            'created_at' => \Carbon\Carbon::createFromTimestamp($customer->created)->format('Y-m-d H:i:s'),
-            'updated_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        return Customer::byAccountAndUserIds(constant('NF_ACCOUNT_ID'), $user->id);
-    }
-        
-    //
-    public static function importStripeCustomers()
-    {
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-
-        $customers = \Stripe\Customer::all();
-
-        foreach($customers->data as $customer) {
-            if(!$user = User::byStripeId($customer->id)) {
-                User::create([
-                    'email' => $customer->email,
-                    'stripe_id' => $customer->id,
-                    'created_at' => \Carbon\Carbon::createFromTimestamp($customer->created)->format('Y-m-d H:i:s'),
-                ]);
-            }
-        }
+        return $this->morphMany(Address::class, 'resource');
     }
 
     public function path()
     {
         return '/customers/' . $this->id;
     }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class)->latest();
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class)->latest();
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class)->latest();
+    }
+
+    public function sources()
+    {
+        return $this->hasMany(Source::class)->latest();
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class)->latest();
+    }
+
+    public static function createStripeCustomer($user)
+    {
+        $description = 'Customer profile for ' . $user->name . ' [' . $user->email . '].';
+
+        if(!$stripeCustomer = static::getStripeCustomerByEmail($user->email)) {
+            $stripeCustomer = \Stripe::createCustomer([
+                'email' => $user->email,
+                'description' => $description,
+            ]);
+        }
+
+        return Customer::create([
+            'creator_id' => $user->id,
+            'user_id' => $user->id,
+            'account_id' => 1,
+            'stripe_id' => $stripeCustomer->id,
+            'description' => $description,
+        ]);
+    }
+
+    public static function getStripeCustomerByEmail($email)
+    {
+        $stripeCustomers = \Stripe::getAllCustomers();
+
+        foreach($stripeCustomers->data as $stripeCustomer) {
+            if($stripeCustomer->email == $email) {
+                return $stripeCustomer;
+            }
+        }
+
+        return false;
+    }    
 }

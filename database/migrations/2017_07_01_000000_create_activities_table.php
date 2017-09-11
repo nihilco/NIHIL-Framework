@@ -15,6 +15,7 @@ class CreateActivitiesTable extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('creator_id');
             $table->unsignedInteger('user_id')->index();
             $table->unsignedInteger('resource_id')->index();
             $table->string('resource_type', 50);

@@ -18,14 +18,19 @@ class PlanTest extends TestCase
         $this->plan = create('App\Models\Plan');
     }
 
-    public function test_a_plan_has_a_user()
+    public function test_a_plan_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->plan->user);
+        $this->assertInstanceOf('App\Models\User', $this->plan->creator);
     }
 
     public function test_a_plan_has_an_account()
     {
         $this->assertInstanceOf('App\Models\Account', $this->plan->account);
+    }
+
+    public function test_a_plan_has_an_currency()
+    {
+        $this->assertInstanceOf('App\Models\Currency', $this->plan->currency);
     }
 
     public function test_a_plan_has_subscriptions()

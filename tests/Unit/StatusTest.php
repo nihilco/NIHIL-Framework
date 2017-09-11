@@ -18,9 +18,9 @@ class StatusTest extends TestCase
         $this->status = create('App\Models\Status');
     }
 
-    public function test_a_status_has_a_user()
+    public function test_a_status_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->status->user);
+        $this->assertInstanceOf('App\Models\User', $this->status->creator);
     }
 
     public function test_a_status_has_issues()

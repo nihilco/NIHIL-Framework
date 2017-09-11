@@ -18,9 +18,9 @@ class PageTest extends TestCase
         $this->page = create('App\Models\Page');
     }
 
-    public function test_a_page_has_a_user()
+    public function test_a_page_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->page->user);
+        $this->assertInstanceOf('App\Models\User', $this->page->creator);
     }
     
 }

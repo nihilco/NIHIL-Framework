@@ -18,6 +18,11 @@ class ThreadTest extends TestCase
         $this->thread = create('App\Models\Thread');   
     }
     
+    public function test_a_thread_has_a_creator()
+    {
+        $this->assertInstanceOf('App\Models\User', $this->thread->creator);
+    }
+
     public function test_a_thread_has_a_user()
     {
         $this->assertInstanceOf('App\Models\User', $this->thread->user);
@@ -33,6 +38,28 @@ class ThreadTest extends TestCase
         $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->thread->votes);
     }
 
+    public function test_a_thread_can_be_followed()
+    {
+        $thread = create('App\Models\Thread');
+        
+        $thread->follow($uid = 1);
+
+        $this->assertEquals(
+            1,
+            $thread->follows()->where('user_id', $uid)->count()
+        );
+    }
+
+    public function test_a_thread_can_be_unfollowed()
+    {
+        $thread = create('App\Models\Thread');
+                
+        $thread->follow($uid = 1);
+
+        $thread->unfollow($uid);
+
+        $this->assertCount(0, $thread->follows);
+    }
 /*
     public function test_a_thread_can_add_a_reply()
     {

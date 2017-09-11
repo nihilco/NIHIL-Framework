@@ -13,9 +13,9 @@ class Product extends Model
 
     protected $table = 'products';
 
-    protected $fillable = [];
+    protected $fillable = ['creator_id', 'account_id', 'name', 'slug', 'description'];
 
-    public function user()
+    public function creator()
     {
         return $this->belongsTo(User::class);
     }

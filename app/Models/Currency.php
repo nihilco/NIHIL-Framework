@@ -15,7 +15,7 @@ class Currency extends Model
 
     protected $fillable = ['name', 'symbol', 'abbr', 'description'];
     
-    public function user()
+    public function creator()
     {
         return $this->belongsTo(User::class);
     }

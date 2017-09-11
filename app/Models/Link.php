@@ -13,9 +13,9 @@ class Link extends Model
 
     protected $table = 'links';
 
-    protected $fillable = ['user_id', 'label', 'destination', 'uses', 'expires_at'];
+    protected $fillable = ['creator_id', 'label', 'destination', 'uses', 'expires_at'];
 
-    public function user()
+    public function creator()
     {
         return $this->belongsTo(User::class);
     }

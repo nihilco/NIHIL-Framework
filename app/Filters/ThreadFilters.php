@@ -7,9 +7,9 @@ use App\Models\Forum;
 
 class ThreadFilters extends Filters
 {
-    protected $filters = ['username', 'forum', 'replies'];
+    protected $filters = ['username', 'forum', 'unanswered'];
     
-    public function forum($key)
+    protected function forum($key)
     {
         $id = null;
 
@@ -23,11 +23,16 @@ class ThreadFilters extends Filters
         return $this->builder->where('forum_id', $id);
     }
 
-    public function username($username)
+    protected function username($username)
     {
         $user = User::where('username', $username)->firstOrFail();
         
         return $this->builder->where('user_id', $user->id);
+    }
+
+    protected function unanswered()
+    {
+        return $this->builder->where('replies_count', 0);
     }
 
     //public function replies()

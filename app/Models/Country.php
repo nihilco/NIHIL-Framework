@@ -15,14 +15,14 @@ class Country extends Model
 
     protected $fillable = ['name', 'abbr', 'description'];
     
-    public function user()
+    public function creator()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function states()
+    public function regions()
     {
-        return $this->hasMany(State::class);
+        return $this->hasMany(Region::class);
     }
 
     public function path()

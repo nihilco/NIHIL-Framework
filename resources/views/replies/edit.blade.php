@@ -42,7 +42,7 @@
         </div>
     <div class="form-group">
         <button type="submit" class="btn btn-lg btn-primary pull-right">Edit</button>
-        <button type="cancel" class="btn btn-lg btn-link pull-right">Cancel</button>
+        <button type="cancel" name="cancel" value="true" class="btn btn-lg btn-link pull-right">Cancel</button>
     </div>
       </form>
     

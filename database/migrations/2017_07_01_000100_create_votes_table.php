@@ -15,6 +15,7 @@ class CreateVotesTable extends Migration
     {
         Schema::create('votes', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('creator_id')->index();
             $table->unsignedInteger('user_id')->index();
             $table->unsignedInteger('resource_id');
             $table->string('resource_type', 50);

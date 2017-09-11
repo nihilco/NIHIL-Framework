@@ -18,9 +18,9 @@ class ThemeTest extends TestCase
         $this->theme = create('App\Models\Theme');
     }
 
-    public function test_a_theme_has_a_user()
+    public function test_a_theme_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->theme->user);
+        $this->assertInstanceOf('App\Models\User', $this->theme->creator);
     }
     
 }

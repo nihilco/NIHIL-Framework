@@ -1,9 +1,11 @@
 <button class="navbar-toggler mobile-sidebar-toggler d-lg-none" type="button">☰</button>
 <a class="navbar-brand" href="{{ url('/') }}">NIHIL Framework</a>
 <ul class="nav navbar-nav d-md-down-none">
+  @if(!Auth::guest())
   <li class="nav-item">
     <a class="nav-link navbar-toggler sidebar-toggler" href="#">☰</a>
   </li>
+  @endif
 </ul>
 <ul class="nav navbar-nav ml-auto">
   <li class="nav-item d-md-down-none">
@@ -45,7 +47,9 @@
     <a class="nav-link" href="{{ route('login') }}">Login</a>
   </li>
   @endif
+  @if(!Auth::guest())
   <li class="nav-item d-md-down-none">
     <a class="nav-link navbar-toggler aside-menu-toggler" href="#">☰</a>
   </li>
+  @endif
 </ul>

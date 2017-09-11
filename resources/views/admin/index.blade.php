@@ -1,111 +1,142 @@
-@extends('layouts.admin')
+@extends('layouts.master')
 
+@section('meta')
+      <meta description="The Taraloka Foundation is a registered 501(c)3 organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
+      <meta keywords="taraloka, sikkim, india, foundation, nihil">
+      <meta author="Uriah M. Clemmer IV">
+
+      <meta property="fb:app_id" content="187097078310518">
+    
+      <meta name="og:url" property="og:url" content="https://taraloka.org/about">
+      <meta name="og:type" property="og:type" content="article">
+      <meta name="og:title" property="og:title" content="Taraloka Foundation">
+      <meta name="og:description" property="og:description" content="The Taraloka Foundation is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
+      <meta name="og:image" property="og:image" content="https://taraloka.org/img/taraloka-logo-og-dark.png">
+
+      <title>Dashboard</title>
+@endsection
+    
 @section('content')
-      <!-- Main section-->
-      <section>
-         <!-- Page content-->
-         <div class="content-wrapper">
-            <div class="content-heading">
-               Dashboard
-               <small>some small phrase</small>
-            </div>
-         <!-- START row-->
-                                     <div class="row">
-                        <div class="col-lg-3 col-md-6">
-                           <!-- START panel-->
-                           <div class="panel panel-primary">
-                              <div class="panel-heading">
-                                 <div class="row">
-                                    <div class="col-xs-3">
-                                       <em class="fa fa-briefcase fa-5x"></em>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                       <div class="text-lg">0</div>
-                                       <p class="m0">Open Invoices!</p>
-                                    </div>
-                                 </div>
-                              </div>
-                              <a href="/invoices" class="panel-footer bg-gray-dark bt0 clearfix btn-block">
-                                 <span class="pull-left">View Details</span>
-                                 <span class="pull-right">
-                                    <em class="fa fa-chevron-circle-right"></em>
-                                 </span>
-                              </a>
-                              <!-- END panel-->
-                           </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                           <!-- START panel-->
-                           <div class="panel panel-green">
-                              <div class="panel-heading">
-                                 <div class="row">
-                                    <div class="col-xs-3">
-                                       <em class="fa fa-usd fa-5x"></em>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-    <div class="text-lg">${{ $paymentsTotal['total'] }} / {{ $paymentsTotal['count'] }}</div>
-                                       <p class="m0">New Payments!</p>
-                                    </div>
-                                 </div>
-                              </div>
-                              <a href="/payments" class="panel-footer bg-gray-dark bt0 clearfix btn-block">
-                                 <span class="pull-left">View Details</span>
-                                 <span class="pull-right">
-                                    <em class="fa fa-chevron-circle-right"></em>
-                                 </span>
-                              </a>
-                           </div>
-                           <!-- END panel-->
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                           <!-- START panel-->
-                           <div class="panel panel-warning">
-                              <div class="panel-heading">
-                                 <div class="row">
-                                    <div class="col-xs-3">
-                                       <em class="fa fa-shopping-cart fa-5x"></em>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                       <div class="text-lg">0</div>
-                                       <p class="m0">New Orders!</p>
-                                    </div>
-                                 </div>
-                              </div>
-                              <a href="/orders" class="panel-footer bg-gray-dark bt0 clearfix btn-block">
-                                 <span class="pull-left">View Details</span>
-                                 <span class="pull-right">
-                                    <em class="fa fa-chevron-circle-right"></em>
-                                 </span>
-                              </a>
-                           </div>
-                           <!-- END panel-->
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                           <!-- START panel-->
-                           <div class="panel panel-danger">
-                              <div class="panel-heading">
-                                 <div class="row">
-                                    <div class="col-xs-3">
-                                       <em class="fa fa-support fa-5x"></em>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                       <div class="text-lg">0</div>
-                                       <p class="m0">Support Tickets!</p>
-                                    </div>
-                                 </div>
-                              </div>
-                              <a href="/tickets" class="panel-footer bg-gray-dark bt0 clearfix btn-block">
-                                 <span class="pull-left">View Details</span>
-                                 <span class="pull-right">
-                                    <em class="fa fa-chevron-circle-right"></em>
-                                 </span>
-                              </a>
-                           </div>
-                           <!-- END panel-->
-                        </div>
-                     </div>
-                     <!-- END row-->
 
-         </div>
-      </section>
+    @include('layouts.breadcrumbs', ['breadcrumbs' => [
+        ['label' => 'Dashboard', 'url' => '/dashboard'],
+    ]])
+  <div class="container-fluid">
+  <div class="animated fadeIn">    
+    
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h1>Dashboard</h1>
+        </div>
+        <div class="card-block">
+
+    
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 col-lg-3">
+      <div class="card">
+        <div class="card-header card-header-inverse card-header-primary">
+          <div class="font-weight-bold">
+            <span>INVOICES: OPEN</span>
+            <span class="pull-right">$1.890,65</span>
+          </div>
+          <div>
+            <span>
+              <small>Today 6:43 AM</small>
+            </span>
+            <span class="pull-right">
+              <small>+432,50 (15,78%)</small>
+            </span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas class="chart-7 chart chart-line" height="38"></canvas>
+          </div>
+          <div class="chart-wrapper">
+            <canvas class="chart-8 chart chart-bar" height="38"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+                                                 <div class="card">
+                                                     <div class="card-header card-header-inverse card-header-danger">
+                                                         <div class="font-weight-bold">
+                                                             <span>SALE</span>
+                     <span class="pull-right">$1.890,65</span>
+                                                         </div>
+                                                         <div>
+                                                             <span>
+                     <small>Today 6:43 AM</small>
+                                                                              </span>
+                                                                              <span class="pull-right">
+                                      <small>+432,50 (15,78%)</small>
+                                                                              </span>
+                                                                          </div>
+                                                                          <div class="chart-wrapper">
+                                                                              <canvas class="chart-7-2 chart chart-line" height="38"></canvas>
+                                                                          </div>
+                                                                          <div class="chart-wrapper">
+                                                                              <canvas class="chart-8-2 chart chart-bar" height="38"></canvas>
+                                                                          </div>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="col-sm-6 col-lg-3">
+                                                                  <div class="card">
+                                                                      <div class="card-header card-header-inverse card-header-success">
+                                                                          <div class="font-weight-bold">
+                                                                              <span>SALE</span>
+                                      <span class="pull-right">$1.890,65</span>
+                                                                          </div>
+                                                                          <div>
+                                                                              <span>
+                                      <small>Today 6:43 AM</small>
+                                                                                               </span>
+                                                                                               <span class="pull-right">
+                                                       <small>+432,50 (15,78%)</small>
+                                                                                               </span>
+                                                                                           </div>
+                                                                                           <div class="chart-wrapper">
+                                                                                               <canvas class="chart-7-3 chart chart-line" height="38"></canvas>
+                                                                                           </div>
+                                                                                           <div class="chart-wrapper">
+                                                                                               <canvas class="chart-8-3 chart chart-bar" height="38"></canvas>
+                                                                                           </div>
+                                                                                       </div>
+                                                                                   </div>
+                                                                               </div>
+                                                                               <div class="col-sm-6 col-lg-3">
+                                                                                   <div class="card">
+                                                                                       <div class="card-header card-header-inverse card-header-warning">
+                                                                                           <div class="font-weight-bold">
+                                                                                               <span>SALE</span>
+                                                       <span class="pull-right">$1.890,65</span>
+                                                                                           </div>
+                                                                                           <div>
+                                                                                               <span>
+                                                       <small>Today 6:43 AM</small>
+                                                                                                                </span>
+                                                                                                                <span class="pull-right">
+                                                                        <small>+432,50 (15,78%)</small>
+                                                                                                                </span>
+                                                                                                            </div>
+                                                                                                            <div class="chart-wrapper">
+                                                                                                                <canvas class="chart-7-4 chart chart-line" height="38"></canvas>
+                                                                                                            </div>
+                                                                                                            <div class="chart-wrapper">
+                                                                                                                <canvas class="chart-8-4 chart chart-bar" height="38"></canvas>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+    
+  </div>
+  </div>
 @endsection

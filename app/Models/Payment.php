@@ -17,9 +17,19 @@ class Payment extends Model
      *
      * @var array
      */
-    protected $fillable = ['account_id', 'customer_id', 'invoice_id', 'stripe_id', 'amount', 'comments'];
+    protected $fillable = [
+        'creator_id',
+        'account_id',
+        'customer_id',
+        'invoice_id',
+        'type_id',
+        'stripe_id',
+        'reference_number',
+        'amount',
+        'comments'
+    ];
 
-    public function user()
+    public function creator()
     {
         return $this->belongsTo(User::class);
     }
@@ -39,9 +49,14 @@ class Payment extends Model
         return $this->belongsTo(Invoice::class);
     }
 
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
     public function path()
     {
-        return '/payments/' . $this->id;
+        return url('/payments/' . $this->id);
     }
 
     public static function byStripeId($sid)
@@ -128,6 +143,20 @@ class Payment extends Model
                     'updated_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
             }
+        }
+    }
+
+    public function getFormattedAmount()
+    {
+        return $this->formatCurrency($this->amount);
+    }
+
+    protected function formatCurrency($int)
+    {
+        if($int < 0) {
+            return '-$' . number_format(($int/-100), 2);
+        }else{
+            return '$' . number_format(($int/100), 2);
         }
     }
 }

@@ -18,9 +18,9 @@ class Order extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['creator_id', 'account_id', 'customer_id'];
 
-    public function user()
+    public function creator()
     {
         return $this->belongsTo(User::class);
     }

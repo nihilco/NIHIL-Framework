@@ -16,6 +16,7 @@ class CreateRatingsTable extends Migration
         //
         Schema::create('ratings', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('creator_id')->index();
             $table->unsignedInteger('user_id')->index();
             $table->unsignedInteger('rating');
             $table->unsignedInteger('resource_id');

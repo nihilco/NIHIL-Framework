@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Account;
+use App\Models\Country;
 
 class AccountsController extends Controller
 {
@@ -30,19 +31,51 @@ class AccountsController extends Controller
     }
 
     //
-    public function store(Account $account)
+    public function store(Request $request)
     {
-        Account::create([
-
+        //
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+            'country' => 'required',
         ]);
 
-        return redirect()->route('home');
+        $stripeAccount = \Stripe::createAccount([
+            'type' => 'custom',
+            'country' => 'US',
+            'business_name' => request('name'),
+        ]);
+        
+        //
+        $account = Account::create([
+            'user_id' => auth()->id(),
+            'mode' => 'test',
+            'status' => 'active',
+            'name' => request('name'),
+            'stripe_id' => $stripeAccount->id,
+            'publishable_key' => $stripeAccount->keys['publishable'],
+            'secret_key' => \Crypt::encrypt($stripeAccount->keys['secret']),
+            'description' => request('description'),
+            'country_id' => request('country'),
+            'managed' => true,           
+        ]);
+
+        if(request()->expectsJson()) {
+            return $account->load('user');
+        }
+
+        return redirect('/accounts')->with('flash', [
+            'type' => 'success',
+            'title' => 'Created Account',
+            'message' => 'You created an account.',
+        ]);
     }
 
     //
     public function create()
     {
-        return view('accounts.create');
+        $countries = Country::all();
+        return view('accounts.create', compact('countries'));
     }
 
     //

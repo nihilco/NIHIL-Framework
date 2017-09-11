@@ -15,7 +15,7 @@ class CreateExceptionsTable extends Migration
     {
         Schema::create('exceptions', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id')->index();
+            $table->unsignedInteger('creator_id')->index();
             $table->unsignedInteger('parent_id')->nullable();
             $table->string('message');
             $table->text('stacktrace');

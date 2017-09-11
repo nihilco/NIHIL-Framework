@@ -10,7 +10,7 @@ class PagesController extends Controller
     //
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
     //
@@ -29,13 +29,32 @@ class PagesController extends Controller
     }
 
     //
-    public function store(Page $page)
+    public function store(Request $request)
     {
-        Page::create([
-
+        $this->validate($request, [
+            'title' => 'required',
+            'slug' => 'required',
+            'description' => 'required',
+            'content' => 'required',
+        ]);
+        
+        $page = Page::create([
+            'user_id' => auth()->id(),
+            'title' => request('title'),
+            'slug' => request('slug'),
+            'description' => request('description'),
+            'content' => request('content'),
         ]);
 
-        return redirect()->route('home');
+        if(request()->expectsJson()) {
+            return $page->load('user');
+        }
+
+        return redirect('/pages')->with('flash', [
+            'type' => 'success',
+            'title' => 'Created Page',
+            'message' => 'You created a page.',
+        ]);
     }
 
     //

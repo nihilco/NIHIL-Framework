@@ -18,6 +18,11 @@ class AccountTest extends TestCase
         $this->account = create('App\Models\Account');
     }
 
+    public function test_an_account_has_a_creator()
+    {
+        $this->assertInstanceOf('App\Models\User', $this->account->creator);
+    }
+
     public function test_an_account_has_a_user()
     {
         $this->assertInstanceOf('App\Models\User', $this->account->user);

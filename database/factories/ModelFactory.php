@@ -14,6 +14,9 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Account::class, function (Faker\Generator $faker) {
     return [
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
         'user_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
@@ -34,12 +37,70 @@ $factory->define(App\Models\Account::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Activity::class, function (Faker\Generator $faker) {
     return [
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
         'user_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'resource_id' => 0,
         'resource_type' => App\Models\Forum::class,
         'action' => 'test.action',
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Address::class, function (Faker\Generator $faker) {
+    return [
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
+        'resource_id' => function() {
+            return factory('App\Models\Customer')->create()->id;
+        },
+        'resource_type' => App\Models\Customer::class,
+        'address1' => $faker->name(),
+        'address2' => $faker->streetAddress(),
+        'address3' => null,
+        'address4' => null,
+        'city' => $faker->city(),
+        'zipcode' => $faker->postcode(),
+        'postalcode' => $faker->postcode(),
+        'region_id' => function() {
+            return factory('App\Models\Region')->create()->id;
+        },
+        'country_id' => function() {
+            return factory('App\Models\Country')->create()->id;
+        },
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Author::class, function (Faker\Generator $faker) {
+    return [
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
+        'prefix' => null,
+        'first_name' => $faker->firstName(),
+        'middle_name' => null,
+        'last_name' => $faker->lastName(),
+        'suffix' => null,
+        'website' => null,
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Book::class, function (Faker\Generator $faker) {
+    return [
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
+        'series_id' => null,
+        'series_order' => null,
+        'title' => $faker->sentence(rand(1,3)),
+        'subtitle' => null,
+        'first_published_at' => null,
     ];
 });
 
@@ -54,7 +115,7 @@ $factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
                 return null;
             }
         },
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'name' => $faker->sentence(rand(1,2)),
@@ -66,7 +127,7 @@ $factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Country::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'name' => $faker->country,
@@ -79,7 +140,7 @@ $factory->define(App\Models\Country::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Currency::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'name' => $faker->sentence(rand(1,2)),
@@ -92,6 +153,9 @@ $factory->define(App\Models\Currency::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Customer::class, function (Faker\Generator $faker) {
     return [
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
         'user_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
@@ -99,12 +163,27 @@ $factory->define(App\Models\Customer::class, function (Faker\Generator $faker) {
             return factory('App\Models\Account')->create()->id;
         },
         'stripe_id' => 'cus_00000000000000',
+        'description' => $faker->paragraph,
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Edition::class, function (Faker\Generator $faker) {
+    return [
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
+        'name' => $faker->company,
+        'description' => $faker->paragraph,
     ];
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Email::class, function (Faker\Generator $faker) {
     return [
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
         'user_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
@@ -121,7 +200,7 @@ $factory->define(App\Models\Email::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Exception::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'parent_id' => function() {
@@ -139,20 +218,45 @@ $factory->define(App\Models\Exception::class, function (Faker\Generator $faker) 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Favorite::class, function (Faker\Generator $faker) {
     return [
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
         'user_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
-        'resource_id' => 0,
+        'resource_id' => function() {
+            return factory('App\Models\Forum')->create()->id;
+        },
         'resource_type' => App\Models\Forum::class,
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Follow::class, function (Faker\Generator $faker) {
+    return [
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
+        'user_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
+        'resource_id' => function() {
+            return factory('App\Models\Thread')->create()->id;
+        },
+        'resource_type' => App\Models\Thread::class,
     ];
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Forum::class, function (Faker\Generator $faker) {
     return [
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
         'user_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
+        'parent_id' => null,
         'title' => $faker->sentence(rand(2,3)),
         'slug' => $faker->slug,
         'description' => $faker->paragraph,
@@ -169,7 +273,7 @@ $factory->define(App\Models\Group::class, function (Faker\Generator $faker) {
                 return null;
             }
         },
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },        
         'name' => $faker->sentence(rand(1,2)),
@@ -180,9 +284,24 @@ $factory->define(App\Models\Group::class, function (Faker\Generator $faker) {
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Imprint::class, function (Faker\Generator $faker) {
+    return [
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
+        'publisher_id' => function() {
+            return factory('App\Models\Publisher')->create()->id;
+        },
+        'name' => $faker->company,
+        'description' => $faker->paragraph,
+    ];
+});
+
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Invoice::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'account_id' => function() {
@@ -191,7 +310,19 @@ $factory->define(App\Models\Invoice::class, function (Faker\Generator $faker) {
         'customer_id' => function() {
             return factory('App\Models\Customer')->create()->id;
         },
-        'key' => $faker->md5,
+        'type_id' => function() {
+            return factory('App\Models\Type')->create(['resource_type' => App\Models\Invoice::class])->id;
+        },
+        'status_id' => function() {
+            return factory('App\Models\Status')->create(['resource_type' => App\Models\Invoice::class])->id;
+        },
+        'billing_address_id' => function() {
+            return factory('App\Models\Address')->create()->id;
+        },
+        'shipping_address_id' => function() {
+            return factory('App\Models\Address')->create()->id;
+        },
+        'slug' => $faker->md5,
         'subtotal' => rand(1,1000000),
         'tax_rate' => rand(1,250) / 10,
         'tax' => rand(1,1000),
@@ -203,7 +334,7 @@ $factory->define(App\Models\Invoice::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\InvoiceItem::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'invoice_id' => function() {
@@ -220,6 +351,9 @@ $factory->define(App\Models\InvoiceItem::class, function (Faker\Generator $faker
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Issue::class, function (Faker\Generator $faker) {
     return [
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
         'user_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
@@ -230,7 +364,7 @@ $factory->define(App\Models\Issue::class, function (Faker\Generator $faker) {
             return factory('App\Models\Priority')->create()->id;
         },
         'status_id' => function() {
-            return factory('App\Models\Status')->create()->id;
+            return factory('App\Models\Status')->create(['resource_type' => App\Models\Issue::class])->id;
         },
         'resolution_id' => function() {
             return factory('App\Models\Resolution')->create()->id;
@@ -247,7 +381,7 @@ $factory->define(App\Models\Issue::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Link::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'label' => $faker->sentence(rand(1,5)),
@@ -263,9 +397,20 @@ $factory->define(App\Models\Link::class, function (Faker\Generator $faker) {
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Notification::class, function (Faker\Generator $faker) {
+    return [
+        'id' => $faker->md5,
+        'type' => '',
+        'notifiable_id' => 0,
+        'notifiable_type' => '',
+        'data' => '',
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Order::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'account_id' => function() {
@@ -280,7 +425,7 @@ $factory->define(App\Models\Order::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Page::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'title' => $faker->sentence(rand(1,2)),
@@ -301,7 +446,7 @@ $factory->define(App\Models\PasswordReset::class, function (Faker\Generator $fak
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Payment::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'account_id' => function() {
@@ -313,7 +458,10 @@ $factory->define(App\Models\Payment::class, function (Faker\Generator $faker) {
         'invoice_id' => function() {
             return factory('App\Models\Invoice')->create()->id;
         },
-        'stripe_id' => 'ch_000000000000000000000000',
+        'type_id' => function() {
+            return factory('App\Models\Type')->create(['resource_type' => App\Models\Payment::class])->id;
+        },
+        'reference_number' => rand(1000, 9999),
         'amount' => rand(100,1000000),
         'comments' => $faker->paragraph,
     ];
@@ -322,14 +470,14 @@ $factory->define(App\Models\Payment::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Plan::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'account_id' => function() {
             return factory('App\Models\Account')->create()->id;
         },
         'currency_id' => function() {
-            return factory('App\Models\User')->create()->id;
+            return factory('App\Models\Currency')->create()->id;
         },
         'name' => $faker->sentence(rand(1,2)),
         'slug' => $faker->slug,
@@ -344,7 +492,7 @@ $factory->define(App\Models\Plan::class, function (Faker\Generator $faker) {
 $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
 
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'title' => $faker->sentence(5, true),
@@ -357,7 +505,7 @@ $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Priority::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'name' => $faker->sentence(rand(1,2)),
@@ -369,7 +517,7 @@ $factory->define(App\Models\Priority::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Product::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'account_id' => function() {
@@ -382,33 +530,74 @@ $factory->define(App\Models\Product::class, function (Faker\Generator $faker) {
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Publisher::class, function (Faker\Generator $faker) {
+    return [
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
+        'parent_id' => null,
+        'address_id' => function() {
+            return factory('App\Models\Address')->create(['resource_type' => App\Models\Publisher::class])->id;
+        },
+        'name' => $faker->company,
+        'description' => $faker->paragraph,
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Rating::class, function (Faker\Generator $faker) {
     return [
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
         'user_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'rating' => rand (10, 100) / 10,
-        'resource_id' => 0,
+        'resource_id' => function() {
+            return factory('App\Models\Forum')->create()->id;
+        },
         'resource_type' => App\Models\Forum::class,
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Region::class, function (Faker\Generator $faker) {
+    return [
+        'parent_id' => null,
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
+        'country_id' => function() {
+            return factory('App\Models\Country')->create()->id;
+        },
+        'name' => $faker->state,
+        'abbr' => $faker->stateAbbr,
+        'description' => $faker->paragraph,
     ];
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Reply::class, function (Faker\Generator $faker) {
     return [
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
         'user_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'content' => $faker->paragraph,
-        'resource_id' => 0,
-        'resource_type' => App\Models\Forum::class,        
+        'resource_id' => function() {
+            return factory('App\Models\Thread')->create()->id;
+        },
+        'resource_type' => App\Models\Thread::class,        
     ];
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Resolution::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'name' => $faker->sentence(rand(1,2)),
@@ -434,7 +623,7 @@ $factory->define(App\Models\Session::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Source::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'account_id' => function() {
@@ -456,36 +645,22 @@ $factory->define(App\Models\Source::class, function (Faker\Generator $faker) {
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\State::class, function (Faker\Generator $faker) {
-    return [
-        'user_id' => function() {
-            return factory('App\Models\User')->create()->id;
-        },
-        'country_id' => function() {
-            return factory('App\Models\Country')->create()->id;
-        },
-        'name' => $faker->state,
-        'abbr' => $faker->stateAbbr,
-        'description' => $faker->paragraph,
-    ];
-});
-
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Status::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'name' => $faker->sentence(rand(1,2)),
         'slug' => $faker->slug,
         'description' => $faker->paragraph,
+        'resource_type' => App\Models\Issue::class,
     ];
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Subscription::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'account_id' => function() {
@@ -512,7 +687,7 @@ $factory->define(App\Models\Subscription::class, function (Faker\Generator $fake
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Tag::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'name' => $faker->sentence(rand(1,3)),
@@ -524,7 +699,7 @@ $factory->define(App\Models\Tag::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Theme::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'name' => $faker->sentence(rand(1,2)),
@@ -539,6 +714,9 @@ $factory->define(App\Models\Thread::class, function (Faker\Generator $faker) {
     return [
         'forum_id' => function () {
             return factory('App\Models\Forum')->create()->id;
+        },
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
         },
         'user_id' => function() {
             return factory('App\Models\User')->create()->id;
@@ -571,7 +749,7 @@ $factory->define(App\Models\Transaction::class, function (Faker\Generator $faker
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Type::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => function() {
+        'creator_id' => function() {
             return factory('App\Models\User')->create()->id;
         },
         'name' => $faker->sentence(rand(1,2)),
@@ -597,6 +775,9 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Vote::class, function (Faker\Generator $faker) {
     return [
+        'creator_id' => function() {
+            return factory('App\Models\User')->create()->id;
+        },
         'user_id' => function() {
             return factory('App\Models\User')->create()->id;
         },

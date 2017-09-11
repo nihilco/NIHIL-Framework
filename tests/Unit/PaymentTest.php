@@ -18,9 +18,9 @@ class PaymentTest extends TestCase
         $this->payment = create('App\Models\Payment');
     }
 
-    public function test_a_payment_has_a_user()
+    public function test_a_payment_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->payment->user);
+        $this->assertInstanceOf('App\Models\User', $this->payment->creator);
     }
 
     public function test_a_payment_has_an_account()
@@ -36,6 +36,11 @@ class PaymentTest extends TestCase
     public function test_a_payment_has_an_invoice()
     {
         $this->assertInstanceOf('App\Models\Invoice', $this->payment->invoice);
+    }
+
+    public function test_a_payment_has_an_type()
+    {
+        $this->assertInstanceOf('App\Models\Type', $this->payment->type);
     }
     
 }

@@ -14,13 +14,29 @@ class Account extends Model
     protected $table = 'accounts';
 
     //
-    protected $fillable = ['stripe_id', 'secret_key', 'publishable_key', 'user_id'];
+    protected $fillable = [
+        'mode',
+        'status',
+        'name',
+        'stripe_id',
+        'publishable_key',
+        'secret_key',
+        'description',
+        'country_id',
+        'managed',
+        'user_id'
+    ];
 
     public function path()
     {
         return '/accounts/' . $this->id;
     }
     
+    public function creator()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -75,79 +91,43 @@ class Account extends Model
     {
         return $this->hasMany(Transaction::class);
     }
-        
-    public static function byStripeAccountId($said)
-    {
-        return static::where('account_id', $said)->first();
-    }
-    
-    public static function importStripeAccounts()
-    {
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-    }
 
-    public static function createStripeAccount()
+    public static function createStripeAccount($data)
     {
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+        $stripeAccount = \Stripe::createAccount([
+            'type' => 'custom',
+            'country' => 'US',
+            'email' => $data['email'],
+            'business_name' => $data['name'],
+            'business_url' => $data['url'],
+        ]);
 
-        $account = \Stripe\Account::create(array(
-            "managed" => true,
-            "country" => "US",
-        ));
-
-        Account::insert([
-            'user_id' => 2,
-            'mode' => 'live',
-            'stripe_id' => $account->id,
-            'publishable_key' => $account->keys->publishable,
-            'secret_key' => \Crypt::encrypt($account->keys->secret),
-            'description' => 'Live managed account for the Blue Springs Historical Association.',
-            'country_id' => 1,
-            'managed' => true,
-            'created_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        return Account::create([
+            'creator_id' => $data['creator_id'],
+            'user_id' => $data['user_id'],
+            'mode' => $data['mode'],
+            'status' => $data['status'],
+            'name' => $data['name'],
+            'stripe_id' => $stripeAccount->id,
+            'publishable_key' => $stripeAccount->keys['publishable'],
+            'secret_key' => \Crypt::encrypt($stripeAccount->keys['secret']),
+            'api_version' => '2017-06-05',
+            'description' => $data['description'],
+            'country_id' => $data['country_id'],
+            'managed' => $data['managed'],
         ]);
     }
 
-    public static function editStripeAccount($sid)
+    public static function getStripeAccountByName($name)
     {
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+        $stripeAccounts = \Stripe::getAllAccounts();
 
-        $account = \Stripe\Account::retrieve($sid);
+        foreach($stripeAccounts->data as $stripeAccount) {
+            if($stripeAccount->business_name == $name) {
+                return $stripeAccount;
+            }
+        }
 
-        //$account->business_name = 'Blue Springs Historical Association Inc.';
-        //$account->business_url = 'https://bluespringshistoricalassociation.org';
-        //$account->email = 'contact@bluespringshistoricalassociation.org';
-        //$account->legal_entity->type = 'company';
-        //$account->legal_entity->business_name = 'Blue Springs Historical Association Inc.';
-        //$account->legal_entity->address->line1 = '330 Elmwood Road';
-        //$account->legal_entity->address->city = 'Midway';
-        //$account->legal_entity->address->state = 'TN';
-        //$account->legal_entity->address->postal_code = '37809';
-        //$account->legal_entity->first_name = 'Wilhelmina';
-        //$account->legal_entity->last_name = 'Williams';
-        //$account->legal_entity->business_tax_id = '81-0771211';
-        //$account->legal_entity->dob->day = '8';
-        //$account->legal_entity->dob->month = '6';
-        //$account->legal_entity->dob->year = '1944';
-        //$account->legal_entity->personal_id_number = '412-72-7535';
-
-        //$account->external_accounts->create(array("external_account" => array(
-        //    'object' => 'bank_account',
-        //    'account_number' => '047000294',
-        //    'country' => 'US',
-        //    'currency' => 'usd',
-        //    'account_holder_name' => 'Blue Springs Historical Association Inc.',
-        //    'account_holder_type' => 'company',
-        //    'routing_number' => '064204347',
-        //)));
-
-        //$account->tos_acceptance->date = \Carbon\Carbon::now()->timestamp;;
-        //$account->tos_acceptance->ip = \Request::ip();
-        //$account->tos_acceptance->user_agent = \Request::header('User-Agent');
-        
-        $account->save();
-
-        die(print_r($account));
+        return false;
     }
 }

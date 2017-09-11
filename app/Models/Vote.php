@@ -22,8 +22,45 @@ class Vote extends Model
      */
     protected $table = 'votes';
 
-    protected $fillable = ['user_id', 'resource_id', 'resource_type', 'vote'];
+    protected $fillable = ['creator_id', 'user_id', 'resource_id', 'resource_type', 'vote'];
     
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($vote) {
+            if($vote->vote == Vote::VOTE_UP) {
+                $vote->resource->increment('votes_up_count');
+            } elseif($vote->vote == Vote::VOTE_DOWN) {
+                $vote->resource->increment('votes_down_count');
+            }
+        });
+
+        static::deleted(function ($vote) {
+            if($vote->vote == Vote::VOTE_UP) {
+                $vote->resource->decrement('votes_up_count');
+            } elseif($vote->vote == Vote::VOTE_DOWN) {
+                $vote->resource->decrement('votes_down_count');
+            }
+
+        });
+
+        static::updated(function ($vote) {
+            if($vote->vote == Vote::VOTE_UP) {
+                $vote->resource->increment('votes_up_count');
+                $vote->resource->decrement('votes_down_count');
+            } elseif($vote->vote == Vote::VOTE_DOWN) {
+                $vote->resource->increment('votes_down_count');
+                $vote->resource->decrement('votes_up_count');
+            }
+        });
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

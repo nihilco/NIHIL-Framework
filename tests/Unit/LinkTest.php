@@ -18,9 +18,9 @@ class LinkTest extends TestCase
         $this->link = create('App\Models\Link');
     }
 
-    public function test_a_link_has_a_user()
+    public function test_a_link_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->link->user);
+        $this->assertInstanceOf('App\Models\User', $this->link->creator);
     }
     
 }

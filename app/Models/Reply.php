@@ -19,13 +19,23 @@ class Reply extends Model
      */
     protected $table = 'replies';
 
-    protected $fillable = ['content', 'user_id', 'resource_id', 'resource_type'];
+    protected $fillable = ['creator_id', 'user_id', 'content', 'resource_id', 'resource_type'];
 
     protected $with = ['user'];
 
     public static function boot()
     {
         parent::boot();
+
+        static::created(function ($reply) {
+            $reply->resource->increment('replies_count');
+        });
+
+        static::deleted(function ($reply) {
+            $reply->resource->decrement('replies_count');
+        });
+
+
     }
     
     public function path()
@@ -34,6 +44,11 @@ class Reply extends Model
         return '/replies/' . $this->id;
     }
     
+    public function creator()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Account;
+use App\Models\Currency;
 use App\Models\Plan;
 
 class PlansController extends Controller
@@ -29,19 +31,46 @@ class PlansController extends Controller
     }
 
     //
-    public function store(Plan $plan)
+    public function store(Request $request)
     {
-        Plan::create([
-
+                //
+        $this->validate($request, [
+            'name' => 'required',
+            'slug' => 'required',
+            'description' => 'required',
+            'amount' => 'required',
+            'currency' => 'required',
+            'intervalCount' => 'required',
+            'interval' => 'required',
+        ]);
+        
+        //
+        $plan = Plan::create([
+            'account_id' => 1,
+            'name' => request('name'),
+            'slug' => request('slug'),
+            'description' => request('description'),
+            'user_id' => auth()->id(),
+            'amount' => request('amount'),
+            'currency_id' => request('currency'),
+            'interval_count' => request('intervalCount'),
+            'interval' => request('interval'),
         ]);
 
-        return redirect()->route('home');
+        return redirect('/plans')->with('flash', [
+            'type' => 'success',
+            'title' => 'Created Plan',
+            'message' => 'You created a plan.',
+        ]);
     }
 
     //
     public function create()
     {
-        return view('plans.create');
+        $accounts = Account::all();
+        $currencies = Currency::all();
+
+        return view('plans.create', compact('accounts', 'currencies'));
     }
 
     //

@@ -12,14 +12,14 @@ trait LogActivity
             });
         }
 
-        static::deleting(function($resource) {
-            $resource->activity()->delete();
-        });
+        //static::deleting(function($resource) {
+        //    $resource->activity()->delete();
+        //});
     }
 
     protected static function getActionsToLog()
     {
-        return ['created'];
+        return ['created', 'deleted'];
     }
     
     protected function recordActivity($action)
@@ -27,6 +27,7 @@ trait LogActivity
         $uid = (auth()->id()) ? auth()->id() : 1;
         
         $this->activity()->create([
+            'creator_id' => $uid,
             'user_id' => $uid,
             'action' => $this->getActivityAction($action),
         ]);

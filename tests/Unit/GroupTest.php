@@ -18,9 +18,9 @@ class GroupTest extends TestCase
         $this->group = create('App\Models\Group');
     }
 
-    public function test_a_group_has_a_user()
+    public function test_a_group_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->group->user);
+        $this->assertInstanceOf('App\Models\User', $this->group->creator);
     }
 
     public function test_a_group_has_a_parent()

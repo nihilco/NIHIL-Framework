@@ -15,6 +15,7 @@ class CreateIssuesTable extends Migration
     {
         Schema::create('issues', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('creator_id')->index();
             $table->unsignedInteger('user_id')->index();
             $table->unsignedInteger('type_id')->nullable();
             $table->unsignedInteger('priority_id')->nullable();

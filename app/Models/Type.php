@@ -18,9 +18,9 @@ class Type extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['creator_id', 'parent_id', 'name', 'slug', 'description'];
 
-    public function user()
+    public function creator()
     {
         return $this->belongsTo(User::class);
     }
@@ -28,5 +28,10 @@ class Type extends Model
     public function parent()
     {
         return $this->belongsTo(Type::class);
+    }
+
+    public function path()
+    {
+        return '/types/' . $this->id;
     }
 }

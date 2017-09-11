@@ -16,7 +16,7 @@ class CreateThemesTable extends Migration
         //
         Schema::create('themes', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id')->index();
+            $table->unsignedInteger('creator_id')->index();
             $table->string('name', 50);
             $table->string('slug', 100)->unique();
             $table->text('description');

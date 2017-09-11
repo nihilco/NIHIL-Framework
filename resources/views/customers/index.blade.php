@@ -43,7 +43,7 @@
         </tr>
       </thead>
       <tbody>
-        @foreach($countries as $country)
+        @foreach($customers as $customer)
         <tr>
           <th scope="row"><a href="{{ $customer->path() }}">{{ $customer->stripe_id }}</a></th>
           <td>{{ $customer->account->name }}</td>

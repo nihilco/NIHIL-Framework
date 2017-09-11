@@ -15,6 +15,7 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('creator_id')->index();
             $table->unsignedInteger('user_id')->index();
             $table->string('mode', 16);
             $table->string('status', 16)->nullable();
@@ -22,6 +23,7 @@ class CreateAccountsTable extends Migration
             $table->string('stripe_id');
             $table->string('publishable_key')->nullable();
             $table->string('secret_key', 255)->nullable();
+            $table->string('api_version', 100)->nullable();
             $table->text('description')->nullable();
             $table->unsignedInteger('country_id')->default(1);
             $table->boolean('managed')->default(true);

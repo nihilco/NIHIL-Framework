@@ -18,9 +18,9 @@ class ResolutionTest extends TestCase
         $this->resolution = create('App\Models\Resolution');
     }
 
-    public function test_a_resolution_has_a_user()
+    public function test_a_resolution_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->resolution->user);
+        $this->assertInstanceOf('App\Models\User', $this->resolution->creator);
     }
 
     public function test_a_resolution_has_issues()

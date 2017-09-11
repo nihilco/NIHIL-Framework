@@ -18,9 +18,9 @@ class CurrencyTest extends TestCase
         $this->currency = create('App\Models\Currency');
     }
 
-    public function test_a_currency_has_a_user()
+    public function test_a_currency_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->currency->user);
+        $this->assertInstanceOf('App\Models\User', $this->currency->creator);
     }
     
 }

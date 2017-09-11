@@ -46,17 +46,22 @@
         <tr>
           <th scope="row"><a href="{{ $thread->path() }}">{{ $thread->title }}</a></th>
           <td>{{ $thread->replies->count() }}</td>
-          <td>{{  $thread->created_at->diffForHumans() }}</td>
+          <td>{{ $thread->created_at->diffForHumans() }}</td>
           <th>
 @if(!Auth::guest())
     @include('votes.voter', ['resource' => $thread])
-    @endif
+    @include('favorites.favoriter', ['resource' => $thread])
+    @include('follows.follower', ['resource' => $thread])
+@endif
 
-@can ('update', $thread)
+      @can('update', $thread)
+        <a href="{{ $thread->path() . '/edit' }}" class="btn btn-sm btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+      @endcan
+@can ('delete', $thread)
              <form action="{{ $thread->path() }}" method="POST" style="display:inline-block;">
                {{ csrf_field() }}
                {{ method_field('DELETE') }}
-               <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+               <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
              </form>
 @endcan
           </th>

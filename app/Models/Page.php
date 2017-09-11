@@ -13,10 +13,20 @@ class Page extends Model
 
     protected $table = 'pages';
     
-    protected $fillable = ['user_id', 'title', 'keywords', 'description', 'content', 'posted_at'];
+    protected $fillable = ['creator_id', 'title', 'slug', 'description', 'content', 'posted_at'];
 
-    public function user()
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+    
+    public function creator()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function path()
+    {
+        return '/pages/' . $this->slug;
     }
 }

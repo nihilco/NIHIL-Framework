@@ -52,12 +52,27 @@ class VotesController extends Controller
         ]);
 
         //
-        Vote::create([
+        if($vote = Vote::withTrashed()
+        ->where([
             'user_id' => auth()->id(),
             'resource_id' => request('resource_id'),
             'resource_type' => request('resource_type'),
-            'vote' => request('vote'),
-        ]);
+        ])->first()) {
+            $vote->vote = request('vote');
+            $vote->deleted_at = null;
+            $vote->save();
+        } else {
+            Vote::create([
+                'user_id' => auth()->id(),
+                'resource_id' => request('resource_id'),
+                'resource_type' => request('resource_type'),
+                'vote' => request('vote'),
+            ]);
+        }
+
+        if(request()->expectsJson()) {
+            return $vote->load('user');
+        }
         
         return back()->with('flash', [
             'type' => 'success',
@@ -87,6 +102,7 @@ class VotesController extends Controller
     public function edit(Vote $vote)
     {
         //
+        $this->authorize('update', $vote);
     }
 
     /**
@@ -98,18 +114,34 @@ class VotesController extends Controller
      */
     public function update(Request $request, Vote $vote)
     {
+        $this->authorize('update', $vote);
+        
         //
         $this->validate($request, [
             'vote' => 'required',
         ]);
 
-        $vote->vote = request('vote');
-        $vote->save();
+        if($vote->vote != request('vote')) {
+          $vote->vote = request('vote');
+          $vote->save();
+          return back()->with('flash', [
+              'type' => 'success',
+              'title' => 'Updated Voted',
+              'message' => 'You changed your vote.',
+          ]);;
+        }elseif($vote->vote == request('vote')) {
+            $vote->delete();
+            return back()->with('flash', [
+                'type' => 'success',
+                'title' => 'Deleted Vote',
+                'message' => 'You deleted your vote.',
+            ]);;
+        }
         
         return back()->with('flash', [
-            'type' => 'success',
-            'title' => 'Updated Voted',
-            'message' => 'You changed your vote.',
+            'type' => 'danger',
+            'title' => 'Error Updating Vote',
+            'message' => 'We were unable to ubdate your vote.',
         ]);;
     }
 
@@ -121,9 +153,15 @@ class VotesController extends Controller
      */
     public function destroy(Vote $vote)
     {
+        $this->authorize('delete', $vote);
+        
         //
         $vote->delete();
 
-        return back();
+        return back()->with('flash', [
+            'type' => 'success',
+            'title' => 'Deleted Voted',
+            'message' => 'You deleted your vote.',
+        ]);;;
     }
 }

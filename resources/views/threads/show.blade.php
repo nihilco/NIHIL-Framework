@@ -24,7 +24,7 @@
         ['label' => $thread->title, 'url' => $thread->path()],
     ]])
   <div class="container-fluid">
-    
+
   <div class="row">
     <div class="col">
       <div class="card">
@@ -39,9 +39,10 @@
     </div>
   </div>
 
-    @forelse($replies as $reply)
-      @include('threads.reply')
+   @forelse($replies as $reply)
+     @include('threads.reply')
     @empty
+     
       <div class="row">
     <div class="col">
       <div class="card">
@@ -91,6 +92,5 @@
   </div>
 
 </div>
-
     
 @endsection

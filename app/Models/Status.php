@@ -18,9 +18,9 @@ class Status extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['creator_id', 'name', 'slug', 'description'];
 
-    public function user()
+    public function creator()
     {
         return $this->belongsTo(User::class);
     }

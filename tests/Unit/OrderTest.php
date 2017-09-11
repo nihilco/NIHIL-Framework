@@ -18,9 +18,9 @@ class OrderTest extends TestCase
         $this->order = create('App\Models\Order');
     }
 
-    public function test_an_order_has_a_user()
+    public function test_an_order_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->order->user);
+        $this->assertInstanceOf('App\Models\User', $this->order->creator);
     }
 
     public function test_an_order_has_an_account()

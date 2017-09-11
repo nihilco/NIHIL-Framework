@@ -13,9 +13,9 @@ class Theme extends Model
 
     protected $table = 'themes';
     
-    protected $fillable = ['user_id', 'name', 'description'];
+    protected $fillable = ['creator_id', 'name', 'slug', 'description'];
 
-    public function user()
+    public function creator()
     {
         return $this->belongsTo(User::class);
     }

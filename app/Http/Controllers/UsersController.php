@@ -35,13 +35,26 @@ class UsersController extends Controller
     }
 
     //
-    public function store(User $user)
+    public function store(Request $request)
     {
-        User::create([
-
+        $this->validate($request, [
+            'name' => 'required',
+            'username' => 'required',
+            'email' => 'required',
+        ]);
+        
+        //
+        $user = User::create([
+            'name' => request('name'),
+            'username' => request('username'),
+            'email' => request('email'),
         ]);
 
-        return redirect()->route('home');
+        return redirect('/users')->with('flash', [
+            'type' => 'success',
+            'title' => 'Created User',
+            'message' => 'You created a user.',
+        ]);
     }
 
     //

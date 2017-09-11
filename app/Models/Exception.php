@@ -15,7 +15,7 @@ class Exception extends Model
 
     protected $fillable = ['user_id', 'message', 'stacktrace'];
 
-    public function user()
+    public function creator()
     {
         return $this->belongsTo(User::class);
     }

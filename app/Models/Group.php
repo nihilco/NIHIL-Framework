@@ -13,9 +13,9 @@ class Group extends Model
 
     protected $table = 'groups';
     
-    protected $fillable = ['user_id', 'name', 'color', 'description'];
+    protected $fillable = ['creator_id', 'name', 'color', 'description'];
 
-    public function user()
+    public function creator()
     {
         return $this->belongsTo(User::class);
     }

@@ -33,7 +33,59 @@
         </div>
         <div class="card-block">
 
+        @if (count($errors) > 0)
+          <div class="alert alert-danger">
+            <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+            </ul>
+          </div>
+        @endif
+    
+      <form method="POST" action="/customers">
+        {{ csrf_field() }}
 
+        <div class="form-group{{ $errors->first('stripeId') ? ' has-danger' : '' }}">
+          <label class="form-control-label" for="stripeId">Stripe ID</label>
+          <input type="text" class="form-control{{ $errors->first('stripeId') ? ' form-control-danger' : '' }}" id="stripeId" name="stripeId" title="stripeId" aria-describedby="stripeIdHelp" placeholder="cus_000000000000" value="{{ old('stripeId') }}" required>
+          @if($errors->first('stripeId'))
+          <small id="stripeIdHelp" class="form-control-feedback">{{ $errors->first('stripeId') }}</small>
+          @endif
+        </div>
+        <div class="form-group{{ $errors->first('account') ? ' has-danger' : '' }}">
+          <label class="form-control-label" for="account">Account</label>          
+          <select class="form-control{{ $errors->first('account') ? ' form-control-danger' : '' }}" id="account" name="account" title="account" aria-describedby="accountHelp" required>
+    @foreach($accounts as $account)
+    <option value="{{ $account->id }}">{{ $account->name }}</option>
+    @endforeach
+          </select>
+          @if($errors->first('account'))
+          <small id="accountHelp" class="form-control-feedback">{{ $errors->first('account') }}</small>
+          @endif
+        </div>
+        <div class="form-group{{ $errors->first('user') ? ' has-danger' : '' }}">
+          <label class="form-control-label" for="user">User</label>          
+          <select class="form-control{{ $errors->first('user') ? ' form-control-danger' : '' }}" id="user" name="user" title="user" aria-describedby="userHelp" required>
+    @foreach($users as $user)
+    <option value="{{ $user->id }}">{{ $user->username }}</option>
+    @endforeach
+          </select>
+          @if($errors->first('user'))
+          <small id="userHelp" class="form-control-feedback">{{ $errors->first('user') }}</small>
+          @endif
+        </div>
+        <div class="form-group{{ $errors->first('description') ? ' has-danger' : '' }}">
+          <label class="form-control-label" for="description">Description</label>
+          <textarea class="form-control{{ $errors->first('description') ? 'form-control-danger' : '' }}" id="description" name="description" title="description" aria-describedby="descriptionHelp" placeholder="Have something to say?" rows="5" required>{{ old('description') }}</textarea>
+          @if($errors->first('description'))
+          <small id="descriptionHelp" class="form-control-feedback">{{ $errors->first('description') }}</small>
+          @endif
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-lg btn-primary pull-right">Create Customer</button>
+        </div>
+      </form>
     
         </div>
       </div>

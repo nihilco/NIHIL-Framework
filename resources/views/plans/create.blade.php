@@ -33,7 +33,81 @@
         </div>
         <div class="card-block">
 
-
+        @if (count($errors) > 0)
+          <div class="alert alert-danger">
+            <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+            </ul>
+          </div>
+        @endif
+    
+      <form method="POST" action="/plans">
+        {{ csrf_field() }}
+        <div class="form-group{{ $errors->first('name') ? ' has-danger' : '' }}">
+          <label class="form-control-label" for="name">Name</label>
+          <input type="text" class="form-control{{ $errors->first('name') ? ' form-control-danger' : '' }}" id="name" name="name" title="name" aria-describedby="nameHelp" placeholder="Let us name this biatch" value="{{ old('name') }}" required>
+          @if($errors->first('name'))
+          <small id="nameHelp" class="form-control-feedback">{{ $errors->first('name') }}</small>
+          @endif
+        </div>
+        <div class="form-group{{ $errors->first('slug') ? ' has-danger' : '' }}">
+          <label class="form-control-label" for="slug">Slug</label>
+          <input type="text" class="form-control{{ $errors->first('slug') ? ' form-control-danger' : '' }}" id="slug" name="slug" title="slug" aria-describedby="slugHelp" placeholder="let-us-name-this-biatch" value="{{ old('slug') }}" required>
+          @if($errors->first('slug'))
+          <small id="slugHelp" class="form-control-feedback">{{ $errors->first('slug') }}</small>
+          @endif
+        </div>
+        <div class="form-group{{ $errors->first('description') ? ' has-danger' : '' }}">
+          <label class="form-control-label" for="description">Description</label>
+          <textarea class="form-control{{ $errors->first('description') ? 'form-control-danger' : '' }}" id="description" name="description" title="description" aria-describedby="descriptionHelp" placeholder="Have something to say?" rows="5" required>{{ old('description') }}</textarea>
+          @if($errors->first('description'))
+          <small id="descriptionHelp" class="form-control-feedback">{{ $errors->first('description') }}</small>
+          @endif
+        </div>
+        <div class="form-group{{ $errors->first('amount') ? ' has-danger' : '' }}">
+          <label class="form-control-label" for="amount">Amount</label>
+          <input type="text" class="form-control{{ $errors->first('amount') ? ' form-control-danger' : '' }}" id="amount" name="amount" title="amount" aria-describedby="amountHelp" placeholder="0.00" value="{{ old('amount') }}" required>
+          @if($errors->first('amount'))
+          <small id="amountHelp" class="form-control-feedback">{{ $errors->first('amount') }}</small>
+          @endif
+        </div>
+        <div class="form-group{{ $errors->first('currency') ? ' has-danger' : '' }}">
+          <label class="form-control-label" for="currency">Currency</label>          
+          <select class="form-control{{ $errors->first('currency') ? ' form-control-danger' : '' }}" id="currency" name="currency" title="currency" aria-describedby="currencyHelp" required>
+    @foreach($currencies as $currency)
+    <option value="{{ $currency->id }}">{{ $currency->name }}</option>
+    @endforeach
+          </select>
+          @if($errors->first('currency'))
+          <small id="currencyHelp" class="form-control-feedback">{{ $errors->first('currency') }}</small>
+          @endif
+        </div>
+        <div class="form-group{{ $errors->first('intervalCount') ? ' has-danger' : '' }}">
+          <label class="form-control-label" for="intervalCount">Interval Count</label>
+          <input type="text" class="form-control{{ $errors->first('intervalCount') ? ' form-control-danger' : '' }}" id="intervalCount" name="intervalCount" title="intervalCount" aria-describedby="intervalCountHelp" placeholder="1" value="{{ old('intervalCount') }}" required>
+          @if($errors->first('intervalCount'))
+          <small id="intervalCountHelp" class="form-control-feedback">{{ $errors->first('intervalCount') }}</small>
+          @endif
+        </div>
+        <div class="form-group{{ $errors->first('interval') ? ' has-danger' : '' }}">
+          <label class="form-control-label" for="interval">Interval</label>          
+          <select class="form-control{{ $errors->first('interval') ? ' form-control-danger' : '' }}" id="interval" name="interval" title="interval" aria-describedby="intervalHelp" required>
+    <option>Select interval...</option>
+        <option value="day">day(s)</option>
+<option value="week">week(s)</option>
+<option value="month">month(s)</option>
+    <option value="month">year(s)</option>
+          </select>
+          @if($errors->first('interval'))
+          <small id="intervalHelp" class="form-control-feedback">{{ $errors->first('interval') }}</small>
+          @endif
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-lg btn-primary pull-right">Create Plan</button>
+        </div>
+      </form>
     
         </div>
       </div>

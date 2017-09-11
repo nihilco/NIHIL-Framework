@@ -67,7 +67,7 @@
 
   -->
 
-  <body class="app header-fixed sidebar-fixed aside-mune-fixed">
+  <body class="app header-fixed sidebar-hidden aside-menu-hidden">
     <div id="app">
     <header class="app-header navbar">
       @include('layouts.navbar')
@@ -103,13 +103,15 @@
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="https://js.stripe.com/v3/"></script>
     <script src="/js/pace.min.js"></script>
     <!-- Plugins and scripts required by all views -->
     <!-- GenesisUI main scripts -->
     <script src="/js/app.js"></script>
-    <script src="/js/nihilframework.js"></script>
+    <!--<script src="/js/nihilframework.js?t=<?php echo time() ?>"></script>-->
     <!-- Plugins and scripts required by this views -->
     <!-- Custom scripts required by this view -->
-
+    <!--<script src="/js/views/main.js"></script>-->
+    @include('layouts.js')                          
   </body>
 </html>

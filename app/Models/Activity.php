@@ -13,7 +13,12 @@ class Activity extends Model
 
     protected $table = 'activities';
     
-    protected $fillable = ['user_id', 'action', 'resource_id', 'resource_type'];
+    protected $fillable = ['creator_id', 'user_id', 'action', 'resource_id', 'resource_type'];
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function user()
     {

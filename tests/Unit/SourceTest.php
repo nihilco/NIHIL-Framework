@@ -18,9 +18,9 @@ class SourceTest extends TestCase
         $this->source = create('App\Models\Source');
     }
 
-    public function test_a_source_has_a_user()
+    public function test_a_source_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->source->user);
+        $this->assertInstanceOf('App\Models\User', $this->source->creator);
     }
 
     public function test_a_source_has_an_account()

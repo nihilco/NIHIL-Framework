@@ -19,9 +19,9 @@ class Source extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['creator_id', 'account_id', 'customer_id', 'type_id', 'stripe_id', 'hash', 'fingerprint', 'nickname', 'reference_number'];
 
-    public function user()
+    public function creator()
     {
         return $this->belongsTo(User::class);
     }
@@ -36,8 +36,18 @@ class Source extends Model
         return $this->belongsTo(Customer::class);
     }
 
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
     public function path()
     {
         return '/sources/' . $this->id;
+    }
+
+    public static function createCardHash($card)
+    {
+        return \Hash::make($card->fingerprint . $card->exp_month . $card->exp_year);
     }
 }

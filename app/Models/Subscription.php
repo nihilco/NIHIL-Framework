@@ -14,6 +14,7 @@ class Subscription extends Model
     protected $table = 'subscriptions';
     
     protected $fillable = [
+        'creator_id',
         'account_id',
         'customer_id',
         'plan_id',
@@ -25,7 +26,7 @@ class Subscription extends Model
         'expires_at'
     ];
 
-    public function user()
+    public function creator()
     {
         return $this->belongsTo(User::class);
     }

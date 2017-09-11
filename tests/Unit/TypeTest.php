@@ -18,9 +18,9 @@ class TypeTest extends TestCase
         $this->type = create('App\Models\Type');
     }
 
-    public function test_a_type_has_a_user()
+    public function test_a_type_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->type->user);
+        $this->assertInstanceOf('App\Models\User', $this->type->creator);
     }
 
     public function test_a_type_has_a_parent()

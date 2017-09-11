@@ -24,7 +24,7 @@ Route::get('/', function () {
 //
 //
 //
-Route::post('webhooks', 'WebhooksController@handle');
+Route::post('webhooks/stripe', 'WebhooksController@handleStripeWebhook');
 
 //Auth::routes();
 Route::get('/signup', 'RegistrationController@create')->name('signup');
@@ -49,7 +49,9 @@ Route::post('/forums/{forum}/threads', 'ThreadsController@store');
 Route::delete('/forums/{forum}', 'ForumsController@destroy');
 Route::get('/forums/{forum}/threads/create', 'ThreadsController@create');
 Route::get('/forums/{forum}/{thread}', 'ThreadsController@show');
+Route::patch('/forums/{forum}/{thread}', 'ThreadsController@update');
 Route::delete('/forums/{forum}/{thread}', 'ThreadsController@destroy');
+Route::get('/forums/{forum}/{thread}/edit', 'ThreadsController@edit');
 Route::get('/forums/{forum}/{thread}/{reply}', 'RepliesController@show');
 
 // ISSUES
@@ -59,21 +61,33 @@ Route::get('/issues/{issue}', 'IssuesController@show');
 Route::delete('/issues/{issue}', 'IssuesController@destroy');
 Route::post('/issues', 'IssuesController@store');
 
+// User
+Route::get('/users/{user}/notifications', 'NotificationsController@index');
+
+// Invoice
+Route::post('/invoices/{invoice}/pay', 'InvoicesController@pay');
+
 //
 //
 //
 Route::resource('accounts', 'AccountsController');
 Route::resource('activities', 'ActivitiesController');
+Route::resource('addresses', 'AddressesController');
+Route::resource('authors', 'AuthorsController');
+Route::resource('books', 'BooksController');
 Route::resource('categories', 'CategoriesController');
 Route::resource('countries', 'CountriesController');
 Route::resource('currencies', 'CurrenciesController');
 Route::resource('customers', 'CustomersController');
+Route::resource('editions', 'EditionsController');
 Route::resource('emails', 'EmailsController');
 Route::resource('exceptions', 'ExceptionsController');
 Route::resource('favorites', 'FavoritesController');
+Route::resource('follows', 'FollowsController');
 Route::resource('groups', 'GroupsController');
 Route::resource('invoices', 'InvoicesController');
 Route::resource('links', 'LinksController');
+Route::resource('notifications', 'NotificationsController');
 Route::resource('orders', 'OrdersController');
 Route::resource('pages', 'PagesController');
 Route::resource('password-resests', 'PasswordResetsController');
@@ -82,17 +96,18 @@ Route::resource('plans', 'PlansController');
 Route::resource('posts', 'PostsController');
 Route::resource('priorities', 'PrioritiesController');
 Route::resource('products', 'ProductsController');
+Route::resource('publishers', 'PublishersController');
 Route::resource('ratings', 'RatingsController');
+Route::resource('regions', 'RegionsController');
 Route::resource('replies', 'RepliesController');
 Route::resource('resolutions', 'ResolutionsController');
 //Route::resource('sessions', 'SessionsController');
 Route::resource('sources', 'SourcesController');
-Route::resource('states', 'StatesController');
 Route::resource('statuses', 'StatusesController');
 Route::resource('subscriptions', 'SubscriptionsController');
 Route::resource('tags', 'TagsController');
 Route::resource('themes', 'ThemesController');
-//Route::resource('threads', 'ThreadsController');
+Route::resource('threads', 'ThreadsController');
 Route::resource('transactions', 'TransactionsController');
 Route::resource('types', 'TypesController');
 Route::resource('users', 'UsersController');

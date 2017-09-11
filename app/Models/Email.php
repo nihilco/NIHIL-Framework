@@ -13,7 +13,12 @@ class Email extends Model
 
     protected $table = 'emails';
     
-    protected $fillable = ['user_id', 'to', 'from', 'subject', 'text', 'html', 'send_at'];
+    protected $fillable = ['creator_id', 'user_id', 'to', 'from', 'subject', 'text', 'html', 'send_at'];
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function user()
     {

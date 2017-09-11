@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://nihilframework.com'),
+    'url' => env('APP_URL', 'https://nihilframework.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -179,9 +179,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         //
-        //App\Providers\StripeServiceProvider::class,
-        //
-        //NIHILCo\Forums\ForumsServiceProvider::class,
+        App\Providers\StripeServiceProvider::class,
     ],
 
     /*
@@ -230,6 +228,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        //
+        'Stripe' => App\Facades\Stripe::class,
     ],
 
 ];

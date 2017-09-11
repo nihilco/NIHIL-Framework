@@ -31,8 +31,6 @@ class RepliesController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', $reply);
-
         //
         return view('replies.create');
     }
@@ -54,12 +52,17 @@ class RepliesController extends Controller
         ]);
         
         //
-        Reply::create([
+        $reply = Reply::create([
+            'creator_id' => auth()->id(),
             'user_id' => auth()->id(),
             'resource_id' => request('resource_id'),
             'resource_type' => request('resource_type'),
             'content' => request('content'),           
         ]);
+
+        if(request()->expectsJson()) {
+            return $reply->load('user');
+        }
 
         return back()->with('flash', [
             'type' => 'success',
@@ -104,7 +107,11 @@ class RepliesController extends Controller
     public function update(Request $request, Reply $reply)
     {
         $this->authorize('update', $reply);
-                
+
+        if(request('cancel') == 'true') {
+            return redirect($reply->resource->path());
+        }
+
         //
         $this->validate($request, [
             'content' => 'required',

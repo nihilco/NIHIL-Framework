@@ -15,7 +15,7 @@ class Category extends Model
 
     protected $fillable = ['parent_id', 'name', 'description'];
 
-    public function user()
+    public function creator()
     {
         return $this->belongsTo(User::class);
     }

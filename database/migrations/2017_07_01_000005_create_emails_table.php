@@ -16,6 +16,7 @@ class CreateEmailsTable extends Migration
         //
         Schema::create('emails', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('creator_id');
             $table->unsignedInteger('user_id')->index();
             $table->string('key', 50)->unique();
             $table->string('to');

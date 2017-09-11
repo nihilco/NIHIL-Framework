@@ -18,9 +18,9 @@ class ProductTest extends TestCase
         $this->product = create('App\Models\Product');
     }
 
-    public function test_a_product_has_a_user()
+    public function test_a_product_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->product->user);
+        $this->assertInstanceOf('App\Models\User', $this->product->creator);
     }
 
     public function test_a_product_has_an_account()

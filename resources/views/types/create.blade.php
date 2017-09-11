@@ -1,46 +1,88 @@
-@extends('layouts.admin')
+@extends('layouts.master')
 
+@section('meta')
+      <meta description="The Taraloka Foundation is a registered 501(c)3 organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
+      <meta keywords="taraloka, sikkim, india, foundation, nihil">
+      <meta author="Uriah M. Clemmer IV">
+
+      <meta property="fb:app_id" content="187097078310518">
+    
+      <meta name="og:url" property="og:url" content="https://taraloka.org/about">
+      <meta name="og:type" property="og:type" content="article">
+      <meta name="og:title" property="og:title" content="Taraloka Foundation">
+      <meta name="og:description" property="og:description" content="The Taraloka Foundation is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
+      <meta name="og:image" property="og:image" content="https://taraloka.org/img/taraloka-logo-og-dark.png">
+
+      <title>Create Type</title>
+@endsection
+    
 @section('content')
-      <!-- Main section-->
-      <section>
-         <!-- Page content-->
-         <div class="content-wrapper">
-            <div class="content-heading">
-               Create Type
-               <small>some small phrase</small>
-            </div>
-                <!-- START row-->
-                <div class="row">
-                   <div class="col-sm-9">
-                      <!-- START panel-->
-                      <div class="panel panel-default">
-                         <div class="panel-body">
-                            <form role="form" method="POST" action="/types" >
-                               {{ csrf_field() }}
-                               <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                  <label>Name</label>
-                                  <input type="text" name="name" placeholder="Enter name" class="form-control">
-    @if ($errors->has('name'))
-    <span class="help-block">
-    <strong>{{ $errors->first('name') }}</strong>
-    </span>
-    @endif
-                               </div>
-                               <div class="form-group{{ $errors->has('dscription') ? ' has-error' : '' }}">
-                                   <label>Description</label>
-                                   <textarea name="description" class="form-control" rows="5" placeholder="Enter description..."></textarea>
-        @if ($errors->has('description'))
-    <span class="help-block">
-    <strong>{{ $errors->first('description') }}</strong>
-    </span>
-    @endif
-                               </div>
-                               <button type="submit" class="btn btn-sm btn-primary pull-right">Create Type</button>
-                            </form>
-                         </div>
-                      </div>
-                      <!-- END panel-->
-                   </div>
-         </div>
-      </section>
+
+    @include('layouts.breadcrumbs', ['breadcrumbs' => [
+        ['label' => 'Types', 'url' => '/types'],
+        ['label' => 'Create', 'url' => '/types/create'],
+    ]])
+  <div class="container-fluid">
+  <div class="animated fadeIn">    
+    
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h1>Create Type</h1>
+        </div>
+        <div class="card-block">
+
+        @if (count($errors) > 0)
+          <div class="alert alert-danger">
+            <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+            </ul>
+          </div>
+        @endif
+    
+      <form method="POST" action="/types">
+        {{ csrf_field() }}
+        <div class="form-group{{ $errors->first('parent') ? ' has-danger' : '' }}">
+          <label class="form-control-label" for="parent">Parent</label>
+          <input type="text" class="form-control{{ $errors->first('parent') ? ' form-control-danger' : '' }}" id="parent" name="parent" title="parent" aria-describedby="parentHelp" placeholder="Let us name this biatch" value="{{ old('parent') }}" required>
+          @if($errors->first('parent'))
+          <small id="parentHelp" class="form-control-feedback">{{ $errors->first('parent') }}</small>
+          @endif
+        </div>
+        <div class="form-group{{ $errors->first('name') ? ' has-danger' : '' }}">
+          <label class="form-control-label" for="name">Name</label>
+          <input type="text" class="form-control{{ $errors->first('name') ? ' form-control-danger' : '' }}" id="name" name="name" title="name" aria-describedby="nameHelp" placeholder="Let us name this biatch" value="{{ old('name') }}" required>
+          @if($errors->first('name'))
+          <small id="nameHelp" class="form-control-feedback">{{ $errors->first('name') }}</small>
+          @endif
+        </div>
+        <div class="form-group{{ $errors->first('slug') ? ' has-danger' : '' }}">
+          <label class="form-control-label" for="slug">Slug</label>
+          <input type="text" class="form-control{{ $errors->first('slug') ? ' form-control-danger' : '' }}" id="slug" name="slug" title="slug" aria-describedby="slugHelp" placeholder="let-us-name-this-biatch" value="{{ old('slug') }}" required>
+          @if($errors->first('slug'))
+          <small id="slugHelp" class="form-control-feedback">{{ $errors->first('slug') }}</small>
+          @endif
+        </div>
+        <div class="form-group{{ $errors->first('description') ? ' has-danger' : '' }}">
+          <label class="form-control-label" for="description">Description</label>
+          <textarea class="form-control{{ $errors->first('description') ? 'form-control-danger' : '' }}" id="description" name="description" title="description" aria-describedby="descriptionHelp" placeholder="Have something to say?" rows="5" required>{{ old('description') }}</textarea>
+          @if($errors->first('description'))
+          <small id="descriptionHelp" class="form-control-feedback">{{ $errors->first('description') }}</small>
+          @endif
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-lg btn-primary pull-right">Create Type</button>
+        </div>
+      </form>
+    
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  </div>
+  </div>
 @endsection

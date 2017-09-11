@@ -8,6 +8,7 @@
      <li class="breadcrumb-item"><a href="{{ $breadcrumbs[$i]['url'] }}">{{ $breadcrumbs[$i]['label'] }}</a></li>
      @endif
      @endfor
+  @if(!Auth::guest())
   <!-- Breadcrumb Menu-->
   <li class="breadcrumb-menu">
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
@@ -16,4 +17,5 @@
       <a class="btn btn-secondary" href="#"><i class="fa fa-gear" aria-hidden="true"></i> &nbsp;Settings</a>
     </div>
   </li>
+  @endif
 </ol>

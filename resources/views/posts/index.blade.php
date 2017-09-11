@@ -1,128 +1,79 @@
-@extends('layouts.admin')
+@extends('layouts.master')
 
+@section('meta')
+      <meta description="The Taraloka Foundation is a registered 501(c)3 organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
+      <meta keywords="taraloka, sikkim, india, foundation, nihil">
+      <meta author="Uriah M. Clemmer IV">
+
+      <meta property="fb:app_id" content="187097078310518">
+    
+      <meta name="og:url" property="og:url" content="https://taraloka.org/about">
+      <meta name="og:type" property="og:type" content="article">
+      <meta name="og:title" property="og:title" content="Taraloka Foundation">
+      <meta name="og:description" property="og:description" content="The Taraloka Foundation is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
+      <meta name="og:image" property="og:image" content="https://taraloka.org/img/taraloka-logo-og-dark.png">
+
+      <title>Posts</title>
+@endsection
+    
 @section('content')
 
-<!-- Main section-->
-          <section>
-              <!-- Page content-->
-              <div class="content-wrapper">
-               <div class="content-heading">
-               Posts
-               <small>some small phrase</small>
-            </div>
-    <div class="row">
-                   <!-- Blog Content-->
-                   <div class="col-lg-9">
-
-<?php
-    $cols = array();
-    $c = 1;
-    foreach($posts as $post)
-    {
-        $cols[$c][] = $post;
-     
-        if($c == 3) {
-            $c = 1;
-        }else{
-            $c++;
-        }
-    }
-?>
-@if(count($posts))    
-                      <div class="row">
-                         <!-- Posts column 1-->
-                         <div class="col-lg-4">
-    @foreach($cols[1] as $post)
-    @include('posts.post')
-    @endforeach
-
-                         </div>
-                         <!-- Posts column 2-->
-                         <div class="col-lg-4">
-    @foreach($cols[2] as $post)
-    @include('posts.post')
-    @endforeach
-                         </div>
-                         <!-- Posts column 3-->
-                         <div class="col-lg-4">
-    @foreach($cols[3] as $post)
-    @include('posts.post')
-    @endforeach
-                         </div>
-                      </div>
-@else
-    <div class="row">
-        <div class="col-lg-12">
-            No posts found.
-        </div>
-    </div>
-@endif
-                   </div>
-                   <!-- Blog Sidebar-->
-                   <div class="col-lg-3">
-                      <!-- Search-->
-                      <div class="panel panel-default">
-                         <div class="panel-heading">Search</div>
-                         <div class="panel-body">
-                            <form class="form-horizontal">
-                               <div class="input-group">
-                                  <input type="text" placeholder="Search for..." class="form-control">
-                                  <span class="input-group-btn">
-                                     <button type="button" class="btn btn-default">
-                                        <em class="fa fa-search"></em>
-                                     </button>
-                                  </span>
-                               </div>
-                            </form>
-                         </div>
-                      </div>
-                      <!-- Categories-->
-                      <div class="panel panel-default">
-                         <div class="panel-heading">Categories</div>
-                         <div class="panel-body">
-                            <ul class="list-unstyled">
-                               <li>
-                                  <a href="">
-                                     <em class="fa fa-angle-right fa-fw"></em>Smartphones</a>
-                               </li>
-                               <li>
-                                  <a href="">
-                                     <em class="fa fa-angle-right fa-fw"></em>Mobiles</a>
-                               </li>
-                               <li>
-                                  <a href="">
-                                     <em class="fa fa-angle-right fa-fw"></em>Tech</a>
-                               </li>
-                               <li>
-                                  <a href="">
-                                     <em class="fa fa-angle-right fa-fw"></em>Inpiration</a>
-                               </li>
-                               <li>
-                                  <a href="">
-                                     <em class="fa fa-angle-right fa-fw"></em>Workspace</a>
-                               </li>
-                            </ul>
-                         </div>
-                      </div>
-                      <!-- Tag Cloud-->
-                      <div class="panel panel-default">
-                         <div class="panel-heading">Tag Cloud</div>
-                         <div class="panel-body">
-                            <div id="jqcloud" class="center-block"></div>
-                         </div>
-                      </div>
-                      <!-- Ads-->
-                      <div class="panel panel-default">
-                         <div class="panel-heading">Ads</div>
-                         <div class="panel-body">
-                            <a href="">
-                               <img src="img/mockup.png" class="img-responsive img-thumbnail">
-                            </a>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-             </div>
-          </section>
+    @include('layouts.breadcrumbs', ['breadcrumbs' => [
+        ['label' => 'Posts', 'url' => '/posts'],
+    ]])
+  <div class="container-fluid">
+  <div class="animated fadeIn">    
     
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h1>Posts</h1>
+        </div>
+        <div class="card-block">
+    @if($posts->count() > 0)
+    <table class="table table-bordered">
+      <thead class="thead-default">
+        <tr>
+          <th>Title</th>
+          <th>Last Update</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($posts as $post)
+        <tr>
+          <th scope="row"><a href="{{ $post->path() }}">{{ $post->title }}</a></th>
+          <td>{{ $post->updated_at->diffForHumans() }}</td>
+          <th>&nbsp;</th>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+    @else
+    <p>No posts at this time.</td></tr>
+    @endif
+    
+        </div>
+      </div>
+    </div>
+  </div>
+    
+      <div class="row">
+    <div class="col">
+      <div class="card">
+            <div class="card-block">
+    @if(!Auth::guest())
+        <a href="/posts/create" class="btn btn-lg btn-primary pull-right">New Post</a>
+    @else
+    Please <a href="{{ route('login') }}">login</a> to manage posts.
+    @endif    
+    
+        </div>
+      </div>
+    </div>
+  </div>
+
+    </div>
+    </div>
 @endsection

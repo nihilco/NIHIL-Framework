@@ -18,9 +18,9 @@ class PriorityTest extends TestCase
         $this->priority = create('App\Models\Priority');
     }
 
-    public function test_a_priority_has_a_user()
+    public function test_a_priority_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->priority->user);
+        $this->assertInstanceOf('App\Models\User', $this->priority->creator);
     }
 
     public function test_a_priority_has_issues()

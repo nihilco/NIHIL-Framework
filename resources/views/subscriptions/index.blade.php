@@ -13,13 +13,13 @@
       <meta name="og:description" property="og:description" content="The Taraloka Foundation is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.">
       <meta name="og:image" property="og:image" content="https://taraloka.org/img/taraloka-logo-og-dark.png">
 
-      <title>Countries</title>
+      <title>Subscriptions</title>
 @endsection
     
 @section('content')
 
     @include('layouts.breadcrumbs', ['breadcrumbs' => [
-        ['label' => 'Countries', 'url' => '/countries'],
+        ['label' => 'Subscriptions', 'url' => '/subscriptions'],
     ]])
   <div class="container-fluid">
   <div class="animated fadeIn">    
@@ -28,32 +28,34 @@
     <div class="col">
       <div class="card">
         <div class="card-header">
-          <h1>Countries</h1>
+          <h1>Subscriptions</h1>
         </div>
         <div class="card-block">
-    @if($countries->count() > 0)
+    @if($subscriptions->count() > 0)
     <table class="table table-bordered">
       <thead class="thead-default">
         <tr>
-          <th>Name</th>
-          <th>Abbr</th>
+          <th>User</th>
+          <th>Account</th>
+          <th>Customer</th>
           <th>Last Update</th>
           <th>&nbsp;</th>
         </tr>
       </thead>
       <tbody>
-        @foreach($countries as $country)
+        @foreach($subscriptions as $subscription)
         <tr>
-          <th scope="row"><a href="{{ $country->path() }}">{{ $country->name }}</a></th>
-          <td>{{ $country->abbr }}</td>
-          <td>{{  $country->updated_at->diffForHumans() }}</td>
+          <th scope="row"><a href="{{ $subscription->path() }}">{{ $subscription->user->username }}</a></th>
+          <td>{{ $subscription->account->name }}</td>
+          <td>{{ $subscription->customer_id }}</td>
+          <td>{{ $subscription->updated_at->diffForHumans() }}</td>
           <th>&nbsp;</th>
         </tr>
         @endforeach
       </tbody>
     </table>
     @else
-    <p>No countries at this time.</td></tr>
+    <p>No subscriptions at this time.</td></tr>
     @endif
     
         </div>
@@ -66,9 +68,9 @@
       <div class="card">
             <div class="card-block">
     @if(!Auth::guest())
-        <a href="/countries/create" class="btn btn-lg btn-primary pull-right">New Country</a>
+        <a href="/subscriptions/create" class="btn btn-lg btn-primary pull-right">New Subscription</a>
     @else
-    Please <a href="{{ route('login') }}">login</a> to manage countries.
+    Please <a href="{{ route('login') }}">login</a> to manage subscriptions.
     @endif    
     
         </div>

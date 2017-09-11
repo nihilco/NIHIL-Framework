@@ -18,9 +18,9 @@ class InvoiceItemTest extends TestCase
         $this->invoiceItem = create('App\Models\InvoiceItem');
     }
 
-    public function test_an_invoice_item_has_a_user()
+    public function test_an_invoice_item_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->invoiceItem->user);
+        $this->assertInstanceOf('App\Models\User', $this->invoiceItem->creator);
     }
 
     public function test_an_invoice_item_has_an_invoice()

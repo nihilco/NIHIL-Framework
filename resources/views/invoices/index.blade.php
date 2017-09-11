@@ -47,7 +47,7 @@
         <tr>
           <th scope="row"><a href="{{ $invoice->path() }}">{{ $invoice->customer->stripe_id }}</a></th>
           <td>{{ $invoice->account->name }}</td>
-          <td>{{ $invoice->user->username }}</td>
+          <td>{{ $invoice->creator->username }}</td>
           <td>{{  $invoice->updated_at->diffForHumans() }}</td>
           <th>&nbsp;</th>
         </tr>

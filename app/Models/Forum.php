@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\LogActivity;
 use App\Traits\MarkFavorite;
+use App\Traits\FollowResource;
 
 class Forum extends Model
 {
-    use SoftDeletes, LogActivity, MarkFavorite;
+    use SoftDeletes, LogActivity, MarkFavorite, FollowResource;
 
     protected $dates = ['deleted_at'];
     /**
@@ -19,15 +20,11 @@ class Forum extends Model
      */
     protected $table = 'forums';
 
-    protected $fillable = ['title', 'slug', 'description', 'user_id'];
+    protected $fillable = ['creator_id', 'user_id', 'title', 'slug', 'description'];
 
     public static function boot()
     {
         parent::boot();
-
-        static::addGlobalScope('threadCount', function ($builder) {
-            $builder->withCount('threads');
-        });
 
         static::deleting(function($forum) {
             $forum->threads->each->delete();

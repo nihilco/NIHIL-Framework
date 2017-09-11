@@ -19,9 +19,19 @@ class Plan extends Model
      *
      * @var array
      */
-    protected $fillable = ['account_id', 'name', 'amount', 'currency_id', 'interval', 'interval_count'];
+    protected $fillable = [
+        'account_id',
+        'creator_id',
+        'name',
+        'slug',
+        'description',
+        'amount',
+        'currency_id',
+        'interval',
+        'interval_count'
+    ];
 
-    public function user()
+    public function creator()
     {
         return $this->belongsTo(User::class);
     }
@@ -29,6 +39,11 @@ class Plan extends Model
     public function account()
     {
         return $this->belongsTo(Account::class);
+    }
+
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
     }
 
     public function subscriptions()
@@ -39,63 +54,5 @@ class Plan extends Model
     public function path()
     {
         return '/plans/' . $this->id;
-    }
-    
-    public static function findUniquePlan($aid, $a, $cid, $i, $ic)
-    {
-        return Plan::where('account_id', $aid)
-                   ->where('amount', $a)
-                   ->where('currency_id', $cid)
-                   ->where('interval', $i)
-                   ->where('interval_count', $ic)
-                   ->first();
-    }
-
-    public function checkIfPlanIsUnique()
-    {
-        if(!$this->account || !$this->amount || !$this->currency_id || !$this->interval || !$this->interval_count) {
-            return false;
-        }
-
-        if(!$plan = Plan::where('account_id', $this->account_id)
-                        ->where('amount', $this->amount)
-                        ->where('currency_id', $this->currency_id)
-                        ->where('interval', $this->interval)
-                        ->where('interval_count', $this->interval_count)
-                        ->first()
-        ) {
-            return true;
-        }
-        
-        return false;
-    }
-    
-    public static function importStripePlans()
-    {
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-
-        $plans = \Stripe\Plan::all();
-
-        $currencies = Currency::allAsSlugIndexedArray();
-        
-        $insert = array();
-        
-        foreach($plans->data as $plan)
-        {
-            if(!$p = Plan::find($plan->id)) {
-                $insert[] = [
-                    'id' => $plan->id,
-                    'name' => $plan->name,
-                    'amount' => $plan->amount,
-                    'currency_id' => $currencies[$plan->currency]->id,
-                    'interval' => $plan->interval,
-                    'interval_count' => $plan->interval_count,
-                    'created_at' => \Carbon\Carbon::createFromTimestamp($plan->created)->format('Y-m-d H:i:s'),
-                    'updated_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
-                ];
-            }
-        }
-
-        return Plan::insert($insert);
-    }
+    }   
 }

@@ -26,7 +26,7 @@ class CountriesController extends Controller
         return view('countries.index', compact('countries'));
     }
 
-    public function store(Country $country)
+    public function store(Request $request)
     {
         Country::create([]);
 

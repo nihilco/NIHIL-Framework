@@ -9,7 +9,8 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
 	"stripe/stripe-php": "4.*",
-	"ezyang/htmlpurifier": "4.*"
+	"ezyang/htmlpurifier": "4.*",
+	"guzzlehttp/guzzle": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

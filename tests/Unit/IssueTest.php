@@ -18,6 +18,11 @@ class IssueTest extends TestCase
         $this->issue = create('App\Models\Issue');
     }
 
+    public function test_an_issue_has_a_creator()
+    {
+        $this->assertInstanceOf('App\Models\User', $this->issue->creator);
+    }
+
     public function test_an_issue_has_a_user()
     {
         $this->assertInstanceOf('App\Models\User', $this->issue->user);

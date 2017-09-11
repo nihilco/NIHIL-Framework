@@ -18,6 +18,11 @@ class EmailTest extends TestCase
         $this->email = create('App\Models\Email');
     }
 
+    public function test_an_email_has_a_creator()
+    {
+        $this->assertInstanceOf('App\Models\User', $this->email->creator);
+    }
+
     public function test_an_email_has_a_user()
     {
         $this->assertInstanceOf('App\Models\User', $this->email->user);

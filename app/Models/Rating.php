@@ -13,7 +13,12 @@ class Rating extends Model
 
     protected $table = 'ratings';
 
-    protected $fillable = ['user_id', 'resource_id', 'resource_type'];
+    protected $fillable = ['creator_id', 'user_id', 'resource_id', 'resource_type'];
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function user()
     {

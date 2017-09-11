@@ -18,9 +18,9 @@ class CategoryTest extends TestCase
         $this->category = create('App\Models\Category');
     }
 
-    public function test_a_category_has_a_user()
+    public function test_a_category_has_a_creator()
     {
-        $this->assertInstanceOf('App\Models\User', $this->category->user);
+        $this->assertInstanceOf('App\Models\User', $this->category->creator);
     }
 
     public function test_a_category_has_a_parent()

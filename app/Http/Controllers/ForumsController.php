@@ -54,6 +54,7 @@ class ForumsController extends Controller
         $forum->slug = request('slug');
         $forum->description = request('description');
         $forum->user_id = auth()->id();
+        $forum->creator_id = auth()->id();
         $forum->save();
 
         return redirect('/forums')->with('flash', [

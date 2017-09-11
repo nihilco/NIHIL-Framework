@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\LogActivity;
 use App\Traits\CastVote;
 use App\Traits\VoiceReply;
+use App\Traits\MarkFavorite;
+use App\Traits\FollowResource;
 
 class Thread extends Model
 {
-    use SoftDeletes, CastVote, LogActivity, VoiceReply;
+    use SoftDeletes, CastVote, LogActivity, VoiceReply, MarkFavorite, FollowResource;
 
     protected $dates = ['deleted_at'];
     /**
@@ -20,11 +22,19 @@ class Thread extends Model
      */
     protected $table = 'threads';
 
-    protected $fillable = ['title', 'slug', 'body', 'user_id'];
+    protected $fillable = ['creator_id', 'user_id', 'title', 'slug', 'body'];
     
     public static function boot()
     {
         parent::boot();
+
+        static::created(function ($thread) {
+            $thread->forum->increment('threads_count');
+        });
+
+        static::deleted(function ($thread) {
+            $thread->forum->decrement('threads_count');
+        });
     }
 
     public function getRouteKeyName()
@@ -36,6 +46,11 @@ class Thread extends Model
     {
         //dd($this);
         return $this->forum->path() . '/'  . $this->slug;
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function user()

@@ -33,7 +33,47 @@
         </div>
         <div class="card-block">
 
-
+        @if (count($errors) > 0)
+          <div class="alert alert-danger">
+            <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+            </ul>
+          </div>
+        @endif
+    
+      <form method="POST" action="/accounts">
+        {{ csrf_field() }}
+        <div class="form-group{{ $errors->first('name') ? ' has-danger' : '' }}">
+          <label class="form-control-label" for="name">Name</label>
+          <input type="text" class="form-control{{ $errors->first('name') ? ' form-control-danger' : '' }}" id="name" name="name" title="name" aria-describedby="nameHelp" placeholder="Let us name this biatch" value="{{ old('name') }}" required>
+          @if($errors->first('name'))
+          <small id="nameHelp" class="form-control-feedback">{{ $errors->first('name') }}</small>
+          @endif
+        </div>
+        <div class="form-group{{ $errors->first('description') ? ' has-danger' : '' }}">
+          <label class="form-control-label" for="description">Description</label>
+          <textarea class="form-control{{ $errors->first('description') ? 'form-control-danger' : '' }}" id="description" name="description" title="description" aria-describedby="descriptionHelp" placeholder="Have something to say?" rows="5" required>{{ old('description') }}</textarea>
+          @if($errors->first('description'))
+          <small id="descriptionHelp" class="form-control-feedback">{{ $errors->first('description') }}</small>
+          @endif
+        </div>
+        <div class="form-group{{ $errors->first('country') ? ' has-danger' : '' }}">
+          <label class="form-control-label" for="countryId">Country ID</label>          
+    <select class="form-control{{ $errors->first('country') ? ' form-control-danger' : '' }}" id="country" name="country" title="country" aria-describedby="countryHelp" required>
+    @foreach($countries as $country)
+    <option value="{{ $country->id }}">{{ $country->name }}</option>
+    @endforeach
+        </select>
+          @if($errors->first('country'))
+          <small id="countryHelp" class="form-control-feedback">{{ $errors->first('country') }}</small>
+          @endif
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-lg btn-primary pull-right">Create Account</button>
+        </div>
+      </form>
     
         </div>
       </div>

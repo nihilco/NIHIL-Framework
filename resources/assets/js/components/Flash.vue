@@ -17,7 +17,7 @@
 	  header: '',
 	  body: '',
 	  show: false
-        }
+        };
       },
 
       created() {

@@ -18,13 +18,33 @@
       </ul>
     </li>
     <li class="nav-item nav-dropdown">
-      <a class="nav-link nav-dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-briefcase" aria-hidden="true"></i> Media</a>
+      <a class="nav-link nav-dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-university" aria-hidden="true"></i> Planner</a>
       <ul class="nav-dropdown-items">
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="icon-star"></i> Books</a>
+          <a class="nav-link" href="/emails"><i class="fa fa-book" aria-hidden="true"></i> Emails</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="icon-star"></i> Documents</a>
+          <a class="nav-link" href="/contacts"><i class="fa fa-user" aria-hidden="true"></i> Contacts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/calendars"><i class="fa fa-user" aria-hidden="true"></i> Calendars</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/tasks"><i class="fa fa-user" aria-hidden="true"></i> Tasks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/addresses"><i class="fa fa-user" aria-hidden="true"></i> Addresses</a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item nav-dropdown">
+      <a class="nav-link nav-dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-university" aria-hidden="true"></i> Library</a>
+      <ul class="nav-dropdown-items">
+        <li class="nav-item">
+          <a class="nav-link" href="/books"><i class="fa fa-book" aria-hidden="true"></i> Books</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/authors"><i class="fa fa-user" aria-hidden="true"></i> Authors</a>
         </li>
       </ul>
     </li>
@@ -32,34 +52,34 @@
       <a class="nav-link nav-dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Shop</a>
       <ul class="nav-dropdown-items">
         <li class="nav-item">
-          <a class="nav-link" href="/accounts"><i class="icon-star"></i> Accounts</a>
+          <a class="nav-link" href="/accounts"><i class="fa fa-university" aria-hidden="true"></i> Accounts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/customers"><i class="icon-star"></i> Customers</a>
+          <a class="nav-link" href="/customers"><i class="fa fa-id-card" aria-hidden="true"></i> Customers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/invoices"><i class="icon-star"></i> Invoices</a>
+          <a class="nav-link" href="/invoices"><i class="fa fa-plus-square" aria-hidden="true"></i> Invoices</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/orders"><i class="icon-star"></i> Orders</a>
+          <a class="nav-link" href="/orders"><i class="fa fa-truck" aria-hidden="true"></i> Orders</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/payments"><i class="icon-star"></i> Payments</a>
+          <a class="nav-link" href="/payments"><i class="fa fa-usd" aria-hidden="true"></i> Payments</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/plans"><i class="icon-star"></i> Plans</a>
+          <a class="nav-link" href="/plans"><i class="fa fa-map" aria-hidden="true"></i> Plans</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/products"><i class="icon-star"></i> Products</a>
+          <a class="nav-link" href="/products"><i class="fa fa-cubes" aria-hidden="true"></i> Products</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/sources"><i class="icon-star"></i> Sources</a>
+          <a class="nav-link" href="/sources"><i class="fa fa-money" aria-hidden="true"></i> Sources</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/subscriptions"><i class="icon-star"></i> Subscriptions</a>
+          <a class="nav-link" href="/subscriptions"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Subscriptions</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/transactions"><i class="icon-star"></i> Transactions</a>
+          <a class="nav-link" href="/transactions"><i class="fa fa-calculator" aria-hidden="true"></i> Transactions</a>
         </li>
       </ul>
     </li>
@@ -67,19 +87,19 @@
       <a class="nav-link nav-dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-life-ring" aria-hidden="true"></i> Support</a>
       <ul class="nav-dropdown-items">
         <li class="nav-item">
-          <a class="nav-link" href="/issues"><i class="icon-star"></i> Issues</a>
+          <a class="nav-link" href="/issues"><i class="fa fa-bug" aria-hidden="true"></i> Issues</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/types"><i class="icon-star"></i> Types</a>
+          <a class="nav-link" href="/types"><i class="fa fa-globe" aria-hidden="true"></i> Types</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/priorities"><i class="icon-star"></i> Priorities</a>
+          <a class="nav-link" href="/priorities"><i class="fa fa-bolt" aria-hidden="true"></i> Priorities</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/statuses"><i class="icon-star"></i> Statuses</a>
+          <a class="nav-link" href="/statuses"><i class="fa fa-heartbeat" aria-hidden="true"></i> Statuses</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/resolutions"><i class="icon-star"></i> Resolutions</a>
+          <a class="nav-link" href="/resolutions"><i class="fa fa-certificate" aria-hidden="true"></i> Resolutions</a>
         </li>
       </ul>
     </li>

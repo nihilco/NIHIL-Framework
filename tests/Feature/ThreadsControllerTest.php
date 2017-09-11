@@ -148,6 +148,18 @@ class ThreadsControllerTest extends TestCase
              ->assertSee($threadByJohn->title)
              ->assertDontSee($threadNotByJohn->title);
     }
+
+    public function test_a_user_can_filter_threads_by_unanswered()
+    {
+        $this->signIn('App\Models\User');
+        
+        $thread = create('App\Models\Thread');
+        $reply = create('App\Models\Reply', ['resource_id' => $thread->id, 'resource_type' => get_class($thread)]);
+
+        $this->get('/forums/threads?unanswered=1')
+             ->assertSee($this->thread->title)
+             ->assertDontSee($thread->title);
+    }
 /*
     public function test_a_user_can_filter_threads_by_reply_count()
     {

@@ -10,7 +10,7 @@ class InvoicesController extends Controller
     //
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['show', 'pay']);
     }
 
     /**
@@ -47,6 +47,27 @@ class InvoicesController extends Controller
     public function create()
     {
         return view('invoices.create');
+    }
+
+    //
+    public function pay(Invoice $invoice, Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required',
+            'stripeToken' => 'required',
+        ]);
+        
+        $payment = $invoice->makePayment([
+            'token' => request('stripeToken'),
+            'email' => request('email'),
+            'comments' => request('comments'),
+        ]);
+
+        return redirect($invoice->path())->with('flash', [
+            'type' => 'success',
+            'title' => 'Made Payment',
+            'message' => 'You made a payment.',
+        ]);
     }
 
     //
