@@ -178,7 +178,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        // New
+        // New Comment
         App\Providers\ConfigServiceProvider::class,
         App\Providers\TemplateServiceProvider::class,
         //
