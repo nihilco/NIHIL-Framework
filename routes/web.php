@@ -34,6 +34,8 @@ Route::post('/login', 'SessionsController@store');
 Route::post('/logout', 'SessionsController@destroy')->name('logout');
 Route::get('/password/request', 'PasswordsController@request')->name('password.request');
 Route::get('/password/reset', 'PasswordsController@reset')->name('password.reset');
+Route::get('/about', 'HomeController@about');
+Route::get('/contact', 'HomeController@contact');
 
 // ADMIN
 Route::get('/dashboard', 'AdminController@index')->name('dashboard');
