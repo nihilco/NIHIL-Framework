@@ -18,7 +18,7 @@ class InvoiceItem extends Model
      *
      * @var array
      */
-    protected $fillable = ['creator_id', 'invoice_id', 'name', 'description', 'quantity', 'unit_price'];
+    protected $fillable = ['creator_id', 'invoice_id', 'name', 'description', 'quantity', 'unit_price', 'subtotal'];
 
     public function creator()
     {

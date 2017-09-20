@@ -19,7 +19,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'about', 'mission', 'newsletters', 'partners', 'contact', 'astral', 'process', 'confirm']]);
+        $this->middleware('auth', ['except' => ['index', 'about', 'mission', 'newsletters', 'partners', 'contact', 'tenth', 'downloads', 'astral', 'process', 'confirm']]);
     }
 
     /**
@@ -55,6 +55,16 @@ class HomeController extends Controller
     public function contact()
     {
         return view('home.contact');
+    }
+
+    public function tenth()
+    {
+        return view('home.tenth');
+    }
+
+    public function downloads()
+    {
+        return view('home.downloads');
     }
 
     public function astral()

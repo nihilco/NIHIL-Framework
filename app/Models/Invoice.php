@@ -15,7 +15,7 @@ class Invoice extends Model
 
     protected $table = 'invoices';
     
-    protected $fillable = ['creator_id', 'account_id', 'customer_id', 'type_id', 'status_id', 'billing_address_id', 'shipping_address_id', 'slug', 'tax_rate', 'shipping_total'];
+    protected $fillable = ['creator_id', 'account_id', 'customer_id', 'type_id', 'status_id', 'billing_address_id', 'shipping_address_id', 'slug', 'subtotal', 'tax_rate', 'tax', 'shipping_total', 'total'];
 
     public function getRouteKeyName()
     {
@@ -111,9 +111,10 @@ class Invoice extends Model
         return $this->tax_rate . '%';
     }
 
-    public function addItem($name, $description, $qty, $price)
+    public function addItem($cid, $name, $description, $qty, $price)
     {
         return $this->items()->create([
+            'creator_id' => $cid,
             'name' => $name,
             'description' => $description,
             'quantity' => $qty,

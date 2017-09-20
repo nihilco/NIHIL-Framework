@@ -20,8 +20,8 @@ class CreateInvoicesTable extends Migration
             $table->unsignedInteger('customer_id');
             $table->unsignedInteger('type_id');
             $table->unsignedInteger('status_id');
-            $table->unsignedInteger('billing_address_id');
-            $table->unsignedInteger('shipping_address_id');
+            $table->unsignedInteger('billing_address_id')->nullable();
+            $table->unsignedInteger('shipping_address_id')->nullable();
             $table->string('slug', 50)->unique();
             $table->integer('subtotal');
             $table->decimal('tax_rate');

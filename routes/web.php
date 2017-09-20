@@ -35,7 +35,22 @@ Route::post('/logout', 'SessionsController@destroy')->name('logout');
 Route::get('/password/request', 'PasswordsController@request')->name('password.request');
 Route::get('/password/reset', 'PasswordsController@reset')->name('password.reset');
 Route::get('/about', 'HomeController@about');
-Route::get('/contact', 'HomeController@contact');
+Route::get('/tenth-anniversary', 'HomeController@tenth');
+Route::get('/10', 'HomeController@tenth');
+Route::get('/10th', 'HomeController@tenth');
+Route::get('/downloads', 'HomeController@downloads');
+
+//
+Route::get('/donate', 'PaymentsController@donate');
+Route::post('/donate', 'PaymentsController@processDonation');
+
+//
+
+Route::get('/apply', 'ApplicationsController@index');
+Route::get('/nominate', 'NominationsController@index');
+Route::get('/contact', 'ContactController@index');
+Route::post('/contact', 'ContactController@store');
+Route::post('/tickets/buy', 'TicketsController@buy');
 
 // ADMIN
 Route::get('/dashboard', 'AdminController@index')->name('dashboard');

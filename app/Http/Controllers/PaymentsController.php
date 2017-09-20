@@ -10,13 +10,14 @@ use App\Models\Account;
 use App\Models\Customer;
 use App\Models\Plan;
 use App\Models\Subscription;
+use App\Models\Invoice;
 
 class PaymentsController extends Controller
 {
         //
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['donate', 'process']]);
+        $this->middleware('auth', ['except' => ['donate', 'processDonation']]);
     }
 
     //
@@ -186,6 +187,71 @@ class PaymentsController extends Controller
     public function donate()
     {
         return view('payments.donate');
+    }
+
+    public function processDonation(Request $request)
+    {
+        $this->validate($request, [
+            'amount' => 'required',
+            'recurrence' => 'required',
+            'email' => 'required',
+            'stripeToken' => 'required',
+        ]);
+
+        if(!$user = User::byEmail(request('email'))) {
+            $user = User::create([
+                'email' => request('email'),
+            ]);
+        }
+
+        $subtotal = request('amount') * 100;
+
+        //
+        $invoice = Invoice::create([
+            'creator_id' => $user->id,
+            'account_id' => 1,
+            'customer_id' => $user->customers()->where('account_id', 1)->first()->id,
+            'type_id' => 25,
+            'status_id' => 7,
+            'slug' => uniqid(),
+            'subtotal' => $subtotal,
+            'tax_rate' => 0,
+            'tax' => 0,
+            'shipping_total' => 0,
+            'total' => $subtotal,
+        ]);
+
+        $invoice->addItem(
+            $user->id,
+            'General Donation',
+            'General purpose donation.',
+            1,
+            $subtotal
+        );
+
+        if(request('recurrence') == 'once') {
+            $payment = $invoice->makePayment([
+                'token' => request('stripeToken'),
+                'email' => request('email'),
+                'comments' => request('comments'),
+            ]);
+        } elseif(
+            request('recurrence') == 'monthly' ||
+            request('recurrence') == 'yearly'
+        ) {
+            $payment = $invoice->makeRecurringPayment([
+                'token' => request('stripeToken'),
+                'email' => request('email'),
+                'recurrence' => request('recurrence'),
+                'comments' => request('comments'),
+            ]);
+        }
+        
+        return redirect($invoice->path())->with('flash', [
+            'type' => 'success',
+            'title' => 'Made Payment',
+            'message' => 'You made a payment.',
+        ]);
     }
 
     private function convertToCents($amount)
