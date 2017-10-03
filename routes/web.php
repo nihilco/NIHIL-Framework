@@ -51,6 +51,7 @@ Route::get('/nominate', 'NominationsController@index');
 Route::get('/contact', 'ContactController@index');
 Route::post('/contact', 'ContactController@store');
 Route::post('/tickets/buy', 'TicketsController@buy');
+Route::resource('tickets', 'TicketsController');
 
 // ADMIN
 Route::get('/dashboard', 'AdminController@index')->name('dashboard');

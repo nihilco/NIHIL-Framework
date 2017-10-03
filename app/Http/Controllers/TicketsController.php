@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Ticket;
 use App\Models\Invoice;
 use App\Models\User;
+use App\Models\Customer;
 
 class TicketsController extends Controller
 {
@@ -56,6 +57,7 @@ class TicketsController extends Controller
     {
         $this->validate($request, [
             'quantity' => 'required',
+            'name' => 'required',
             'email' => 'required',
             'stripeToken' => 'required',
         ]);
@@ -63,7 +65,12 @@ class TicketsController extends Controller
         if(!$user = User::byEmail(request('email'))) {
             $user = User::create([
                 'email' => request('email'),
+                'name' => request('name'),
             ]);
+        }
+
+        if(!$customer = $user->customers()->where('account_id', 5)->first()) {
+            $customer = Customer::createStripeCustomer($user);
         }
 
         $ticketPrice = 3500;
@@ -72,8 +79,8 @@ class TicketsController extends Controller
         //
         $invoice = Invoice::create([
             'creator_id' => $user->id,
-            'account_id' => 1,
-            'customer_id' => $user->customers()->where('account_id', 1)->first()->id,
+            'account_id' => 5,
+            'customer_id' => $customer->id, 
             'type_id' => 24,
             'status_id' => 7,
             'slug' => uniqid(),

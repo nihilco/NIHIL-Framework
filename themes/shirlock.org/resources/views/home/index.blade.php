@@ -1,4 +1,20 @@
 @extends('layouts.template')
+
+@section('meta')
+      <meta description="The Shirlock Foundation is a registered 501(c)3 organization committed to financially assisting the families of college students who are battling cancer.">
+      <meta keywords="shirlock, college, cancer, atlanta, foundation, nihil">
+      <meta author="Uriah M. Clemmer IV">
+
+      <meta property="fb:app_id" content="567784843612818">
+    
+      <meta property="og:url" content="https://shirlock.org">
+      <meta property="og:type" content="article">
+      <meta property="og:title" content="The Shirlock Foundation">
+      <meta property="og:description" content="The Shirlock Foundation is a registered 501(c)3 organization committed to financially assisting the families of college students who are battling cancer.">
+      <meta property="og:image" content="https://shirlock.org/img/shirlock-logo-og.png">
+
+      <title>Shirlock Foundation</title>
+@endsection
     
 @section('content')
 
@@ -22,7 +38,7 @@
           <img class="second-slide" src="/img/bourbon-chase-banner.jpg" alt="Second slide">
           <div class="container">
             <div class="carousel-caption d-md-block text-left">
-              <h1>Boubon Chase</h1>
+              <h1>Bourbon Chase</h1>
               <p>&quot;A 200-mile relay race along the Kentucky Bourbon Trail, The Bourbon Chase celebrates the best of Kentucky. It is a 200-mile journey across the Bluegrass State – through our historic bourbon distilleries, across our majestic horse country, and into our enchanting small towns.&quot;</p>
               <p><a class="btn btn-lg btn-primary" href="https://www.bourbonchase.com/" role="button" target="_blank">Learn more</a></p>
             </div>
@@ -54,7 +70,7 @@
       <div class="row">
         <div class="col-sm-4">
           <h2>Apply Online</h2>
-          <p>Are you 18-25 years of age and battling cancer?  Our online application is quick and easy - give it a try. We want to help.</p>
+          <p>Are you a college student battling cancer?  Our online application is quick and easy - give it a try. We want to help.</p>
           <p><a class="btn btn-success" href="/apply" role="button">Apply &raquo;</a></p>
         </div>
         <div class="col-sm-4">

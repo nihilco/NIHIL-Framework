@@ -15,6 +15,7 @@ class Customer extends Model
 
     protected $fillable = [
         'user_id',
+        'creator_id',
         'stripe_id',
         'account_id',
         'description',
@@ -86,7 +87,7 @@ class Customer extends Model
         return Customer::create([
             'creator_id' => $user->id,
             'user_id' => $user->id,
-            'account_id' => 1,
+            'account_id' => 5,
             'stripe_id' => $stripeCustomer->id,
             'description' => $description,
         ]);

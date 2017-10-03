@@ -1,5 +1,21 @@
 @extends('layouts.template')
 
+@section('meta')
+      <meta description="The Shirlock Foundation is turning 10! Come celebrate with us at Monday Night Brewing's new facility on the Beltline.  Through partnership with Monday Night Brewing and their '$100K in 100 Days' campaign to help open their new West End facility, 'The Garage', we're looking forward to seeing everyone for food, drinks, music, and fun. Come out and celebrate our last decade and help us prepare for the next 10 years of continuing to assist college-aged cancer patients in need!  Pint glasses, koozies, food, local brews, music, and more will all be included with your ticket. Tickets will be on sale soon!">
+      <meta keywords="shirlock, college, cancer, atlanta, foundation, nihil">
+      <meta author="Uriah M. Clemmer IV">
+
+      <meta property="fb:app_id" content="567784843612818">
+    
+      <meta property="og:url" content="https://shirlock.org/tenth-anniversary">
+      <meta property="og:type" content="article">
+      <meta property="og:title" content="Tenth Anniversary | The Shirlock Foundation">
+      <meta property="og:description" content="The Shirlock Foundation is turning 10! Come celebrate with us at Monday Night Brewing's new facility on the Beltline.  Through partnership with Monday Night Brewing and their '$100K in 100 Days' campaign to help open their new West End facility, 'The Garage', we're looking forward to seeing everyone for food, drinks, music, and fun. Come out and celebrate our last decade and help us prepare for the next 10 years of continuing to assist college-aged cancer patients in need!  Pint glasses, koozies, food, local brews, music, and more will all be included with your ticket. Tickets on sale now!">
+      <meta property="og:image" content="https://shirlock.org/img/shirlock-tenth-anniversary-og.png">
+
+      <title>Tenth Anniversary | Shirlock Foundation</title>
+@endsection
+    
 @section('content')
 
 <div class="container">
@@ -11,6 +27,12 @@
 
       <img src="/img/monday-night-banner.jpg" class="img-fluid" alt="Tenth Anniversary Celebration" />
 
+    <p>The Shirlock Foundation is turning 10! Come celebrate with us at Monday Night Brewings new facility on the Beltline.</p>
+
+    <p>Through partnership with Monday Night Brewing and their &quot;$100K in 100 Days&quot; campaign to help open their new West End facility, &quot;The Garage&quot;, we are looking forward to seeing everyone for food, drinks, music, and fun. Come out and celebrate our last decade and help us prepare for the next 10 years of continuing to assist college-aged cancer patients in need!</p>
+
+    <p>Pint glasses, koozies, food, local brews, music, and more will all be included with your ticket. Tickets on sale now!</p>
+    
     </div>
     <div class="col-md-4">
 
@@ -18,10 +40,10 @@
         <div class="card-body">
 
     <strong>Where: </strong>Monday Night Brewing<br />
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;933 Lee Street SW<br />
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Atlanta, GA 30310<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;933 Lee Street SW<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Atlanta, GA 30310<br />
     <strong>Date: </strong>November 5, 2017<br />
-    <strong>Time: </strong>4:00PM to 7:00PM<br />
+    <strong>Time: </strong>3:00PM to 6:00PM<br />
     <strong>Price: </strong>$35/person<br />
     <button type="button" class="btn btn-lg btn-success mt-3" data-toggle="modal" data-target="#ticketModal">Buy Tickets</button>
 
@@ -70,6 +92,17 @@
                     </div>
                                          @if($errors->first('quantity'))
                                          <div class="invalid-feedback">{{ $errors->first('quantity') }}</div>
+                                         @endif
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control{{ $errors->first('name') ? ' is-invalid' : '' }}" id="name" placeholder="John Smith" name="name" title="name">
+                                         @if($errors->first('name'))
+                                         <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                                          @endif
                   </div>
                 </div>

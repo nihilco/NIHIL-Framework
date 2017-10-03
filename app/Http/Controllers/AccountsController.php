@@ -49,6 +49,7 @@ class AccountsController extends Controller
         //
         $account = Account::create([
             'user_id' => auth()->id(),
+            'creator_id' => auth()->id(),
             'mode' => 'test',
             'status' => 'active',
             'name' => request('name'),

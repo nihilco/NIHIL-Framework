@@ -204,13 +204,17 @@ class PaymentsController extends Controller
             ]);
         }
 
+        if(!$customer = $user->customers()->where('account_id', 5)->first()) {
+            $customer = Customer::createStripeCustomer($user);
+        }
+
         $subtotal = request('amount') * 100;
 
         //
         $invoice = Invoice::create([
             'creator_id' => $user->id,
-            'account_id' => 1,
-            'customer_id' => $user->customers()->where('account_id', 1)->first()->id,
+            'account_id' => 5,
+            'customer_id' => $customer->id,
             'type_id' => 25,
             'status_id' => 7,
             'slug' => uniqid(),

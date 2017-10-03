@@ -1,5 +1,5 @@
 <script>
-var stripe = Stripe('pk_test_oBG1UuDfekCXu72oDEOjRcqk');
+var stripe = Stripe('pk_live_QRU7EqjeD0h1mjMxc1SEODHv');
 var elements = stripe.elements();
 
 // Custom styling can be passed to options when creating an Element.

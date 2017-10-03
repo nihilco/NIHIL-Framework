@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://nihilframework.com'),
+    'url' => env('APP_URL', 'https://shirlock.org'),
 
     /*
     |--------------------------------------------------------------------------

@@ -7,6 +7,11 @@
     <meta name="author" content="Uriah M. Clemmer IV">
     <link rel="icon" href="/img/favicon.ico">
 
+    @yield('meta')
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+      
     <title>Shirlock Foundation</title>
 
     <!-- Bootstrap core CSS -->

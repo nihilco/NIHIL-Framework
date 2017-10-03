@@ -88,5 +88,21 @@ class AccountsTableSeeder extends Seeder
             'country_id' => 1,
             'managed' => true,
         ]);
+        
+        $shirlockLiveAccount = factory('App\Models\Account')->create([
+            'creator_id' => 1,
+            'user_id' => 1,
+            'mode' => 'live',
+            'status' => 'active',
+            'name' => 'The Shirlock Foundation',
+            'stripe_id' => 'acct_1B4AzzLbZ3rPSQCJ',
+            'publishable_key' => 'pk_live_QRU7EqjeD0h1mjMxc1SEODHv',
+            'secret_key' => 'eyJpdiI6InBhYXNBaGlmKzFRUTRzN3k2Z2QzbVE9PSIsInZhbHVlIjoiUmRubFwvMFNNZUhnVThKYW1Ua0JpYkpCQzVGM3VHS0Rlckp6NjBpeCsxZVo1SVJnWndFNW12NkNuU0lqVktcL2FiIiwibWFjIjoiMGVmYjM0ZjRkMWUzYTYwOThjYmUwOTkxYTRjNmVjYjMxOWVlMTYyYWU0Yzc1MDAzYTJiOWI2M2NhMTdmNWYyOCJ9',
+            'api_version' => '2017-06-05',
+            'description' => 'Live managed account for The Shirlock Foundation.',
+            'country_id' => 1,
+            'managed' => true,
+        ]);
+        
     }
 }

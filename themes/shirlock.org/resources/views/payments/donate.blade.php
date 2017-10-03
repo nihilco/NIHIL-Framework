@@ -1,5 +1,21 @@
 @extends('layouts.template')
 
+@section('meta')
+      <meta description="The Shirlock Foundation is a registered 501(c)3 organization committed to financially assisting the families of college students who are battling cancer.">
+      <meta keywords="shirlock, college, cancer, atlanta, foundation, nihil">
+      <meta author="Uriah M. Clemmer IV">
+
+      <meta property="fb:app_id" content="567784843612818">
+    
+      <meta property="og:url" content="https://shirlock.org/donate">
+      <meta property="og:type" content="article">
+      <meta property="og:title" content="Donate | The Shirlock Foundation">
+      <meta property="og:description" content="The Shirlock Foundation is a registered 501(c)3 organization committed to financially assisting the families of college students who are battling cancer.">
+      <meta property="og:image" content="https://shirlock.org/img/shirlock-logo-og.png">
+
+      <title>Donate | Shirlock Foundation</title>
+@endsection
+    
 @section('content')
 
 <div class="container">
@@ -54,14 +70,14 @@
                         <input type="radio" name="recurrence" title="recurrence" id="once" autocomplete="off" value="once" checked>
                         Once
                       </label>
-                      <label class="btn btn-secondary">
+                      <!--<label class="btn btn-secondary">
                         <input type="radio" name="recurrence" title="recurrence" id="monthly" autocomplete="off" value="monthly">
                         Monthly
                       </label>
                       <label class="btn btn-secondary">
                         <input type="radio" name="recurrence" title="recurrence" id="yearly" autocomplete="off" value="yearly">
                         Yearly
-                      </label>
+                      </label>-->
                     </div>
                                 @if($errors->first('recurrence'))
                 <div class="invalid-feedback">{{ $errors->first('recurrence') }}</div>
@@ -117,8 +133,15 @@
       <div class="card card-shirlock top-card">
         <div class="card-body">
 
-          <h4>Remember, you can also <a href="/apply">apply</a> for our Keene Award or <a href="/nominate">nominate</a> a loved one online.</h3>
-    
+          <h4><strong>The Shirlock Foundation</strong> is a registered 501(c)(3) non-profit organization and your donation is tax deductible.</h3>
+
+          <h5 class="mt-3">Corporate Matching</h5>
+          <p>Many employers will match your gift to us.  Print your donation receipt and share it with your human resources department to work from the inside-out, or <a href="/contact">contact us</a> to work from the outside-in.</p>
+
+          <h5 class="mt-3">Wish to donate by check?</h5>
+                <p>Simply mail your donation to us at the following address:</p>
+                <p><strong>The Shirlock Foundation</strong><br />P.O. Box 79225<br />Atlanta, GA 30357</p>
+                
         </div>
       </div>
     

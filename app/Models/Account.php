@@ -24,7 +24,8 @@ class Account extends Model
         'description',
         'country_id',
         'managed',
-        'user_id'
+        'user_id',
+        'creator_id'
     ];
 
     public function path()

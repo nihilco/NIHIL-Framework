@@ -131,7 +131,9 @@ class Invoice extends Model
             ]);
         }
 
-        $customer = $user->customers()->where('account_id', 1)->first();
+        if(!$customer = $user->customers()->where('account_id', 5)->first()) {
+            $customer = Customer::createStripeCustomer($user);
+        }
 
         $stripeCustomer = \Stripe::retrieveCustomer($customer->stripe_id);
 
@@ -152,7 +154,7 @@ class Invoice extends Model
             
             $source = Source::create([
                 'creator_id' => $user->id,
-                'account_id' => 1,
+                'account_id' => 5,
                 'customer_id' => $customer->id,
                 'type_id' => 11,
                 'stripe_id' => $stripeSource->id,
@@ -170,20 +172,21 @@ class Invoice extends Model
             'source' => $source->stripe_id,
             'currency' => 'usd',
             'amount' => $this->total,
-            'description' => 'Payment for invoice #' . $this->id . '.',
+            'description' => 'Payment for ' . $this->type->name . ' #' . $this->id . '.',
             'metadata' => ['application' => 'NIHIL-Framework'],
             'customer' => $customer->stripe_id,
+            'receipt_email' => $user->email,
         ];
 
         if($data['comments']) {
-            $stripeData['metadata']['comments'] = $data['comments'];
+            $stripeData['metadata']['comments'] = substr($data['comments'], 0, 499);
         }
         
         $stripeCharge = \Stripe::createCharge($stripeData);
 
         $payment = Payment::create([
             'creator_id' => $user->id,
-            'account_id' => 1,
+            'account_id' => 5,
             'customer_id' => $customer->id,
             'invoice_id' => $this->id,
             'type_id' => 25, 
@@ -200,11 +203,10 @@ class Invoice extends Model
         // Email customer
         //$job = (new SendInvoicePaid($this, $payment))->onQueue('emails');
         //dispatch($job);
-        $message = (new InvoicePaid($this, $payment))
-            ->onQueue('emails');
+        $message = (new InvoicePaid($this, $payment));
         
         \Mail::to($user->email)
-            ->queue($message);
+            ->send($message);
         
         return $payment;
     }
